@@ -12,22 +12,22 @@ layout: base
 
     <section id="intro">
         <h2>HIYA!</h2>
-        <p>一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者</p>
-        <p>除了敲代码, 还喜欢看书, 听音乐, 以及猫猫狗狗</p>
-        <p>业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡</p>
+        <p>一个 ORACLE数据库管理员, 技术宅, 喜欢学习一些新技术新东西</p>
+        <p>除了敲代码, 还喜欢听音乐，打篮球，游戏</p>
+        <p>春有百花秋有月，夏有凉风冬有雪。若无闲事挂心头，便是人间好时节。</p>
     </section>
 
     <section id="skillsets">
         <h2>SKILLSETS</h2>
-        <ul id="frontend">
-            <i class="fa fa-tv">前端</i>
-            {% for skill in my.skills.frontend %}
+        <ul id="database">
+            <i class="fa fa-tv">数据库</i>
+            {% for skill in my.skills.database %}
             <li>{{ skill }}</li>
             {% endfor %}
         </ul>
-        <ul id="backend">
-            <i class="fa fa-cog"> 后端</i>
-            {% for skill in my.skills.backend %}
+        <ul id="other">
+            <i class="fa fa-cog"> 其它技术</i>
+            {% for skill in my.skills.other %}
             <li>{{ skill }}</li>
             {% endfor %}
         </ul>

@@ -2,7 +2,7 @@
 title: "Centos6 搭建Github Pages + Jekyll + Markdown"
 layout: post
 category: translation
-tags: [php, http]
+tags: [github,jekyll]
 excerpt: "查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，  
 以下便是我的文档，以供参考。"
 ---

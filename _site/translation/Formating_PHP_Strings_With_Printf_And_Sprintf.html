@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="和其他许多编程语言一样, PHP 也有功能强大的 printf() 和 sprintf() 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易读, 或者需要传递数据给其他程式的时候, 这两个函数很有用. 这篇教程就会教你如何使用 printf() 和 sprintf() 来格式化字符串.">
+
+<title>使用 php printf() 和 sprintf() 格式化字符串</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/simplePagination.css">
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/jquery.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://unifreak.github.io/javascripts/html5shiv.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/markdownreader.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/pygments_monokai.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/code_block.css">
+</head>
+
+<body>
+    <header id="l-header">
+    <div class="container">
+        <div class="row logo">
+            <div class="col-lg-7">
+                <h1>UniFreak</h1>
+            </div>
+
+
+            <div class="col-lg-5">
+                <p>On the way to death</p>
+                <p>On the way of learning</p>
+            </div>
+        </div>
+
+        <div class="row navicon">
+            <a href=""><i class="fa fa-navicon"></i></a>
+        </div>
+
+        <div class="row navbar">
+            <nav class="col-lg-8 col-md-8 col-xs-12">
+                <ul class="row">
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/">HOME</a></li>
+                    <li class="col-lg-3">
+                        <ul class="subnav">
+                            <a href="javascript:void(0)">POST</a>
+                            <li><a href="https://unifreak.github.io/category">CATEGORY</a></li>
+                            <li><a href="https://unifreak.github.io/tag">TAG</a></li>
+                        </ul>
+                    </li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/about">ABOUT</a></li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/building">PLAY GROUND</a></li>
+                </ul>
+            </nav>
+
+            <div class="search col-lg-4 col-md-4 col-xs-12">
+                <label for="search"></label>
+                <input id="search" name="serach" type="text" placeholder="Dummy Search">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <div class="row">
+            <div id="markdown-container" class="col-lg-9">
+                <header>
+                    <p id="postTitle">使用 php printf() 和 sprintf() 格式化字符串</p>
+                    
+                    <ul class="tags clearfix">
+                        
+                        <li><i class="fa fa-tag"></i> php</li>
+                        
+                    </ul>
+                    
+                    <p id="postMeta">posted on 23 Jan 2016 under category <a href="https://unifreak.github.io/category/">translation</a></p>
+
+                </header>
+
+                <p><em>原文在 2009/11/19 发表于 <a href="http://www.elated.com/articles/formatting-php-strings-printf-sprintf/">http://www.elated.com/articles/formatting-php-strings-printf-sprintf/</a></em></p>
+
+<p>和其他许多编程语言一样, PHP 也有功能强大的 <a href="http://php.net/manual/en/function.printf.php"><code>printf()</code></a> 和 <a href="http://php.net/manual/en/function.sprintf.php"><code>sprintf()</code></a> 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易读, 或者需要传递数据给其他程式的时候, 这两个函数很有用.</p>
+
+<p>PHP 也有许多专门用途的格式化字符串的函数 - 比如 <a href="http://php.net/manual/en/function.date.php"><code>date()</code></a> 函数, 适合用于格式化日期字符串. 而 <code>printf()</code> 和 <code>sprintf()</code> 则适合更为通用的格式化.</p>
+
+<p>这篇教程就会教你如何使用 <code>printf()</code> 和 <code>sprintf()</code> 来格式化字符串.</p>
+
+<h1 id="printf">一个简单的 <code>printf()</code> 示例</h1>
+
+<p>了解 <code>printf()</code> 的最简单方式就是通过示例. 下面这个例子打印一个包含了两个数字的字符串:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 打印 &quot;Australia comprises 6 states and 10 territories&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;Australia comprises %d states and %d territories&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>注意这个字符串在被打印出的时候, 第一个 <code>%d</code> 被第二个参数 <code>6</code> 替换, 第二个 <code>%d</code> 则被第三个参数 <code>10</code> 替换. 其工作原理即:</p>
+
+<ul>
+<li><p>第一个参数必须是一个字符串, 我们称之为目标字符串. 目标字符串包含普通的字符, 和一些可选的格式说明符 (比如 <code>%d</code>)</p></li>
+<li><p>所有格式说明符都以 <code>%</code> 开头. 它按对应的顺序以特定方式格式化目标字符串之后的参数, 然后将其插入到最终的字符串中, 并显示到网页.</p></li>
+</ul>
+
+<p><strong>NOTE:</strong> 如果想要打印 <code>%</code> 符, 使用 <code>%%</code>.</p>
+
+<h1 id=">类型说明符</h1>
+
+<p>上面那个例子使用的 <code>%d</code> 这个格式说明符, 会将参数按照有符号十进制数字格式化. 这个 <code>d</code> 被称为类型说明符. <code>printf()</code> 支持很多类型说明符. 下面是类型说明符的完整列表:</p>
+
+<table><thead>
+<tr>
+<th>类型说明符</th>
+<th>备注</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>b</code></td>
+<td>将参数作为二进制数字(如 <code>10010110</code>)格式化</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>将参数作为 ASCII 码值格式化为对应的字符</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>将参数作为有符号十进制数字格式化</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>将参数作为科学计数法(如 <code>1.234e+3</code>)格式化</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>将参数作为浮点数字, 并且使用地区设定(如在法国, 逗号被用作小数点)格式化</td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>和上面相同, 不过不使用地区设定</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>将参数作为八进制数字格式化</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>将参数作为字符串格式化</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>将参数作为无符号十进制数字格式化</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>将参数作为小写十六进制数字(如 <code>4fdf87</code>)格式化</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>将参数作为大写十六进制数字(如 <code>4FDF87</code>)格式化</td>
+</tr>
+</tbody></table>
+
+<p>下面是一些类型说明符的示例:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;Here&#39;s the number %s as a float (%f), a binary integer (%b), an octal integer (%o), and a hex integer (%x).&quot;</span><span class="p">,</span> <span class="mf">543.21</span><span class="p">,</span> <span class="mf">543.21</span><span class="p">,</span> <span class="mf">543.21</span><span class="p">,</span> <span class="mf">543.21</span><span class="p">,</span> <span class="mf">543.21</span> <span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>这段代码会输出:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Here&#39;s the number 543.21 as a float (543.210000), a binary integer (1000011111), an octal integer (1037), and a hex integer (21f).
+</code></pre></div>
+<h1 id=">符号说明符</h1>
+
+<p>默认情况下, <code>printf()</code> 只会在负数前加正负符号:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%d&quot;</span><span class="p">,</span> <span class="mi">36</span> <span class="p">);</span>   <span class="c1">// 输出 &quot;36&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%d&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">36</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;-36&quot;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>如果你也想让 <code>printf()</code> 在正数前加符号, 可以在类型说明符前指定一个符号说明符 <code>+</code>:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%+d&quot;</span><span class="p">,</span> <span class="mi">36</span> <span class="p">);</span>   <span class="c1">// 输出 &quot;+36&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%+d&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">36</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;-36&quot;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h1 id=">填充</h1>
+
+<p><code>printf()</code> 允许你填充目标字符串到指定的长度. 你可以使用任何字符做填充字符, 也可以指定填充左边还是右边. 如果你希望在数字前补 <code>0</code> 或让字符串右对齐, 填充就派上用场了.</p>
+
+<p>通过在 <code>%</code> 前面插入一个填充说明符来指定填充规则. 填充说明符使用以下格式:</p>
+
+<p>&lt;填充符&gt;&lt;宽度&gt;:</p>
+
+<ul>
+<li><p>&lt;填充符&gt; 可以是 <code>0</code> 或空格. 如果你不指定则默认使用空格. 如果你想要指定其他填充符, 需在它之前加一个 <code>&#39;</code> 字符.</p></li>
+<li><p>&lt;宽度&gt; 即想要填充到的宽度. 整数代表左填充, 负数代表右填充.</p></li>
+</ul>
+
+<p>这是些填充说明符示例:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%04d&quot;</span><span class="p">,</span> <span class="mi">12</span> <span class="p">);</span>          <span class="c1">// 输出 &quot;0012&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%04d&quot;</span><span class="p">,</span> <span class="mi">1234</span> <span class="p">);</span>        <span class="c1">// 输出 &quot;1234&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%04d&quot;</span><span class="p">,</span> <span class="mi">12345</span> <span class="p">);</span>       <span class="c1">// 输出 &quot;12345&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;% 10s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">);</span>    <span class="c1">// 输出 &quot;     Hello&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%10s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">);</span>     <span class="c1">// 输出 &quot;     Hello&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%&#39;*10s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">);</span>   <span class="c1">// 输出 &quot;*****Hello&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%&#39;*-10s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;Hello*****&quot;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>留意第三个示例, 填充说明符并不会导致目标字符串被截断为 4 个字符. <strong>填充只会在必要处增加字符</strong></p>
+
+<h1 id=">数字精度</h1>
+
+<p>当使用 <code>f</code> 或者 <code>F</code> 类型说明符格式化浮点数时, PHP 默认会取到小数点后面 6 位:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%f&quot;</span><span class="p">,</span> <span class="mf">123.456</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;123.456000&quot;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>如果要指定不同的精度, 就要用到精度说明符了. 精度说明符是一个 <code>.</code> 号后跟一个数字, 并应放到类型说明符之前. 如:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%.2f&quot;</span><span class="p">,</span> <span class="mf">123.456</span> <span class="p">);</span>   <span class="c1">// 输出 &quot;123.46&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%.10f&quot;</span><span class="p">,</span> <span class="mf">123.456</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;123.4560000000&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%.0f&quot;</span><span class="p">,</span> <span class="mf">123.456</span> <span class="p">);</span>   <span class="c1">// 输出 &quot;123&quot;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>如果你既指定了填充说明符又指定了精度说明符, <code>printf()</code> 会将整个数字(包括整数和小数部分)填充到指定长度:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%08.2f&quot;</span><span class="p">,</span> <span class="mf">123.456</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;00123.46&quot;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>如果你同时使用 <code>s</code> 类型说明符和精度说明符, <code>printf()</code> 会截断目标字符串到指定的长度:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nb">printf</span><span class="p">(</span> <span class="s2">&quot;%.2s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">);</span>  <span class="c1">// 输出 &quot;He&quot;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h1 id=">参数交换</h1>
+
+<p>默认情况下, 目标字符串的第一个格式说明符会格式化该字符串后的第一个参数, 目标字符串的第二个格式说明符会格式化该字符串后的第二个参数, 以此类推. 但是你可以更改这个顺序.</p>
+
+<p>要这样做, 在 <code>%</code> 符和类型说明符之间插入一个 <code>$</code> 号. 如:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="c1">// 输出 &quot;Australia comprises 10 territories and 6 states&quot;</span>
+<span class="nb">printf</span><span class="p">(</span> <span class="s1">&#39;Australia comprises %2$d territories and %1$d states&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">);</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>在上面的例子中, 第一个格式说明符是 <code>%2$d</code>. 意即: &quot;将目标字符串后的第二个参数作为十进制整数格式化&quot;. 第二个格式说明符 <code>%1$d</code> 即: &quot;将目标字符串后的第一个参数作为十进制整数格式化&quot;. 这样, 参数便以不同与默认的顺序格式化.</p>
+
+<p>在上面的例子中, 格式字符串使用单引号而非双引号包围. 这样是为了阻止 <code>$</code> 符号被 PHP 解释为变量名.</p>
+
+<h1 id=">保存格式化后的结果</h1>
+
+<p>那 <code>sprintf()</code> 又是干嘛的呢? 这个函数和 <code>printf()</code> 只有一点不同: 它会将格式化后的结果返回, 而不是直接输出. 这样你就可以将结果赋给变量, 进行其他操作等. 如果你想要在输出它之前进行额外的处理, 或者保存到数据库等, 那这点会很有用. 下面是示例:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="nv">$result</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span> <span class="s2">&quot;Australia comprises %d states and %d territories&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span> <span class="p">);</span>
+
+<span class="c1">// 输出 &quot;Australia comprises 6 states and 10 territories&quot;</span>
+<span class="k">echo</span> <span class="nv">$result</span><span class="p">;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h1 id=">相关函数</h1>
+
+<p>其他相关的函数包括 <a href="http://php.net/manual/en/function.fprintf.php"><code>fprintf()</code></a>, 用于将结果写到流(如文件). 还有 <a href="http://php.net/manual/en/function.vprintf.php"><code>vprintf()</code></a>/<a href="http://php.net/manual/en/function.vsprintf.php"><code>vsprintf()</code></a>/<a href="http://php.net/manual/en/function.vfprintf.php"><code>vfprintf()</code></a>, 它们使用一个数组参数, 而非参数列表.</p>
+
+            </div>
+
+            <div id="markdown-outline" class="col-lg-3">
+            </div>
+
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'unifreak-github';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+    
+<footer id="l-footer">
+    <div class="container">
+        <div class="row">
+            <div id="contact" class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-9">
+                <h3>CONTACT</h3>
+                <div class="row">
+                    <address id="address" class="col-lg-6 col-md-6 col-sm-6">
+                        China Hubei Wuhan<br>
+                        Hongshan, 450000<br>
+                        XuefuJiayuan<br>
+                        FangHao<br>
+                    </address>
+
+                    <ul class="col-lg-6 col-md-6 col-sm-6">
+                        <li class="qq"><i class="fa fa-qq"></i> &nbsp;&nbsp;744910240</li>
+                        <li class="email"><i class="fa fa-envelope"></i> <a href="mailto:fanghao90s@gmail.com"> &nbsp;&nbsp;fanghao90s@gmail.com</a></li>
+                        <li class="tel"><i class="fa fa-mobile"></i> <a href="tel:15671542698">&nbsp;&nbsp; 15671542698</a></li>
+                        <li class="github"><i class="fa fa-github"></i> <a href="http://www.github.com/UniFreak"> &nbsp;&nbsp;http://www.github.com/UniFreak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="rss" class="col-lg-2 col-md-2 col-sm-2">
+                    <h3>SUBSCRIBE<br>
+                    via</h3>
+                <a href="feed.xml">
+                    <i class="rss fa fa-rss-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <p id="legal">
+            Copyright (c) 2015 UniFreak | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a>
+        </p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/base.js"></script>
+
+
+<!-- 百度统计 -->
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/baidu_statistics.js"></script>
+
+
+    <script type="text/javascript" src="https://unifreak.github.io/javascripts/markdownreader.js"></script>
+</body>
+</html>

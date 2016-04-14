@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="许多初级到中级的的 PHP 程序员把 header() 函数当作某种神秘巫术. 他们可以照着代码示例把功能实现, 但是还是不知道到底它是如果运作的. 我最开始就是这样的.实际上它非常简单. 在这篇文章中, 我会解释 HTTP 头(header) 是如何运作的, 它们与 PHP 的关系, 以及它们的 meta 标签...">
+
+<title>HTTP 头和 PHP header() 函数</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/simplePagination.css">
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/jquery.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://unifreak.github.io/javascripts/html5shiv.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/markdownreader.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/pygments_monokai.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/code_block.css">
+</head>
+
+<body>
+    <header id="l-header">
+    <div class="container">
+        <div class="row logo">
+            <div class="col-lg-7">
+                <h1>UniFreak</h1>
+            </div>
+
+
+            <div class="col-lg-5">
+                <p>On the way to death</p>
+                <p>On the way of learning</p>
+            </div>
+        </div>
+
+        <div class="row navicon">
+            <a href=""><i class="fa fa-navicon"></i></a>
+        </div>
+
+        <div class="row navbar">
+            <nav class="col-lg-8 col-md-8 col-xs-12">
+                <ul class="row">
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/">HOME</a></li>
+                    <li class="col-lg-3">
+                        <ul class="subnav">
+                            <a href="javascript:void(0)">POST</a>
+                            <li><a href="https://unifreak.github.io/category">CATEGORY</a></li>
+                            <li><a href="https://unifreak.github.io/tag">TAG</a></li>
+                        </ul>
+                    </li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/about">ABOUT</a></li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/building">PLAY GROUND</a></li>
+                </ul>
+            </nav>
+
+            <div class="search col-lg-4 col-md-4 col-xs-12">
+                <label for="search"></label>
+                <input id="search" name="serach" type="text" placeholder="Dummy Search">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <div class="row">
+            <div id="markdown-container" class="col-lg-9">
+                <header>
+                    <p id="postTitle">HTTP 头和 PHP header() 函数</p>
+                    
+                    <ul class="tags clearfix">
+                        
+                        <li><i class="fa fa-tag"></i> php</li>
+                        
+                        <li><i class="fa fa-tag"></i> http</li>
+                        
+                    </ul>
+                    
+                    <p id="postMeta">posted on 26 Sep 2015 under category <a href="https://unifreak.github.io/category/">translation</a></p>
+
+                </header>
+
+                <p><em>原文链接: <a href="http://www.nicholassolutions.com/tutorials/php/headers.html">http://www.nicholassolutions.com/tutorials/php/headers.html</a></em></p>
+
+<p><em>版权: 本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文</em></p>
+
+<h1 id=">引言</h1>
+
+<p>许多初级到中级的的 PHP 程序员把 <a href="http://www.php.net/manual/function.header.php">header()</a> 函数当作某种神秘巫术. 他们可以照着代码示例把功能实现, 但是还是不知道到底它是如果运作的. 我最开始就是这样的.</p>
+
+<p>实际上它非常简单. 在这篇文章中, 我会解释 HTTP 头(header) 是如何运作的, 它们与 PHP 的关系, 以及它们的 meta 标签 equivalents(对应物)</p>
+
+<p>希望你读完之后, 能更顺手的使用 header() 函数, 甚至想出一些更多利用它的地方. 我们也会讲到其他一些关于 HTTP 和 PHP 的重要话题. 但是在我们开始讲任何程序相关的东西之前, 我们需要先快速(并且不完整的)过一遍 HTTP (HyperTex Transfer Protocol) 运作原理</p>
+
+<h1 id="http">HTTP 概览</h1>
+
+<h2 id="headers">Headers: 对话中的词语</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/HyperText_Transfer_Protocol">HTTP</a> 是 web 服务器和客户端浏览器之间的数据传输(比如 web 页面中的 HTML, 图片, 文件)协议(&#39;规则&#39;集合), 并且通常使用 80 <a href="http://en.wikipedia.org/wiki/Port_%28computing%29#Network_port">端口</a>. 这就是网站 URL 前面 &#39;<code>http://</code>&#39; 的来源</p>
+
+<p>很多人最开始制作 web 页面的时候, 他们先在本地电脑上写 HTML, 在本地浏览器查看是否符合预期, 然后上传到服务器, 就可以在网上浏览这些页面了. 看起来好像在无论在本地查看与在服务器上查看的页面都一样, 传输的数据只有这些 HTML 以及它包含的图片. 但是实际上还有另外一些许多你没看到的信息 - 头信息.</p>
+
+<p>头信息可以分为两大类: 你浏览器向服务器请求文件时发出的请求头信息, 服务器提供文件给浏览器时发出的响应头信息. 把这些头信息当作浏览器和服务器对话时的词语. 我喜欢把服务器想象为图书管理员, 把浏览器想象成正在请求图书资源的学者. 浏览器走向位于服务台 (80 端口) 的服务器, 说道, &quot;Hi, 我是 Mozilla, 我正在找这个编目号是 &#39;<a href="http://www.expertsrt.com">www.expertsrt.com</a>&#39; 的资源. 你可以帮我找到它吗?&quot; 服务器听到后回应 &quot;是的, 我找到了, 让我把它给你. 这里面是 HTML 文本, 它写的是 &#39;<code>&lt;html&gt;...</code>&#39;&quot; 浏览器开始从头到尾的读它, 并且遇到了一个图片标签, 所以向服务器要位于 src 属性指定处的图片. 服务器进行查找, 找到这个文件然后说道 &quot;这是个 PNG 图片, 它的数据是...&quot; 你懂的.</p>
+
+<p id="secondConv">另一个对话可能像这样:</p>
+
+<blockquote>
+<p>浏览器: Hi, 我是 Mozilla, 能给我在 &#39;<a href="http://www.expertsrt.com/moved.html">www.expertsrt.com/moved.html</a>&#39; 这里的文件吗?.</p>
+
+<p>服务器: 那个文件已经不在那儿了, 他现在在 &#39;<a href="http://www.expertsrt.com/newloc.html">www.expertsrt.com/newloc.html</a>&#39;.</p>
+
+<p>浏览器: Hi, 我是 Mozilla, 能给我在 &#39;<a href="http://www.expertsrt.com/newloc.html">www.expertsrt.com/newloc.html</a>&#39; 这里的文件吗?</p>
+
+<p>服务器: 我找到这个文件了. 查看它 10 秒钟然后再向我问一次. 它是一个 HTML 文本文件, 它有这些内容...</p>
+</blockquote>
+
+<p>...10 秒钟...</p>
+
+<blockquote>
+<p>浏览器: Hi, 我是 Mozilla, 能给我在 &#39;<a href="http://www.expertsrt.com/newloc.html">www.expertsrt.com/newloc.html</a>&#39; 这里的文件吗?</p>
+
+<p>服务器: 我找到这个文件了. 查看它 10 秒钟然后再向我问一次. 它是一个 HTML 文本文件, 它有这些内容...</p>
+</blockquote>
+
+<p>...10 秒钟...</p>
+
+<blockquote>
+<p>浏览器: Hi, 我是 Mozilla, 能给我在 &#39;<a href="http://www.expertsrt.com/newloc.html">www.expertsrt.com/newloc.html</a>&#39; 这里的文件吗?</p>
+
+<p>服务器: 我找到这个文件了. 查看它 10 秒钟然后再向我问一次. 它一个 HTML 文本文件, 它有这些内容...</p>
+</blockquote>
+
+<p>...诸如这般, 直到浏览器被用户重新定向...</p>
+
+<p>正如你所看到的, 使用头信息可以控制许多事情. 使用 header() 函数, 你可以让服务器发送你所需的头信息, 这样你可以做除了发送 HTML 之外许多很酷的事情.</p>
+
+<h2 id=">看看整个对话过程</h2>
+
+<p>在继续之前, 让我们先不使用浏览器来查看一个 web 页面, 这样我们可以看到整个对话, 更好的了解 HTTP 头的工作. 先打开命令行 (在 windows 中, 点击开始菜单-&gt;运行, 输入 <code>cmd</code>, 然后点击 &quot;OK&quot;...如果你正使用 linux, 你或许已经知道怎么打开了). 在命令行中输入:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">telnet expertsrt.com 80
+</code></pre></div>
+<p>然后回车. 这会链接到 expersrt.com 的 80 端口. 然后, 复制并粘贴下面的文字:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">GET / HTTP/1.1
+Host: expertsrt.com
+</code></pre></div>
+<p>如果你输入或粘贴这些文字的时候, 命令行除了光标的闪烁没看到任何动静的话, 不要担心 -- 它们确实被发送到服务器了. 第一行说明你使用 GET 请求方法去获取资源 / (这里是目标主机上基目录里的文件), 并且你在使用 HTTP 1.1 版本. 第二行告诉服务器你想要连接到哪台主机. 当你输入 &#39;expertsrt.com&#39; 后, 回车两次 (只需两次). 你应当立刻得到类似下面的响应:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">HTTP/1.1 301 Moved Permanently
+Date: Wed, 08 Feb 2006 07:44:07 GMT
+Server: Apache/2.0.54 (Debian GNU/Linux) mod_auth_pgsql/2.0.2b1 mod_ssl/2.0.54 OpenSSL/0.9.7e
+Location: http://www.expertsrt.com/
+Content-Length: 233
+Content-Type: text/html; charset=iso-8859-1
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;title&gt;301 Moved Permanently&lt;/title&gt;
+&lt;/head&gt;&lt;body&gt;
+&lt;h1&gt;Moved Permanently&lt;/h1&gt;
+&lt;p&gt;The document has moved &lt;a href=&quot;http://www.expertsrt.com/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre></div>
+<p>哎呀! 看起来好像我们请求的文件已经不在那儿了; 它已经被移到新的地方了: <code>http://www.expertsrt.com</code>. 如果你使用浏览器, 你只会看到 HTML - 在第一个空白行之前的都是头信息. 实际上, 现代浏览器比这更智能 - 当他们看到第三行的新的 URL 时, 会自动转向那里, 这样你就不用手动再输入这个新的 URL 了. 让我们去这个新的 URL. 这时可能你已经断开连接了. 如果这样, 只需按向上键, telnet 命令会出现, 然后回车以重新连接. 如果你没有断开连接, 那直接输入下面的文字就行:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">GET / HTTP/1.1
+Host: www.expertsrt.com
+</code></pre></div>
+<p>然后回车两次. 你会看到另一个类似的响应, 告诉你那个页面实际上在 <code>http://www.expertsrt.com/index.php</code>. 服务器真挑剔是不是? ;-) 重复上面的操作, 不过这次输入</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">GET /index.php HTTP/1.1
+Host: www.expertsrt.com
+</code></pre></div>
+<p>注意我们想要的文件名在第一行. 这一次我们屏幕被文字刷满了: 这就是来自 ERT 主页的 HTML. 这里的头信息看起来是这样的</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">HTTP/1.1 200 OK
+Date: Wed, 08 Feb 2006 08:20:07 GMT
+Server: Apache/2.0.54 (Debian GNU/Linux) mod_auth_pgsql/2.0.2b1 mod_ssl/2.0.54 OpenSSL/0.9.7e
+X-Powered-By: PHP/4.4.0
+Transfer-Encoding: chunked
+Content-Type: text/html
+</code></pre></div>
+<p>很简单是不是? 我们来继续探讨这跟你编程有什么关系. 如果你不明白我们讲到的所有事情也没有关系. 重要的是对浏览器和服务器如何交互的有个大致印象, 以及意识到并没有什么魔法在里面. 最终就是这些</p>
+
+<ol>
+<li>浏览器和服务器通过使用头信息来进行交互</li>
+<li>头信息在主要内容之前发送, 并且用两个 <a href="http://www.google.com/search?q=define%3ACRLF">CRLF</a>/换行符 来和主要内容分割开</li>
+<li><p>在头信息部分, 每一行就是一个头. 首先是头的名字, 然后是一个冒号一个空格, 然后是这个头的名/值</p>
+
+<p>头名: 头值</p></li>
+<li><p>头信息可以包括许多类型的信息和指示, 以便浏览器和服务器用来告知对方接下来该做什么</p></li>
+</ol>
+
+<p><strong>提示</strong>: 如果你是那种刨根问底的人, 你可以看看 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">RFC 2616</a>, 那是 HTTP/1.1 的完整规范. 尤其是 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14">14 章</a>, 包含每一个头的完整定义</p>
+
+<h1 id="php-header">PHP header(): 基础</h1>
+
+<p>注意在我们最终得到的主页中的 X-Powered-By: PHP/4.4.0 和 Content-Type: text/html 这两个头信息. PHP 一开始就被设计成输出 HTML ( PHP 中的 H 即代表 &#39;Hypertext&#39;), 并且在 PHP 脚本第一次生成输出(比如, 使用 echo)时, 会自动为你包含这些头信息. 这非常方便, 但也造成许多 PHP 新手对头信息的困惑 - 在像 Perl 这样不是一开始就被设计成用于 web 开发的语言中, 不包含你自己的头而直接发送输出会产生 &#39;500 Internal Server Error&#39; 错误, 所以 Perl 的 web 开发者不得不立即学习关于头信息的知识</p>
+
+<p><a href="http://www.php.net/manual/function.header.php"><code>header()</code></a> 函数发送 HTTP 响应头信息, 而且只做这件事</p>
+
+<p>使用这个函数, 你可以让你的脚本发送你选择的头信息给浏览器, 创造一个非常有用的动态结果. 但是, 你需要知道关于 <code>header()</code> 函数的第一件事就是你必须在 PHP 发送任何输出(这会使 PHP 自动发送默认的头信息)<strong>之前</strong>使用它</p>
+
+<p>我怀疑有哪个 PHP 程序员没有见到过如下的错误消息</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Warning: Cannot modify header information - headers already sent by.....
+</code></pre></div>
+<p>如我们所说的, 响应头信息用一个空白行和主要内容分割. 这意味你仅可以发送头信息一次, 如果你的脚本有任何输出 (即使一个在 <code>&lt;?php</code> 标签之前的空白行或空格), PHP 就会自动发送头信息. 例如, 看一下下面这个脚本, 看起来逻辑上很正常:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">Welcome to my website!&lt;br /&gt;</span>
+<span class="cp">&lt;?php</span>
+  <span class="k">if</span><span class="p">(</span><span class="nv">$test</span><span class="p">){</span>
+   <span class="k">echo</span> <span class="s2">&quot;You&#39;re in!&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: http://www.mysite.com/someotherpage.php&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>这个脚本判断 <code>$test</code> 是否为 true, 如果不是则使用 <code>Location</code> 头重定向访问者. 看到问题所在了吗? &#39;Welcome...&#39; 文字始终会发送出去, 所以默认的头信息会自动被发送. 在调用 <code>header()</code> 时已经太晚了: 用户只看到一条错误消息 (如果你把错误报告关掉了, 则只会看到 &#39;Welcome...&#39; 文字), 而不是被重定向</p>
+
+<p>基本上有两种解决方法. 第一个就是重写代码</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+  <span class="k">if</span><span class="p">(</span><span class="nv">$test</span><span class="p">){</span>
+   <span class="k">echo</span> <span class="s1">&#39;Welcome to my website&lt;br /&gt;You&#39;</span><span class="nx">re</span> <span class="nx">in</span><span class="o">!</span><span class="s1">&#39;;</span>
+<span class="s1">  }</span>
+<span class="s1">  else{</span>
+<span class="s1">    header(&#39;</span><span class="nx">Location</span><span class="o">:</span> <span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">mysite</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">someotherpage</span><span class="o">.</span><span class="nx">php</span><span class="err">&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>第二个就是使用<a href="http://www.php.net/outcontrol">输出缓冲</a>, 这个解决方法更为优雅易用. 在我们上面的例子中, 重写代码并不困难, 但是试想一下如果有很多 HTML 需要移动位置 - 这样做就会很麻烦, 也会让我们的代码更难追踪. 虽然我们第一个示例导致了错误, 但是逻辑上是没错的. 输出缓冲可以让你一直保留(&#39;缓冲&#39;)输出(即使是 PHP 代码之外的 HTML)直到你明确指示了把输出发送给浏览器. 这样你就可以随意编写你的代码, 知道你指定了你需要指定的头信息, 然后明确指示发送这些输出. 两个相关的函数是 <a href="http://www.php.net/manual/function.ob-start.php"><code>ob_start()</code></a> 和 <a href="http://www.php.net/manual/function.ob-flush.php"><code>ob_flush()</code></a>, <code>ob_start()</code>用于打开输出缓冲, <code>ob_flush()</code> 会发送缓冲了的输出:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+ <span class="nb">ob_start</span><span class="p">();</span>  <span class="c1">//开始输出缓冲</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">Welcome to my website!</span>
+<span class="cp">&lt;?php</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">){</span>
+   <span class="k">echo</span> <span class="s2">&quot;You&#39;re in!&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+    <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: http://www.mysite.com/someotherpage.php&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nb">ob_flush</span><span class="p">();</span> <span class="c1">//输出缓冲中的数据</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>我鼓励你读一下所有关于输出缓冲的函数, 非常有用. 你应当尽早的把输出缓冲发送出去, 尤其当你有许多东西想要发送的时候. 否则你的页面会看起来加载的很慢, 因为所有的内容只有被组装完毕后才发送, 而不是当可用的时候立即就被发送出去.</p>
+
+<p><strong>提示: 第二个参数</strong> 如果你调用 header() 不止一次发送同一个头, 这个头的值将会是<em>最后</em>调用的 header() 中设置的值. 如,</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Some-Header: Value-1&#39;</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Some-Header: Value-2&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>会产生 <code>Some-Header: Value-2</code> 这个结果. 你可以通过设置第二个参数来发送同一个头两次. 这个参数默认是 true. 如果你设置其为 false, 那么第二个头值不会替换第一个, 而是两个都被发送. 所以下面的代码</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Some-Header: Value-1&#39;</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Some-Header: Value-2&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span> <span class="c1">//不要替换第一个</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>将会产生 <code>Some-Header: Value-1, Value-2</code> 这个结果. 你很少会用到这个, 但是知道它也不错.</p>
+
+<p>知道了 HTTP header 和 PHP 如何配合之后, 让我们来看一些更为具体的例子.</p>
+
+<h1 id="php-header">PHP header(): 一些例子</h1>
+
+<p><strong>提示</strong>: 下面这个代码片断都是截取自完整的工作代码. 当你在自己的程序中包含他们的时候, 记得定义所有你自己的变量, 赋给他们默认值, 以及遵循其他最佳实践.</p>
+
+<h2 id="location">使用 <code>Location</code> 头重定向</h2>
+
+<p>我们已经在上面看到过几次了: 它会重定向浏览器.</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: http/www.mysite.com/new_location.html&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>虽然你给它一个相对 URL 没准也能工作, 但是根据 HTTP 规范, 你真的应该使用一个绝对 URL.</p>
+
+<p>一个容易犯的错误就是在使用了 Location header 之后不立即使用 <a href="http://www.php.net/manual/function.exit.php"><code>exit</code></a> 以结束执行 (你可能不是总是想要结束执行, 但是大部分时间是的). 之所以这是一个错误是因为 PHP 代码会继续执行, 即使用户已经被重定向到新的 URL. 在最好的情况下, 这会不必要的使用系统资源. 在最坏的情况下, 你可能会执行一些让自己后悔的操作. 看一下下面的代码:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//重定向访问级别低于 4 的用户</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">check_access_level</span><span class="p">(</span><span class="nv">$username</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">){</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: http://www.mysite.com/someotherpage.php&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//向高于访问级别 4 的用户发送秘密邮件</span>
+<span class="nx">mail_secret_code</span><span class="p">(</span><span class="nv">$username</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">&#39;The secret email is on its way!&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>未授权用户的确被重定向了, 但是因为代码会继续执行, 他们同样会收到邮件. 为了避免这种情况, 针对已授权用户的代码可以写到 <code>else{}</code> 声明中, 但是直接在 <code>header()</code> 后面使用 <code>exit</code> 来结束代码执行会更为干净容易一些.</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//重定向访问级别低于 4 的用户</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">check_access_level</span><span class="p">(</span><span class="nv">$username</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">){</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Location: http://www.mysite.com/someotherpage.php&#39;</span><span class="p">);</span>
+  <span class="k">exit</span><span class="p">;</span> <span class="c1">//停止代码执行</span>
+<span class="p">}</span>
+
+<span class="c1">//向高于访问级别 4 的用户发送秘密邮件</span>
+<span class="nx">mail_secret_code</span><span class="p">(</span><span class="nv">$username</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">&#39;The secret email is on its way!&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="refresh">使用 <code>Refresh</code> 头重定向</h2>
+
+<p><code>Refresh</code> 和 <code>Location</code> 一样可以重定向用户, 但是你可以延迟重定向. 例如, 下面的代码会在显示当前页面 10 秒钟后重定向用户到新的页面:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Refresh: 10; url=http://www.mysite.com/otherpage.php&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">&#39;You will be redirected in 10 seconds&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>另一个常见的用途就是通过重复的&#39;重定向&#39;一个页面到它自身来强制更新页面 (参见<a href="#secondConv">上面</a>的第二个 &#39;对话&#39;). 例如, 这里是一个简单的例子, 页面会从 10 开始向下数, 每个数字之间有 3 秒间隔:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">])){</span>
+    <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+  <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Refresh: 3; url=&#39;</span> <span class="o">.</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;PHP_SELF&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;?n=&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="p">);</span>
+  <span class="k">echo</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+  <span class="k">echo</span> <span class="s1">&#39;BLAST OFF!&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><strong>提示</strong>: 如果刷新时间设置成 0, 则 <code>Refresh</code> 头实际上和 <code>Location</code> 头完全一样</p>
+
+<h2 id="content-type">使用 <code>Content-Type</code> 头来提供不同类型的文件以及生成动态内容</h2>
+
+<p>服务器用 <code>Content-Type</code> 头告诉浏览器自己将要发送什么类型的数据. 使用这个头信息, 你可以让 PHP 脚本输出任何类型的文件, 从纯文本文件到图片文件到 zip 文件等等. 下面的表格列举了最常用的一个 <a href="http://en.wikipedia.org/wiki/Mime_type">MIME 类型</a>:</p>
+
+<p><strong>常用 MIME 类型:</strong></p>
+
+<table><thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>text/html</td>
+<td>HTML (PHP 默认)</td>
+</tr>
+<tr>
+<td>text/plain</td>
+<td>纯文本</td>
+</tr>
+<tr>
+<td>image/gif</td>
+<td>GIF 图片</td>
+</tr>
+<tr>
+<td>image/jpeg</td>
+<td>JPEG 图片</td>
+</tr>
+<tr>
+<td>image/png</td>
+<td>PNG 图片</td>
+</tr>
+<tr>
+<td>video/mpeg</td>
+<td>MPEG 视频</td>
+</tr>
+<tr>
+<td>audio/wav</td>
+<td>WAV 音频</td>
+</tr>
+<tr>
+<td>audio/mpeg</td>
+<td>MP3 音频</td>
+</tr>
+<tr>
+<td>video/mov</td>
+<td>mov 视频</td>
+</tr>
+<tr>
+<td>video/quicktime</td>
+<td>Quicktime 视频</td>
+</tr>
+<tr>
+<td>video/x-ms-wmv</td>
+<td>Windows WMV 视频</td>
+</tr>
+<tr>
+<td>audio/x-ms-wma</td>
+<td>Windows WMA 音频</td>
+</tr>
+<tr>
+<td>audio/x-realaudio</td>
+<td>RealPlayer 音频/视频 (.rm)</td>
+</tr>
+<tr>
+<td>audio/x-pn-realaudio</td>
+<td>RealPlayer 音频/视频 (.ram)</td>
+</tr>
+<tr>
+<td>video/x-msvideo</td>
+<td>ms 视频</td>
+</tr>
+<tr>
+<td>video/avi</td>
+<td>AVI 视频</td>
+</tr>
+<tr>
+<td>application/pdf</td>
+<td>PDF 文档</td>
+</tr>
+<tr>
+<td>application/msword</td>
+<td>MS Word .doc 文件</td>
+</tr>
+<tr>
+<td>application/zip</td>
+<td>Zip 文件</td>
+</tr>
+<tr>
+<td>application/octet-stream</td>
+<td>其他. 数据. 用于强制下载或使用应用打开.*</td>
+</tr>
+<tr>
+<td>x-foo/x-bar</td>
+<td>其他. 数据. 用于强制下载或使用应用打开.*</td>
+</tr>
+</tbody></table>
+
+<p>你可以用此来做一些有趣的事情. 比如, 你可能想要向用户发用一个预先格式化过的文本文件, 而不是 HTML:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: text/plain&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$plain_text_content</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>另或者你想要提示用户下载文件, 而不是在浏览器中查看它. 使用 <code>Content-Disposition</code> 头, 这很容易, 你甚至可以推荐一个文件名给用户:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/octet-stream&#39;</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition: attachment; &#39;</span>
+       <span class="o">.</span><span class="s1">&#39;filename=&quot;plain_text_file.txt&quot;&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$plain_text_content</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>另或者你需要提供文件文件, 但是又希望隐藏文件的真实路径和名字, 并且只让已登录的用户下载:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="nv">$b_is_logged_in</span><span class="p">){</span>
+   <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/octet-stream&#39;</span><span class="p">);</span>
+   <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition: attachment; &#39;</span>
+           <span class="o">.</span><span class="s1">&#39;filename=&quot;&#39;</span><span class="o">.</span><span class="nv">$different_filename</span><span class="o">.</span><span class="s1">&#39;&quot;&#39;</span><span class="p">);</span>
+   <span class="nb">readfile</span><span class="p">(</span><span class="s1">&#39;/path/to/files/&#39;</span> <span class="o">.</span> <span class="nv">$filename</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+   <span class="k">echo</span> <span class="s1">&#39;You are not authorized to view this file&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>又或者你已经使用 PHP 的<a href="http://www.php.net/manual/ref.image.php">图片函数</a>动态生成了一个图片, 想要展示给用户. 你可以创建一个 <code>build_image.php</code> 文件, 像这样</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+   <span class="c1">//生成图片, 然后</span>
+   <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: image/jpeg&#39;</span><span class="p">);</span>
+   <span class="nb">imagejpeg</span><span class="p">(</span><span class="nv">$image_resouce</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><strong>提示</strong>: 当心 <a href="http://www.php.net/magic_quotes"><code>magic_quotes</code></a>! PHP 会自动使用反斜杠转移特殊字符, 这一开始看起来是个好主意, 但是大多数好的程序员认为 (a) 这会鼓励不去验证输入的粗心代码, 并且 (b) 在良好的代码中会产生本不该有 (如果 <code>magic_quote</code> 关闭) 的麻烦. 其中一个麻烦就是二进制数据被破坏. 在上面这个例子中, 如果 <a href="http://www.php.net/manual/en/ref.info.php#ini.magic-quotes-runtime"><code>magic_quotes_runtime</code></a>被启用, 则 <code>readfile()</code> 输出的数据可能被添加反斜杠, 导致发送给用户的文件被破坏. 完美情况下, 你应该在 <code>php.ini</code> 文件中关闭 <code>magic_quotes_runtime</code> 选项, 但是如果你没有权限访问这个配置文件, 你可以使用 <a href="http://www.php.net/manual/en/function.set-magic-quotes-runtime.php"><code>set_magic_quotes_runtime()</code></a> 函数 (给它传个数字 0) 关闭它.</p>
+
+<p>令人高兴的是, 最近的一次 PHP <a href="http://www.php.net/%7Ederick/meeting-notes.html#magic-quotes">开发者会议</a>显示, 在未来版本(6+) 的 PHP 中 <code>magic quotes</code> 会被弃用. 但是在所有人升级到这个版本的 PHP 之前, 记住这个导致的问题会节省你很多麻烦和疑问.</p>
+
+<p>你可以在 URL 中传递生成图片所需的参数, 然后使用 $_GET 获取它们. 然后在另一个页面, 你可以使用 img 标签来包含这个图片:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;img src=&quot;build_image.php</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&quot;?</span><span class="si">$user_id</span><span class="s2">&amp;amp;</span><span class="si">$caption</span><span class="s2">&quot;</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x">&quot;&gt;</span>
+</code></pre></div>
+<p>可用的地方几乎讲不完. 你 PHP 变成越多, 越会发现 <code>Content-Type</code> 头真的是你的好朋友</p>
+
+<p><strong>提示</strong>: 浏览器处理各式 <code>MIME类型</code> 的<em>预期</em>方式以及<em>实际</em>方式可能并不一致 (尤其是 Internet Explorer), 所以你最好是在你需要支持的浏览器中测试一下. PHP 参考中的<a href="http://www.php.net/manual/function.header.php#usernotes">用户评论</a>有许多关于此的技巧.</p>
+
+<h2 id=">防止页面缓存</h2>
+
+<p>PHP 页面通常会生成非常动态的内容, 为了防止用户因为页面缓存而错过了更新过的页面, 告诉浏览器不要缓存特定的页面通常非常有用. 下面的代码在可能会访问你网站的浏览器中工作的很好:</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Cache-Control: no-cache, no-store, must-revalidate&#39;</span><span class="p">);</span> <span class="c1">//HTTP/1.1</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Expires: Sun, 01 Jul 2005 00:00:00 GMT&#39;</span><span class="p">);</span>
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Pragma: no-cache&#39;</span><span class="p">);</span> <span class="c1">//HTTP/1.0</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><code>Expires</code> 头可以是任何已经过去的日期. 对于 <code>MIME 类型</code>, 浏览器 (尤其是较老的) 可能不会总是正确的理解你的缓存指示 (虽然大部分现代浏览器会).</p>
+
+<h2 id=">其他应用</h2>
+
+<p>还有另外一个可以使用头信息的地方, 比如设置 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP 响应码</a>, 或者执行 <a href="http://www.php.net/manual/features.http-auth.php">HTTP 认证</a> (如果你作为 <code>Apache</code> 模块来使用 PHP 的话). 现在, 你了解了 header() 如何工作及怎么使用它, 你可以用它做你之前想都没想到的许多事情了.</p>
+
+<h1 id="php">PHP 中的请求头信息</h1>
+
+<p>我们讲了怎么使用响应头信息了. 我们还可以从浏览器发给服务器的请求头信息中获取很多信息. 有两种方法来获取. 第一, 许多 [<code>$_SERVER</code>数组][server]中的值都是由传来的请求头信息决定的. 第二, 如果 PHP 是作为 <code>Apache</code> 模块使用的, <a href="http://www.php.net/manual/function.apache-request-headers.php"><code>apache_request_headers()</code></a> 会返回一个包含所有请求头信息的数组 (甚至那些不在 <code>$_SERVER</code> 中的).</p>
+
+<h2 id=">安全第一: 不要信任请求头信息</h2>
+
+<p>因为请求头信息发自浏览器, 浏览器又可以在客户端被控制, 所以你<strong>永远不要信任来自请求头, 又和你站点安全紧密相关的头信息</strong>. 一个很好的例子就是 <code>$_SERVER[&#39;HTTP_REFERER&#39;]</code>变量, 这个变量应该包含一个用户转自的源 URL. 一个新手的常见错误就是认为他们可以使用这个来确保用户只会通过特定路径来访问页面, 因此他们便无需关心服务器端的数据验证. 例如, 看看下面的代码, 它试着去确保数据是从一个特定的页面发送过来的, 而不是从另一个站点</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+ <span class="k">if</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_REFERER&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;http://www.mysite.com/myform.html&#39;</span><span class="p">){</span>
+   <span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Refresh: 5; url=http://www.mysite.com/myform.html&#39;</span><span class="p">);</span>
+   <span class="k">echo</span> <span class="s1">&#39;You must use the form on my site...redirecting now.&#39;</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="k">else</span><span class="p">{</span>
+   <span class="nx">insert_data</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;var1&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;var2&#39;</span><span class="p">]);</span>
+ <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>这或许会阻止那些不是很精通的黑客通过他的浏览器提交一个自定义的表单来提交数据, 但是任何一个稍微高深一些的黑客都可以通过使用 <code>telnet</code> 来提交数据, 包括请求头信息</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Referer: http://www.mysite.com/myform.html
+</code></pre></div>
+<p>然后轻易的躲过这层保护机制. 这里所要讲的重点是: 使用 HTTP 请求头信息来统计一些数据以便提供更好的用户体验 - 大部分的请求头信息都是发自真实的浏览器而且可以被信任...但是<strong>不要</strong>在有关安全的问题上依赖任何请求 header</p>
+
+<h2 id="http">使用 HTTP 请求头信息</h2>
+
+<p>你可以用它做几件事. 使用 <code>$_SERVER[&#39;HTTP_USER_AGENT&#39;]</code>你可以探测用户生成他使用的什么浏览器. 你可以检查 <code>$_SERVER[&#39;HTTP_ACCEPT_LANGUAGE&#39;]</code> (可能要配合 <code>$_SERVER[&#39;HTTP_ACCEPT_CHARSET&#39;]</code> 和一些 <a href="http://www.expertsrt.com/articles/Rod/city_country_IP.php">IP 地理位置</a> ) 来决定向用户展示什么语言. 虽然 <code>$_SERVER[&#39;HTTP_REFERER&#39;]</code> 对于安全目的并不能被依赖, 但是可以用来统计你网站的流量, 或者根据用户的访问路径来定制显示内容. 如果因为某些原因你想要操作原始的请求字符串, 你可以使用 <code>$_SERVER[&#39;QUERY_STRING&#39;]</code>. 查看 <code>$_SERVER[&#39;REQUEST_METHOD&#39;]</code> 可以知道你的页面是通过 <code>GET</code> 还是 <code>POST</code> 方法访问的. 还有很多可以帮助你做许多有创意的事情的信息等着你去发现.</p>
+
+<h1 id="html-meta-http-equivalents">HTML <code>meta</code> 标签中的 HTTP 头信息 equivalents(对应物)</h1>
+
+<p>很有可能在阅读本文之前, 你已经用过下面的 HTML meta 标签重定向用户了:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;refresh&quot;</span> <span class="na">content=</span><span class="s">&quot;0;http://www.mysite.com/somepage.html&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p>看起来很熟悉? &#39;http-equiv&#39; <code>meta</code> 标签即 HTTP 响应头的&#39;对应物&#39;, 引入它们是为了让没有服务器端编程能力的人在写 HTML 页面的时候也能使用强大的头信息功能. 使用这些 meta 标签很简单: 它们可以被放在文档 <code>&lt;head&gt;</code> 中的任何地方, <code>http-equiv</code> 属性包含头名, <code>content</code> 属性包含头值.</p>
+
+<p>我发现这些 meta 标签最开始也会和 HTTP 头一样让人困惑, 但是现在它们在你看来应该很简单了. 虽然我更喜欢使用 PHP 的 <code>header()</code> 函数, 但是 <code>meta</code> 标签的 HTTP equivalents 对于像指定字符集这样的事情会更顺手一些. 比如, 我经常在 HTML 页面中使用 (有时候 PHP 页面中也会用到):</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p><strong>提示</strong>: 使用 <code>meta</code> 标签来指定头信息并不被一致的支持, 所以通常来讲使用头信息本身会更加安全和快速. 另外很明显, 还有一些头的名值对并不能用 <code>meta equivalents</code> 来指定: 在真正的头信息被发送, 浏览器已经把文档读取为 HTML 之后, 你是不能再去设置 <code>Content-Type</code> 成 <code>image/png</code> 的 ;-)</p>
+
+<h1 id=">结语</h1>
+
+<p>现在我们讲完了, 你应该对 HTTP 的工作原理以及如何使用响应请求头信息以及如何把它们应用到自己的代码中有了很好的认识. 这些知识也会让你在 web 应用的效率和安全方面有更审慎的思考. 我希望在你继续编程的时候, 会发现你使用 HTTP 头信息更加顺手了, 也能通过使用它们让你的工作更加轻松, 你的页面更好了.</p>
+
+<p>还有额外一点, 记住头信息就像是词语: 它们交流信息并请求某些操作被执行, 但是本身并不强制任何事情. 99.9% 的情况下, 浏览器和服务器和谐合作, 事情发展很顺利. 但记住在现实中, 是不是你会遇到一些混蛋 (黑客), 或者一些只想按照自己意愿做事的东西 (Internet Explorer). web 开发从很多角度讲是一个客服性质的工作, 所以你应该尽全力避免这些东西, 满足客户的 &#39;特殊需要&#39; :-)</p>
+
+<hr>
+
+            </div>
+
+            <div id="markdown-outline" class="col-lg-3">
+            </div>
+
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'unifreak-github';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+    
+<footer id="l-footer">
+    <div class="container">
+        <div class="row">
+            <div id="contact" class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-9">
+                <h3>CONTACT</h3>
+                <div class="row">
+                    <address id="address" class="col-lg-6 col-md-6 col-sm-6">
+                        China Hubei Wuhan<br>
+                        Hongshan, 450000<br>
+                        XuefuJiayuan<br>
+                        FangHao<br>
+                    </address>
+
+                    <ul class="col-lg-6 col-md-6 col-sm-6">
+                        <li class="qq"><i class="fa fa-qq"></i> &nbsp;&nbsp;744910240</li>
+                        <li class="email"><i class="fa fa-envelope"></i> <a href="mailto:fanghao90s@gmail.com"> &nbsp;&nbsp;fanghao90s@gmail.com</a></li>
+                        <li class="tel"><i class="fa fa-mobile"></i> <a href="tel:15671542698">&nbsp;&nbsp; 15671542698</a></li>
+                        <li class="github"><i class="fa fa-github"></i> <a href="http://www.github.com/UniFreak"> &nbsp;&nbsp;http://www.github.com/UniFreak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="rss" class="col-lg-2 col-md-2 col-sm-2">
+                    <h3>SUBSCRIBE<br>
+                    via</h3>
+                <a href="feed.xml">
+                    <i class="rss fa fa-rss-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <p id="legal">
+            Copyright (c) 2015 UniFreak | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a>
+        </p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/base.js"></script>
+
+
+<!-- 百度统计 -->
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/baidu_statistics.js"></script>
+
+
+    <script type="text/javascript" src="https://unifreak.github.io/javascripts/markdownreader.js"></script>
+</body>
+</html>

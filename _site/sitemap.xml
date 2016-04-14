@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <url>
+        <loc>https://unifreak.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf</loc>
+        <lastmod>2016-04-14T01:46:52-04:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://unifreak.github.io//notes/learning-note-YII(1.1)</loc>
+        <lastmod>2016-04-14T01:46:52-04:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://unifreak.github.io//translation/Understanding_the_diff_command_in_unix</loc>
+        <lastmod>2016-04-14T01:46:52-04:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://unifreak.github.io//translation/Http_headers_and_PHP_header()_function</loc>
+        <lastmod>2016-04-14T01:46:52-04:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</urlset>

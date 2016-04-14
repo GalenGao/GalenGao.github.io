@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Unix 系统管理员来经常需要去知道两个文件之间有什么差异. diff 命令就是干这个的. 我现在就准备讲讲 diff. 它是一个经常被用到却不是很被了解的命令. 我希望 Unix 使用者在读完这篇文章之后能够正确了解这个命令的用途并从中获益.">
+
+<title>理解 diff 命令</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/simplePagination.css">
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/jquery.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://unifreak.github.io/javascripts/html5shiv.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/markdownreader.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/pygments_monokai.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/code_block.css">
+</head>
+
+<body>
+    <header id="l-header">
+    <div class="container">
+        <div class="row logo">
+            <div class="col-lg-7">
+                <h1>UniFreak</h1>
+            </div>
+
+
+            <div class="col-lg-5">
+                <p>On the way to death</p>
+                <p>On the way of learning</p>
+            </div>
+        </div>
+
+        <div class="row navicon">
+            <a href=""><i class="fa fa-navicon"></i></a>
+        </div>
+
+        <div class="row navbar">
+            <nav class="col-lg-8 col-md-8 col-xs-12">
+                <ul class="row">
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/">HOME</a></li>
+                    <li class="col-lg-3">
+                        <ul class="subnav">
+                            <a href="javascript:void(0)">POST</a>
+                            <li><a href="https://unifreak.github.io/category">CATEGORY</a></li>
+                            <li><a href="https://unifreak.github.io/tag">TAG</a></li>
+                        </ul>
+                    </li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/about">ABOUT</a></li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/building">PLAY GROUND</a></li>
+                </ul>
+            </nav>
+
+            <div class="search col-lg-4 col-md-4 col-xs-12">
+                <label for="search"></label>
+                <input id="search" name="serach" type="text" placeholder="Dummy Search">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <div class="row">
+            <div id="markdown-container" class="col-lg-9">
+                <header>
+                    <p id="postTitle">理解 diff 命令</p>
+                    
+                    <ul class="tags clearfix">
+                        
+                        <li><i class="fa fa-tag"></i> linux</li>
+                        
+                    </ul>
+                    
+                    <p id="postMeta">posted on 28 Sep 2015 under category <a href="https://unifreak.github.io/category/">translation</a></p>
+
+                </header>
+
+                <p><em>原文在 2009/04/17 发表于 <a href="http://unix.worldiswelcome.com/understanding-the-diff-command-in-unix">http://unix.worldiswelcome.com/understanding-the-diff-command-in-unix</a></em></p>
+
+<p>Unix 系统管理员来经常需要去知道两个文件之间有什么差异. <code>diff</code> 命令就是干这个的. 我现在就准备讲讲 <code>diff</code>. 它是一个经常被用到却不是很被了解的命令. 我希望 Unix 使用者在读完这篇文章之后能够正确了解这个命令的用途并从中获益. 另外一个有用的命令是: <a href="http://unix.worldiswelcome.com/how-to-find-common-lines-between-two-text-files-in-unix"><code>comm</code></a> 命令. 我们开始吧...</p>
+
+<p>示例文件分别是 <em>first</em> 文件和 <em>second</em> 文件. 如下:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ nl first
+1 computer
+2 modem
+3 monitor
+4 phone
+5 switch
+
+wiw_labs:$ nl second
+1 cable
+2 mobile
+3 screen
+4 modem
+5 phone
+6 server
+</code></pre></div>
+<p><code>diff</code> 命令用来比较这两个文件之间的差异</p>
+
+<h1 id="diff">diff 命令的用法</h1>
+
+<p>我命先从 <code>diff</code> 的用法说起. <code>diff</code> 通常这样使用:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">diff first_file second_file
+</code></pre></div>
+<p>这条命令意即: first_file 和 second_file 有什么不同</p>
+
+<h1 id="diff">diff 命令如何工作</h1>
+
+<p><code>diff</code> 命令的运作原理就是, 想法设法的让 <em>first</em> 文件和 <em>second</em> 文件一样. 它希望通过更改(c), 删除(d) <em>first</em> 文件中的行以使其和 <em>second</em> 文件一模一样. 如果需要, 它还会把 <em>second</em> 文件中的行附加到 <em>first</em> 文件中. 如果你明白我说的什么, 很好, 如果不明白也随便. 当我使用示例给你解释的时候你就会明白的.</p>
+
+<p><code>diff</code> 就是通过下面的这些步骤来生成这两个文件的差异报告的:</p>
+
+<ol>
+<li><p>它从 <em>first</em> 文件和 <em>second</em> 文件的第 1 行开始. 如果它们不一样, <code>diff</code> 便顺着 <em>first</em> 文件往下找, 直到找到和 <em>second</em> 文件中相似的条目.</p></li>
+<li><p>如果在 <em>first</em> 文件中没有找到和 <em>second</em> 文件第 1 行相同的行, 它就再从 <em>second</em> 文件的第 2 行开始. 它会在 <em>first</em> 文件中开始找. 然后提议做什么(附加, 更改或删除)</p></li>
+</ol>
+
+<h1 id=">示例</h1>
+
+<p>理论讲得够多了. 我们来点实际例子好解释的更通透一点.
+我把这两个文件并排来放, 好理解起来更容易一些. 另外行号也一并显示了出来.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste first second|nl
+1 computer cable
+2 modem mobile
+3 monitor screen
+4 phone modem
+5 switch phone
+6           server
+
+wiw_labs:$ diff first second
+1c1,3
+&lt; computer
+—
+&gt; cable
+&gt; mobile
+&gt; screen
+3d4
+&lt; monitor
+5c6
+&lt; switch
+—
+&gt; server
+</code></pre></div>
+<p>现在, 看一下上面 <code>paste</code> 命令带行号的输出. 注意下面几点:</p>
+
+<ul>
+<li><em>first</em> 文件的第 2 行(modem) 和 <em>second</em> 文件的第 4 行(modem) 一致. 所以, 如果我们把 <em>first</em> 文件中的第 1 行换成 <em>second</em> 文件中的 1 到 3 行, 这两个文件的第一部分便都一样了. 输出看起来就会是这样的:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste first second|nl
+1 cable cable
+2 mobile mobile
+3 screen screen
+4 modem modem
+5 monitor phone
+6 phone server
+7 switch
+</code></pre></div>
+<ul>
+<li><em>first</em> 文件的第 4 行(phone) 和 <em>second</em> 文件的第 5 行一致. 这意味着如果我们删除 <em>first</em> 文件中的第 3 行(也就是目前的第 4 行), 这两个文件的第二部分便都一样了.</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste first second|nl
+1 cable cable
+2 mobile mobile
+3 screen screen
+4 modem modem
+5 phone phone
+6 switch server
+</code></pre></div>
+<ul>
+<li><em>first</em> 文件的第 5 行(switch)可用 <em>second</em> 文件的第 6 行(server)替换. 至此, 这两个文件完全一样了.</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste first second|nl
+1 cable cable
+2 mobile mobile
+3 screen screen
+4 modem modem
+5 phone phone
+6 server server
+</code></pre></div>
+<p>现在, <code>diff</code> 命令的输出更容易理解了:</p>
+
+<blockquote>
+<p><strong>1c1,3</strong>: 更改 <em>first</em> 文件的第一行为 <em>second</em> 文件的 1 到 3 行</p>
+
+<p><strong>3d4</strong>: 从 <em>first</em> 文件中删除第 3 行(modem).</p>
+
+<p><strong>5c6</strong>: 更改 <em>first</em> 文件中的第 5 行(switch) 为 <em>second</em> 文件中的第 6 行(server)</p>
+</blockquote>
+
+<p>现在, 反过来再看一下:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste second first | nl
+1 cable computer
+2 mobile modem
+3 screen monitor
+4 modem phone
+5 phone switch
+6 server
+
+wiw_labs:$ diff second first
+1,3c1
+&lt; cable
+&lt; mobile
+&lt; screen
+—
+&gt; computer
+4a3
+&gt; monitor
+6c5
+&lt; server
+—
+&gt; switch
+</code></pre></div>
+<ul>
+<li>我们看到 <em>first</em> 文件的第 4 行(modem) 和 <em>second</em> 文件的第 2 行一致. 所以如果我们把 <em>first</em> 文件的 1 到 3 行替换为 <em>second</em> 文件的第 1 行, 我们得到如下输出:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste second first | nl
+1 computer computer
+2 modem modem
+3 phone monitor
+4 server phone
+5 switch
+</code></pre></div>
+<ul>
+<li>现在, <em>second</em> 文件的第 3 行(monitor) 在 <em>first</em> 文件中并不存在. 所以, 把它附加到 <em>first</em> 文件的第 4 行(modem)后面. 要记住 <code>diff</code> 命令的输出中的行号永远指的是原始的行号. 现在, 输出看起来是这样的:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wiw_labs:$ paste second first | nl
+1 computer computer
+2 modem modem
+3 monitor monitor
+4 phone phone
+5 server switch
+</code></pre></div>
+<ul>
+<li><em>first</em> 文件的第 6 行(server)需要改成 <em>second</em> 文件的第 5 行(switch). 更改之后, 两个文件便都一样了:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text">1 computer computer
+2 modem modem
+3 monitor monitor
+4 phone phone
+5 switch switch
+</code></pre></div>
+<p>现在, 更容易理解 <code>diff</code> 命令的输出了:</p>
+
+<blockquote>
+<p><strong>1,3c1</strong>: 把 <em>first</em> 文件的第 1 到 3 行改为 <em>second</em> 文件的第 1 行.</p>
+
+<p><strong>4a3</strong>: 在 <em>first</em> 文件的第 4 行(modem)后面附加上 <em>second</em> 文件的第 3 行(monitor).</p>
+
+<p><strong>6c5</strong>: 把 <em>first</em> 文件的第 6 行(server)改为 <em>second</em> 文件的第 5 行(switch).</p>
+</blockquote>
+
+            </div>
+
+            <div id="markdown-outline" class="col-lg-3">
+            </div>
+
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'unifreak-github';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+    
+<footer id="l-footer">
+    <div class="container">
+        <div class="row">
+            <div id="contact" class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-9">
+                <h3>CONTACT</h3>
+                <div class="row">
+                    <address id="address" class="col-lg-6 col-md-6 col-sm-6">
+                        China Hubei Wuhan<br>
+                        Hongshan, 450000<br>
+                        XuefuJiayuan<br>
+                        FangHao<br>
+                    </address>
+
+                    <ul class="col-lg-6 col-md-6 col-sm-6">
+                        <li class="qq"><i class="fa fa-qq"></i> &nbsp;&nbsp;744910240</li>
+                        <li class="email"><i class="fa fa-envelope"></i> <a href="mailto:fanghao90s@gmail.com"> &nbsp;&nbsp;fanghao90s@gmail.com</a></li>
+                        <li class="tel"><i class="fa fa-mobile"></i> <a href="tel:15671542698">&nbsp;&nbsp; 15671542698</a></li>
+                        <li class="github"><i class="fa fa-github"></i> <a href="http://www.github.com/UniFreak"> &nbsp;&nbsp;http://www.github.com/UniFreak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="rss" class="col-lg-2 col-md-2 col-sm-2">
+                    <h3>SUBSCRIBE<br>
+                    via</h3>
+                <a href="feed.xml">
+                    <i class="rss fa fa-rss-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <p id="legal">
+            Copyright (c) 2015 UniFreak | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a>
+        </p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/base.js"></script>
+
+
+<!-- 百度统计 -->
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/baidu_statistics.js"></script>
+
+
+    <script type="text/javascript" src="https://unifreak.github.io/javascripts/markdownreader.js"></script>
+</body>
+</html>

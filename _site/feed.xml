@@ -5,9 +5,192 @@
     <description>Fanghao&#39;s personal weblog, on coding or such stuff</description>
     <link>https://unifreak.github.io//</link>
     <atom:link href="https://unifreak.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Apr 2016 01:46:52 -0400</pubDate>
-    <lastBuildDate>Thu, 14 Apr 2016 01:46:52 -0400</lastBuildDate>
+    <pubDate>Thu, 14 Apr 2016 03:35:07 -0400</pubDate>
+    <lastBuildDate>Thu, 14 Apr 2016 03:35:07 -0400</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>Centos6 搭建Github Pages + Jekyll + Markdown</title>
+        <description>&lt;p&gt;&lt;em&gt;是否原创: 原创&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;原文链接: &lt;a href=&quot;http://galengao.github.io&quot;&gt;http://galengao.github.io&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;版权: 本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;引言&lt;/h1&gt;
+
+&lt;p&gt;查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，&lt;br&gt;
+以下便是我的文档，以供参考。 &lt;/p&gt;
+
+&lt;h1 id=&quot;rvm&quot;&gt;安装rvm&lt;/h1&gt;
+
+&lt;p&gt;rvm是用于安装ruby的，以下命令有时会解析不到那个地址，多尝试几次。 &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;curl -L https://get.rvm.io | bash -s stable --ruby
+source /usr/local/rvm/scripts/rvm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;执行&lt;code&gt;curl -L https://get.rvm.io | bash -s stable --ruby&lt;/code&gt;会报如下错误：&lt;br&gt;
+&lt;img src=&quot;../images/rvm1.png&quot; alt=&quot;alt text&quot;&gt;&lt;br&gt;
+&lt;strong&gt;解决办法&lt;/strong&gt;：&lt;br&gt;
+执行上面圈起来的语句，然后重新执行即可&lt;br&gt;
+&lt;img src=&quot;../images/rvm2.png&quot; alt=&quot;solution&quot;&gt;&lt;br&gt;
+&lt;strong&gt;然后执行&lt;/strong&gt; &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;curl -L https://get.rvm.io | bash -s stable --ruby
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;使其生效&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;source /usr/local/rvm/scripts/rvm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;rvm -v&lt;/code&gt; 表示安装成功&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/rvm3.png&quot; alt=&quot;look&quot;&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;ruby&quot;&gt;安装ruby&lt;/h1&gt;
+
+&lt;p&gt;这里安装2.3.0版本的，因为后面的jekyll要2.0以上的  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;rvm install 2.3.0
+rvm use 2.3.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../images/ruby1.png&quot; alt=&quot;ruby&quot;&gt; &lt;/p&gt;
+
+&lt;h1 id=&quot;git&quot;&gt;安装git&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yum -y git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../images/git1.png&quot; alt=&quot;ruby&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ssh-key&quot;&gt;生成SSH KEY&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;ssh-keygen -t rsa
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;回车，输入两次密码:&lt;br&gt;
+&lt;img src=&quot;../images/ssh1.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ssh-key-github&quot;&gt;把SSH KEY添加到GITHUB里&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;cat /root/.ssh/id_rsa.pub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../images/ssh2.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;github&quot;&gt;把上面的内容复制到github里&lt;/h1&gt;
+
+&lt;p&gt;登录&lt;a href=&quot;https://github.com/&quot;&gt;https://github.com/&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;github页面右上角有一个[setting]设置&lt;/strong&gt; 如下:
+&lt;img src=&quot;../images/ssh3.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;进去后点SSH那个选项&lt;/strong&gt;
+&lt;img src=&quot;../images/ssh4.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;然后新建ssh&lt;/strong&gt;
+&lt;img src=&quot;../images/ssh5.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最后把上面的内容复制进去，title可以空起&lt;/strong&gt;
+&lt;img src=&quot;../images/ssh6.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;然后Add SSH key提交后，会让你再输一把你的github账号即可。&lt;br&gt;
+测试一下，输入ssh -T &lt;a href=&quot;mailto:git@github.com&quot;&gt;git@github.com&lt;/a&gt;，出现如下信息即可。箭头那输入密码&lt;/strong&gt;
+&lt;img src=&quot;../images/ssh7.png&quot; alt=&quot;ssh&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;设置你的账号信息&lt;/h1&gt;
+
+&lt;p&gt;现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。&lt;br&gt;
+Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你
+自己的，名字必须是你的真名，而不是GitHub的昵称。&lt;br&gt;
+    git config --global user.name &amp;quot;你的名字&amp;quot;
+    git config --global user.email &amp;quot;&lt;a href=&quot;mailto:your_email@youremail.com&quot;&gt;your_email@youremail.com&lt;/a&gt;&amp;quot;&lt;/p&gt;
+
+&lt;h1 id=&quot;github-pages&quot;&gt;使用GitHub Pages建立博客&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;new repository&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github1.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;起个repository名，然后创建&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github2.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这时出现如下消息&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github3.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;点击上面的setting后如下&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github4.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;再点击上面的Launch automatic page generator&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github6.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这时上面都不用管，继续点击上面的continue to layouts&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github5.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;选中一个主题后点击上面的Publish page即可，会出现一个地址。&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github7.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;复制上面的地址&lt;a href=&quot;http://galengao.github.io/myblog%E5%9C%A8%E6%96%B0%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%89%93%E5%BC%80%E6%89%BE%E5%88%B0SSH%E5%90%8E%E7%9A%84%E8%BF%9E%E6%8E%A5&quot;&gt;http://galengao.github.io/myblog在新窗口中打开找到SSH后的连接&lt;/a&gt;&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github8.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;然后复制那个连接，在本地克隆&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&quot;../images/github9.png&quot; alt=&quot;github&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jekyll&quot;&gt;安装jekyll&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果要换镜像，如下：  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l、
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果安装jekyll出现如下错误时：&lt;br&gt;
+&lt;img src=&quot;../images/jekyll1.png&quot; alt=&quot;jekyll&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;解决升级gem，移除国外镜像，用国内的。  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;rvm rubygems latest
+gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../images/jekyll2.png&quot; alt=&quot;jekyll&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;启动项目查看情况&lt;/h1&gt;
+
+&lt;p&gt;进入我克隆的目录&lt;br&gt;
+&lt;code&gt;cd /root/GalenGao.github.io&lt;/code&gt; 
+启动（注：如果不指定IP和端口，默认启动是127.0.0.1:4000，这时远程访问不了，可用jekyll serve --help） &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;jekyll serve -H192.168.10.145
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../images/project1.png&quot; alt=&quot;project&quot;&gt;
+这时浏览器会看到如下信息：
+&lt;img src=&quot;../images/project2.png&quot; alt=&quot;project&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jekyll&quot;&gt;替换jekyll模板&lt;/h1&gt;
+
+&lt;p&gt;下载地址&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;br&gt;
+到网站去任意下载一个模板，然后上传到本地服务器。如我下载的  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;unzip unifreak.github.io-master.zip 
+cd unifreak.github.io-master.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;把里面的内容全部拷入到我上面的项目下  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;cp -rf * ../GalenGao.github.io/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;github&quot;&gt;你还需要如下命令推送到 github.&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git add .
+git commit -m &amp;quot;first post&amp;quot;
+git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;makdown&quot;&gt;makdown工具&lt;/h1&gt;
+
+&lt;h2 id=&quot;markdownpad-http-www-markdownpad-com-download-html&quot;&gt;markdownpad下载&lt;a href=&quot;http://www.markdownpad.com/download.html&quot;&gt;http://www.markdownpad.com/download.html&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;&gt;注册码&lt;/h3&gt;
+
+&lt;p&gt;邮箱：
+&lt;a href=&quot;mailto:Soar360@live.com&quot;&gt;Soar360@live.com&lt;/a&gt;
+授权秘钥：
+GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 Apr 2016 00:00:00 -0400</pubDate>
+        <link>https://unifreak.github.io//translation/github-jekyll</link>
+        <guid isPermaLink="true">https://unifreak.github.io//translation/github-jekyll</guid>
+        
+        <category>php</category>
+        
+        <category>http</category>
+        
+        
+        <category>translation</category>
+        
+      </item>
     
       <item>
         <title>使用 php printf() 和 sprintf() 格式化字符串</title>

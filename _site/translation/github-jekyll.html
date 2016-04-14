@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装， 以下便是我的文档，以供参考。">
+
+<title>Centos6 搭建Github Pages + Jekyll + Markdown</title>
+
+<!-- favicon -->
+<link rel="shortcut icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="icon" href="https://unifreak.github.io/favicon.ico" type="image/icon">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/simplePagination.css">
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/jquery.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://unifreak.github.io/javascripts/html5shiv.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/markdownreader.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/pygments_monokai.css">
+<link rel="stylesheet" type="text/css" href="https://unifreak.github.io/stylesheets/code_block.css">
+</head>
+
+<body>
+    <header id="l-header">
+    <div class="container">
+        <div class="row logo">
+            <div class="col-lg-7">
+                <h1>UniFreak</h1>
+            </div>
+
+
+            <div class="col-lg-5">
+                <p>On the way to death</p>
+                <p>On the way of learning</p>
+            </div>
+        </div>
+
+        <div class="row navicon">
+            <a href=""><i class="fa fa-navicon"></i></a>
+        </div>
+
+        <div class="row navbar">
+            <nav class="col-lg-8 col-md-8 col-xs-12">
+                <ul class="row">
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/">HOME</a></li>
+                    <li class="col-lg-3">
+                        <ul class="subnav">
+                            <a href="javascript:void(0)">POST</a>
+                            <li><a href="https://unifreak.github.io/category">CATEGORY</a></li>
+                            <li><a href="https://unifreak.github.io/tag">TAG</a></li>
+                        </ul>
+                    </li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/about">ABOUT</a></li>
+                    <li class="col-lg-3"><a href="https://unifreak.github.io/building">PLAY GROUND</a></li>
+                </ul>
+            </nav>
+
+            <div class="search col-lg-4 col-md-4 col-xs-12">
+                <label for="search"></label>
+                <input id="search" name="serach" type="text" placeholder="Dummy Search">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <div class="row">
+            <div id="markdown-container" class="col-lg-9">
+                <header>
+                    <p id="postTitle">Centos6 搭建Github Pages + Jekyll + Markdown</p>
+                    
+                    <ul class="tags clearfix">
+                        
+                        <li><i class="fa fa-tag"></i> php</li>
+                        
+                        <li><i class="fa fa-tag"></i> http</li>
+                        
+                    </ul>
+                    
+                    <p id="postMeta">posted on 11 Apr 2016 under category <a href="https://unifreak.github.io/category/">translation</a></p>
+
+                </header>
+
+                <p><em>是否原创: 原创</em></p>
+
+<p><em>原文链接: <a href="http://galengao.github.io">http://galengao.github.io</a></em></p>
+
+<p><em>版权: 本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文</em></p>
+
+<h1 id=">引言</h1>
+
+<p>查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，<br>
+以下便是我的文档，以供参考。 </p>
+
+<h1 id="rvm">安装rvm</h1>
+
+<p>rvm是用于安装ruby的，以下命令有时会解析不到那个地址，多尝试几次。 </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">curl -L https://get.rvm.io | bash -s stable --ruby
+source /usr/local/rvm/scripts/rvm
+</code></pre></div>
+<p>执行<code>curl -L https://get.rvm.io | bash -s stable --ruby</code>会报如下错误：<br>
+<img src="../images/rvm1.png" alt="alt text"><br>
+<strong>解决办法</strong>：<br>
+执行上面圈起来的语句，然后重新执行即可<br>
+<img src="../images/rvm2.png" alt="solution"><br>
+<strong>然后执行</strong> </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">curl -L https://get.rvm.io | bash -s stable --ruby
+</code></pre></div>
+<p><strong>使其生效</strong></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">source /usr/local/rvm/scripts/rvm
+</code></pre></div>
+<p><strong><code>rvm -v</code> 表示安装成功</strong><br>
+<img src="../images/rvm3.png" alt="look"> </p>
+
+<h1 id="ruby">安装ruby</h1>
+
+<p>这里安装2.3.0版本的，因为后面的jekyll要2.0以上的  </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">rvm install 2.3.0
+rvm use 2.3.0
+</code></pre></div>
+<p><img src="../images/ruby1.png" alt="ruby"> </p>
+
+<h1 id="git">安装git</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">yum -y git
+</code></pre></div>
+<p><img src="../images/git1.png" alt="ruby"></p>
+
+<h1 id="ssh-key">生成SSH KEY</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ssh-keygen -t rsa
+</code></pre></div>
+<p>回车，输入两次密码:<br>
+<img src="../images/ssh1.png" alt="ssh"></p>
+
+<h1 id="ssh-key-github">把SSH KEY添加到GITHUB里</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">cat /root/.ssh/id_rsa.pub
+</code></pre></div>
+<p><img src="../images/ssh2.png" alt="ssh"></p>
+
+<h1 id="github">把上面的内容复制到github里</h1>
+
+<p>登录<a href="https://github.com/">https://github.com/</a> </p>
+
+<p><strong>github页面右上角有一个[setting]设置</strong> 如下:
+<img src="../images/ssh3.png" alt="ssh"></p>
+
+<p><strong>进去后点SSH那个选项</strong>
+<img src="../images/ssh4.png" alt="ssh"></p>
+
+<p><strong>然后新建ssh</strong>
+<img src="../images/ssh5.png" alt="ssh"></p>
+
+<p><strong>最后把上面的内容复制进去，title可以空起</strong>
+<img src="../images/ssh6.png" alt="ssh"></p>
+
+<p><strong>然后Add SSH key提交后，会让你再输一把你的github账号即可。<br>
+测试一下，输入ssh -T <a href="mailto:git@github.com">git@github.com</a>，出现如下信息即可。箭头那输入密码</strong>
+<img src="../images/ssh7.png" alt="ssh"></p>
+
+<h1 id=">设置你的账号信息</h1>
+
+<p>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。<br>
+Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你
+自己的，名字必须是你的真名，而不是GitHub的昵称。<br>
+    git config --global user.name &quot;你的名字&quot;
+    git config --global user.email &quot;<a href="mailto:your_email@youremail.com">your_email@youremail.com</a>&quot;</p>
+
+<h1 id="github-pages">使用GitHub Pages建立博客</h1>
+
+<p><strong>new repository</strong><br>
+<img src="../images/github1.png" alt="github"></p>
+
+<p><strong>起个repository名，然后创建</strong><br>
+<img src="../images/github2.png" alt="github"></p>
+
+<p><strong>这时出现如下消息</strong><br>
+<img src="../images/github3.png" alt="github"></p>
+
+<p><strong>点击上面的setting后如下</strong><br>
+<img src="../images/github4.png" alt="github"></p>
+
+<p><strong>再点击上面的Launch automatic page generator</strong><br>
+<img src="../images/github6.png" alt="github"></p>
+
+<p><strong>这时上面都不用管，继续点击上面的continue to layouts</strong><br>
+<img src="../images/github5.png" alt="github"></p>
+
+<p><strong>选中一个主题后点击上面的Publish page即可，会出现一个地址。</strong><br>
+<img src="../images/github7.png" alt="github"></p>
+
+<p><strong>复制上面的地址<a href="http://galengao.github.io/myblog%E5%9C%A8%E6%96%B0%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%89%93%E5%BC%80%E6%89%BE%E5%88%B0SSH%E5%90%8E%E7%9A%84%E8%BF%9E%E6%8E%A5">http://galengao.github.io/myblog在新窗口中打开找到SSH后的连接</a></strong><br>
+<img src="../images/github8.png" alt="github"></p>
+
+<p><strong>然后复制那个连接，在本地克隆</strong><br>
+<img src="../images/github9.png" alt="github"></p>
+
+<h1 id="jekyll">安装jekyll</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">gem install jekyll
+</code></pre></div>
+<p>如果要换镜像，如下：  </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l、
+</code></pre></div>
+<p>如果安装jekyll出现如下错误时：<br>
+<img src="../images/jekyll1.png" alt="jekyll"></p>
+
+<p>解决升级gem，移除国外镜像，用国内的。  </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">rvm rubygems latest
+gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+</code></pre></div>
+<p><img src="../images/jekyll2.png" alt="jekyll"></p>
+
+<h1 id=">启动项目查看情况</h1>
+
+<p>进入我克隆的目录<br>
+<code>cd /root/GalenGao.github.io</code> 
+启动（注：如果不指定IP和端口，默认启动是127.0.0.1:4000，这时远程访问不了，可用jekyll serve --help） </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">jekyll serve -H192.168.10.145
+</code></pre></div>
+<p><img src="../images/project1.png" alt="project">
+这时浏览器会看到如下信息：
+<img src="../images/project2.png" alt="project"></p>
+
+<h1 id="jekyll">替换jekyll模板</h1>
+
+<p>下载地址<a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a><br>
+到网站去任意下载一个模板，然后上传到本地服务器。如我下载的  </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">unzip unifreak.github.io-master.zip 
+cd unifreak.github.io-master.zip
+</code></pre></div>
+<p>把里面的内容全部拷入到我上面的项目下  </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">cp -rf * ../GalenGao.github.io/
+</code></pre></div>
+<h1 id="github">你还需要如下命令推送到 github.</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">git add .
+git commit -m &quot;first post&quot;
+git push origin master
+</code></pre></div>
+<h1 id="makdown">makdown工具</h1>
+
+<h2 id="markdownpad-http-www-markdownpad-com-download-html">markdownpad下载<a href="http://www.markdownpad.com/download.html">http://www.markdownpad.com/download.html</a></h2>
+
+<h3 id=">注册码</h3>
+
+<p>邮箱：
+<a href="mailto:Soar360@live.com">Soar360@live.com</a>
+授权秘钥：
+GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==</p>
+
+            </div>
+
+            <div id="markdown-outline" class="col-lg-3">
+            </div>
+
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'unifreak-github';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+    </div>
+
+    
+<footer id="l-footer">
+    <div class="container">
+        <div class="row">
+            <div id="contact" class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-9">
+                <h3>CONTACT</h3>
+                <div class="row">
+                    <address id="address" class="col-lg-6 col-md-6 col-sm-6">
+                        China Hubei Wuhan<br>
+                        Hongshan, 450000<br>
+                        XuefuJiayuan<br>
+                        FangHao<br>
+                    </address>
+
+                    <ul class="col-lg-6 col-md-6 col-sm-6">
+                        <li class="qq"><i class="fa fa-qq"></i> &nbsp;&nbsp;744910240</li>
+                        <li class="email"><i class="fa fa-envelope"></i> <a href="mailto:fanghao90s@gmail.com"> &nbsp;&nbsp;fanghao90s@gmail.com</a></li>
+                        <li class="tel"><i class="fa fa-mobile"></i> <a href="tel:15671542698">&nbsp;&nbsp; 15671542698</a></li>
+                        <li class="github"><i class="fa fa-github"></i> <a href="http://www.github.com/UniFreak"> &nbsp;&nbsp;http://www.github.com/UniFreak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="rss" class="col-lg-2 col-md-2 col-sm-2">
+                    <h3>SUBSCRIBE<br>
+                    via</h3>
+                <a href="feed.xml">
+                    <i class="rss fa fa-rss-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <p id="legal">
+            Copyright (c) 2015 UniFreak | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a>
+        </p>
+    </div>
+</footer>
+
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/base.js"></script>
+
+
+<!-- 百度统计 -->
+<script type="text/javascript" src="https://unifreak.github.io/javascripts/baidu_statistics.js"></script>
+
+
+    <script type="text/javascript" src="https://unifreak.github.io/javascripts/markdownreader.js"></script>
+</body>
+</html>

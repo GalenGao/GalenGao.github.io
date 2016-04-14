@@ -1,8 +1,8 @@
-https://unifreak.github.io//translation/github-jekyll
-https://unifreak.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf
-https://unifreak.github.io//notes/learning-note-YII(1.1)
-https://unifreak.github.io//translation/Understanding_the_diff_command_in_unix
-https://unifreak.github.io//translation/Http_headers_and_PHP_header()_function
+https://GalenGao.github.io//translation/github-jekyll
+https://GalenGao.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf
+https://GalenGao.github.io//notes/learning-note-YII(1.1)
+https://GalenGao.github.io//translation/Understanding_the_diff_command_in_unix
+https://GalenGao.github.io//translation/Http_headers_and_PHP_header()_function
 
 
 

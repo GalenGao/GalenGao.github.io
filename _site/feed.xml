@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>UniFreak | Another yet unique freak is showing a freakshow</title>
+    <title>HuiRong | Another yet unique freak is showing a freakshow</title>
     <description>Fanghao&#39;s personal weblog, on coding or such stuff</description>
-    <link>https://unifreak.github.io//</link>
-    <atom:link href="https://unifreak.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Apr 2016 03:35:07 -0400</pubDate>
-    <lastBuildDate>Thu, 14 Apr 2016 03:35:07 -0400</lastBuildDate>
+    <link>https://GalenGao.github.io//</link>
+    <atom:link href="https://GalenGao.github.io//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 14 Apr 2016 04:27:00 -0400</pubDate>
+    <lastBuildDate>Thu, 14 Apr 2016 04:27:00 -0400</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -180,8 +180,8 @@ git push origin master
 GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==&lt;/p&gt;
 </description>
         <pubDate>Mon, 11 Apr 2016 00:00:00 -0400</pubDate>
-        <link>https://unifreak.github.io//translation/github-jekyll</link>
-        <guid isPermaLink="true">https://unifreak.github.io//translation/github-jekyll</guid>
+        <link>https://GalenGao.github.io//translation/github-jekyll</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//translation/github-jekyll</guid>
         
         <category>php</category>
         
@@ -376,8 +376,8 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 &lt;p&gt;其他相关的函数包括 &lt;a href=&quot;http://php.net/manual/en/function.fprintf.php&quot;&gt;&lt;code&gt;fprintf()&lt;/code&gt;&lt;/a&gt;, 用于将结果写到流(如文件). 还有 &lt;a href=&quot;http://php.net/manual/en/function.vprintf.php&quot;&gt;&lt;code&gt;vprintf()&lt;/code&gt;&lt;/a&gt;/&lt;a href=&quot;http://php.net/manual/en/function.vsprintf.php&quot;&gt;&lt;code&gt;vsprintf()&lt;/code&gt;&lt;/a&gt;/&lt;a href=&quot;http://php.net/manual/en/function.vfprintf.php&quot;&gt;&lt;code&gt;vfprintf()&lt;/code&gt;&lt;/a&gt;, 它们使用一个数组参数, 而非参数列表.&lt;/p&gt;
 </description>
         <pubDate>Sat, 23 Jan 2016 00:00:00 -0500</pubDate>
-        <link>https://unifreak.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf</link>
-        <guid isPermaLink="true">https://unifreak.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf</guid>
+        <link>https://GalenGao.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//translation/Formating_PHP_Strings_With_Printf_And_Sprintf</guid>
         
         <category>php</category>
         
@@ -1931,8 +1931,8 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 19 Nov 2015 00:00:00 -0500</pubDate>
-        <link>https://unifreak.github.io//notes/learning-note-YII(1.1)</link>
-        <guid isPermaLink="true">https://unifreak.github.io//notes/learning-note-YII(1.1)</guid>
+        <link>https://GalenGao.github.io//notes/learning-note-YII(1.1)</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//notes/learning-note-YII(1.1)</guid>
         
         <category>php</category>
         
@@ -2120,8 +2120,8 @@ wiw_labs:$ diff second first
 &lt;/blockquote&gt;
 </description>
         <pubDate>Mon, 28 Sep 2015 00:00:00 -0400</pubDate>
-        <link>https://unifreak.github.io//translation/Understanding_the_diff_command_in_unix</link>
-        <guid isPermaLink="true">https://unifreak.github.io//translation/Understanding_the_diff_command_in_unix</guid>
+        <link>https://GalenGao.github.io//translation/Understanding_the_diff_command_in_unix</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//translation/Understanding_the_diff_command_in_unix</guid>
         
         <category>linux</category>
         
@@ -2576,8 +2576,8 @@ Content-Type: text/html
 &lt;hr&gt;
 </description>
         <pubDate>Sat, 26 Sep 2015 00:00:00 -0400</pubDate>
-        <link>https://unifreak.github.io//translation/Http_headers_and_PHP_header()_function</link>
-        <guid isPermaLink="true">https://unifreak.github.io//translation/Http_headers_and_PHP_header()_function</guid>
+        <link>https://GalenGao.github.io//translation/Http_headers_and_PHP_header()_function</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//translation/Http_headers_and_PHP_header()_function</guid>
         
         <category>php</category>
         

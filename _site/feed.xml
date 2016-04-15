@@ -5,9 +5,755 @@
     <description>Fanghao&#39;s personal weblog, on coding or such stuff</description>
     <link>https://GalenGao.github.io//</link>
     <atom:link href="https://GalenGao.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Apr 2016 05:58:37 -0400</pubDate>
-    <lastBuildDate>Thu, 14 Apr 2016 05:58:37 -0400</lastBuildDate>
+    <pubDate>Thu, 14 Apr 2016 23:12:34 -0400</pubDate>
+    <lastBuildDate>Thu, 14 Apr 2016 23:12:34 -0400</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>CENTOS6.6下nmon的监控</title>
+        <description>&lt;h1 id=&quot;installing-nmon&quot;&gt;Installing Nmon&lt;/h1&gt;
+
+&lt;p&gt;By default nmon is available in the Ubuntu repository. You can easily install nmon by running the following command:  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yum install  nmon
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How to Use Nmon to Monitor Linux Performance&lt;br&gt;
+Once the installation has been finished, you can launch it by typing the nmon command in the terminal.  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;nmon
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You wI’ll see the following output:  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon1.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see from the above screenshot that the nmon command-line utility runs completely in interactive mode, and you can easily toggle statistics using shortcut keys.&lt;br&gt;
+You can use the following nmon keyboard shortcuts to display different system stats:  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;q : to stop and exit Nmon
+h : to see help screen
+c : see CPU stats
+m : see memory stats
+d : see disk stats
+k : see kernel stats
+n : see network stats
+N : see NFS stats
+j : see file system stats
+t : see top process
+V : see virtual memory stats
+v : verbose mode  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;check-cpu-by-processor&quot;&gt;Check CPU by Processor&lt;/h1&gt;
+
+&lt;p&gt;If you would like to collect some statistics on CPU performance, you should hit the c key on the keyboard.&lt;br&gt;
+After hitting the c key you wI’ll see the following output.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon2.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;check-top-process-statistics&quot;&gt;Check Top Process Statistics&lt;/h1&gt;
+
+&lt;p&gt;To get stats on top processes that are running on your system, press the t key on your keyboard.&lt;br&gt;
+You will see the following output.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon3.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;check-network-statistics&quot;&gt;Check Network Statistics&lt;/h1&gt;
+
+&lt;p&gt;To get the network stats of your Linux system, just press the n key on your keyboard.&lt;br&gt;
+You wI’ll see the following output:  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon4.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;disk-i-o-graphs&quot;&gt;Disk I/O Graphs&lt;/h1&gt;
+
+&lt;p&gt;Use the d key to get information about disks.&lt;br&gt;
+You wI’ll see the following output:  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon5.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;check-kernel-information&quot;&gt;Check Kernel Information&lt;/h1&gt;
+
+&lt;p&gt;A most important key to use with this tool is k; it is used to display some brief information on the kernel of your system.&lt;br&gt;
+You will see the following output after hitting the k key on your keyboard.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon6.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;get-system-information&quot;&gt;Get System Information&lt;/h1&gt;
+
+&lt;p&gt;A very useful key for every system admin is the r key which is used to give information on different resources such as machine architecture, operating system version, Linux version and CPU.&lt;br&gt;
+You will see the following output by hitting the r key.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../images/nmon7.png&quot; alt=&quot;nmon&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;还有许多其他的工具做的和 Nmon 同样的工作，不过 Nmon 对一个 Linux 新手来说还是很友好的。
+Nmon 监控 Linux 的系统性能&lt;/p&gt;
+
+&lt;p&gt;[原文链接]&lt;a href=&quot;https://www.maketecheasier.com/monitor-linux-system-performance/&quot;&gt;https://www.maketecheasier.com/monitor-linux-system-performance/&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 Apr 2016 00:00:00 -0400</pubDate>
+        <link>https://GalenGao.github.io//linux/linux-nmon</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//linux/linux-nmon</guid>
+        
+        <category>nmon</category>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>男怕批判，女怕忽略</title>
+        <description>&lt;p&gt;&lt;img src=&quot;../images/weixin.jpg&quot; alt=&quot;kaitou&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;font color=#00ffff size=5&gt;
+男女之间的沟通问题，可说是贯穿于交往的整个过程，在一开始“爱”的蒙蔽下，问题不会显山露水，而经年累月，男女两性本身的差异就将此隐患上升到“障碍”的高度。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;以下对话模式在我们的生活中经常发生：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;女：“你怎么老是不给我打电话？”&lt;br&gt;
+男：“我怎么没有打？前天不是还打了？”&lt;br&gt;
+女：“你就是没有打！”&lt;br&gt;
+“你心里根本就没有我。”&lt;br&gt;
+“你根本就不爱我！”&lt;br&gt;
+男：……&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;男人怕被批评，女人怕被忽略，这是男女之间的天然差异，在生活的方方面面都有所体现，而在两性沟通中却由于这一点可以引发摩擦、冲突甚至分手。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;对照上面的这个对话：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果作为男人，可以在对方说出这句话的时候，认真倾听她话里的真正需要，可能就没有之后的唇舌之争。&lt;/li&gt;
+&lt;li&gt;而作为女人，如果一开始就学会表达自己的感受和需要，而不是用绝对词来声讨她的男人，那男人也不会有本能的反抗反应。&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;所以说男女之间出了什么问题，真的是互相抬轿子，每个人都需要对“问题”承担自己该有的责任。&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;基于以上的差异，要学好两性沟通，避免火星撞地球的暴力冲突，男女要学习的着重点会有所不同。 &lt;/p&gt;
+
+&lt;p&gt;不知各位在生活中有没有发现，如果你是一位女下属，你在跟你的男上司抱怨工作时，如果他特别认真地倾听你的讲话，并且每次都不断地鼓励你继续表达，从不打断，甚至有时能把你想说但说不出来的话都能表达出来时，你会不会觉得跟着这样“懂”你的老板太值了？&lt;/p&gt;
+
+&lt;p&gt;如果这位男上司工作投入得忘了时间，收到了他妻子的来电：“老公，我把饭烧好了，在家里等你回家，现在离你平时回家的时间已经超出了一小时，我感觉有点着急，你能告诉我你具体回家吃饭的时间吗？”能想象，这个男上司收拾了东西，马上秒速离开办公室。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;事实往往如此，好男人和好女人就是这样互相成就的：&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;男人是目标和问题解决型的，如果他的女人能在沟通中不带有任何批评的把她自己的感受和需要表达出来，她的男人就会迅速用解决问题的方式来解决这份需要，那女人的目的就达到了。&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;女人是状态和感受型的，如果能真实地找到自己的感受，并想明白自己的需要是什么，只要将其表达出来，那问题就都能解决。&lt;/strong&gt;  &lt;/p&gt;
+
+&lt;p&gt;我们现在的问题往往是，男人不懂倾听，女人不懂表达。
+是什么阻止了你自如地表达？
+是什么阻止了我们去听到别人的内在声音？是评判。我们每天每时都在对别人进行评判：老公不按时回家，那他就是个不顾家的人！老板又安排给我一个我不愿意做的事，那他就是个不懂体恤下属的人！我们还天天对自己评判：我如果达不到自己的期待，那我就是个失败者!
+我们在经年累月中学会了评判，所以才没有耐心去倾听别人的声音，男人在女人还未开口但她脸上已有愠色时，就内心升起了一个评判：“她又开始给我使脸色，太不体谅我了。”&lt;/p&gt;
+
+&lt;p&gt;这个评判发生在倾听之前，那女人什么声音男人也听不到。但如果能耐着性子放下评判先去倾听女人的内在声音，那个声音只是在说：“我很想你，想得到你更多的关注。”我们会发现，之前的那个评判就不成立了。&lt;/p&gt;
+
+&lt;p&gt;那是什么阻止了我们能自如地表达自己的感受和需要？在心理咨询或者授课中，我会无数次地问对方“请你告诉我当时的感受是什么”，而大多数人都觉得去寻找自己的感受和需要异常难。&lt;/p&gt;
+
+&lt;p&gt;最近与一位业内的老师一起筹备给大龄青年脱单的课程，我们决定在第一课时，就要求大家开始练习学习寻找感受和需要，而结果是可想而知的惨，十个人里能准确地回馈出自己感受的少之又少，而能表达出自己需要的几乎为零。&lt;/p&gt;
+
+&lt;p&gt;我们在成长的几十年里，一直在学习如何有“想法”，演绎到极致就是学习如何去“评判”，没有人告诉我们需要把我们本有的“感受”保存住，甚至我们会以“表达感受”为耻，因为我们从小未被父母允许表达。&lt;/p&gt;
+
+&lt;p&gt;长大后，我们学会了用想法甚至评判代替感受：我觉得你不爱我，我觉得你不在乎我，你是个混蛋，我是个没用的人。而在沟通中，这样的想法或是评判并无实质的意义。&lt;/p&gt;
+
+&lt;p&gt;如果耐着性子，在想法和感受前先去触摸并且客观的描述感受：我没有收到你的电话，我很担心；如果再继续地探求下还能进一步发现自己的需要就更好：我的这份担心让我需要你能经常与我保持各种形式的沟通，你能每天给我打个电话吗？&lt;/p&gt;
+
+&lt;p&gt;女人能这样表达出来，男人自然能听得到；而男人如果能准确地把对方的感受和需要反馈出来，对于女人来说，“懂她”就可以排除一切的生活难题。&lt;/p&gt;
+
+&lt;p&gt;最要命的是，女人自以为是地去贤惠体贴，压抑住自己的感受和需要，一切以男人为中心，而男人天性只关注与目标相关的事物，又忽视了女人内在的感受和需要。平时的不沟通，在男人看来眼前的一切是理所当然，在女人看来是受尽了委屈。女人天然的发散式认知模式让她更关注别人的感受和需要，而男人却没有这个功能。&lt;/p&gt;
+
+&lt;p&gt;经年累月，就能看到一个女人在恋爱和婚姻中一边牺牲，一边埋怨男人。一直被压抑的感受和需要，还被女人错误地理解为坚强和独立，于是，随着女人付出越多得到越少时，她便强化了要坚强和独立的模式，甚至会丧失掉最初吸引男人的女性特质。而可怜的男人，从未关注到女人的这些变化，在他眼里，自己的女人从最初的温柔乖巧变成了今日开口即指责的女汉子。&lt;/p&gt;
+
+&lt;p&gt;到底是谁成就了谁？谁又应该为这样的结果来买单？
+&lt;/front&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 12 Apr 2016 00:00:00 -0400</pubDate>
+        <link>https://GalenGao.github.io//%E6%96%87%E7%AB%A0/man-and-women</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//%E6%96%87%E7%AB%A0/man-and-women</guid>
+        
+        <category>心灵鸡汤</category>
+        
+        
+        <category>文章</category>
+        
+      </item>
+    
+      <item>
+        <title>CENTOS6.6搭建OPENVPN</title>
+        <description>&lt;h1 id=&quot;&gt;环境&lt;/h1&gt;
+
+&lt;p&gt;OS: CentOS 6.6 x86_64 Minimal&lt;/p&gt;
+
+&lt;h1 id=&quot;epel&quot;&gt;安装EPEL扩展库&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yum install http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;&gt;安装所需依赖软件包&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yum install -y openssl openssl-devel lzo lzo-devel pam pam-devel automake pkgconfig  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;openvpn&quot;&gt;安装OpenVPN&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;yum install openvpn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;easy-rsa-2-x&quot;&gt;下载easy-rsa 2.x&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;wget https://github.com/OpenVPN/easy-rsa/archive/release/2.x.zip
+unzip 2.x.zip
+cd easy-rsa-release-2.x
+cp -rf easy-rsa /etc/openvpn/  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;easy-rsa-vars&quot;&gt;配置easy-rsa vars&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;cd /etc/openvpn/easy-rsa/2.0/
+ln -s openssl-1.0.0.cnf openssl.cnf
+chmod +x vars
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;修改vars文件中以下配置项：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# vim vars
+...
+# Increase this to 2048 if you
+# are paranoid.  This will slow
+# down TLS negotiation performance
+# as well as the one-time DH parms
+# generation process.
+export KEY_SIZE=1024
+
+...
+# These are the default values for fields
+# which will be placed in the certificate.
+# Don&amp;#39;t leave any of these fields blank.
+export KEY_COUNTRY=&amp;quot;CN&amp;quot;
+export KEY_PROVINCE=&amp;quot;SiChuan&amp;quot;
+export KEY_CITY=&amp;quot;ChenDu&amp;quot;
+export KEY_ORG=&amp;quot;hlkj&amp;quot;
+export KEY_EMAIL=&amp;quot;gaohuirong@ynhualikj.com&amp;quot;
+export KEY_OU=&amp;quot;cdyf&amp;quot;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;执行vars文件使环境变量生效：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# source ./vars
+
+NOTE: If you run ./clean-all, I will be doing a rm -rf on /etc/openvpn/easy-rsa/2.0/keys  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;&gt;生成所需的各种证书文件&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;清除旧的证书：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./clean-all
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;生成服务器端CA证书，由于在vars文件中做过缺省设置，在出现交互界面时，直接一路回车即可：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./build-ca
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;生成服务器证书，仍然是在出现交互界面时，直接一路回车，并在结尾询问[y/n]时输入y即可：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./build-key-server server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;生成DH验证文件：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./build-dh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;生成TLS私密文件：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;cd keys
+openvpn --genkey --secret ta.key
+cd ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;生成客户端证书，例如eric与rainbow两个用户：&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./build-key client1
+./build-key client2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;&gt;编辑服务器配置文件：&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;cp /usr/share/doc/openvpn-2.3.10/sample/sample-config-files/server.conf  /etc/openvpn/  
+
+vim /etc/openvpn/server.conf  
+
+#################################################
+# Sample OpenVPN 2.0 config file for#
+# multi-client server.  #
+#   #
+# This file is for the server side  #
+# of a many-clients &amp;lt;-&amp;gt; one-server  #
+# OpenVPN configuration.#
+#   #
+# OpenVPN also supports #
+# single-machine &amp;lt;-&amp;gt; single-machine #
+# configurations (See the Examples page #
+# on the web site for more info).   #
+#   #
+# This config should work on Windows#
+# or Linux/BSD systems.  Remember on#
+# Windows to quote pathnames and use#
+# double backslashes, e.g.: #
+# &amp;quot;C:\\Program Files\\OpenVPN\\config\\foo.key&amp;quot; #
+#   #
+# Comments are preceded with &amp;#39;#&amp;#39; or &amp;#39;;&amp;#39; #
+#################################################
+
+# Which local IP address should OpenVPN
+# listen on? (optional)
+;local a.b.c.d
+
+# Which TCP/UDP port should OpenVPN listen on?
+# If you want to run multiple OpenVPN instances
+# on the same machine, use a different port
+# number for each one.  You will need to
+# open up this port on your firewall.
+port 1153
+
+# TCP or UDP server?
+;proto tcp
+proto udp
+
+# &amp;quot;dev tun&amp;quot; will create a routed IP tunnel,
+# &amp;quot;dev tap&amp;quot; will create an ethernet tunnel.
+# Use &amp;quot;dev tap0&amp;quot; if you are ethernet bridging
+# and have precreated a tap0 virtual interface
+# and bridged it with your ethernet interface.
+# If you want to control access policies
+# over the VPN, you must create firewall
+# rules for the the TUN/TAP interface.
+# On non-Windows systems, you can give
+# an explicit unit number, such as tun0.
+# On Windows, use &amp;quot;dev-node&amp;quot; for this.
+# On most systems, the VPN will not function
+# unless you partially or fully disable
+# the firewall for the TUN/TAP interface.
+;dev tap
+dev tun
+
+# Windows needs the TAP-Win32 adapter name
+# from the Network Connections panel if you
+# have more than one.  On XP SP2 or higher,
+# you may need to selectively disable the
+# Windows firewall for the TAP adapter.
+# Non-Windows systems usually don&amp;#39;t need this.
+;dev-node MyTap
+
+# SSL/TLS root certificate (ca), certificate
+# (cert), and private key (key).  Each client
+# and the server must have their own cert and
+# key file.  The server and all clients will
+# use the same ca file.
+#
+# See the &amp;quot;easy-rsa&amp;quot; directory for a series
+# of scripts for generating RSA certificates
+# and private keys.  Remember to use
+# a unique Common Name for the server
+# and each of the client certificates.
+#
+# Any X509 key management system can be used.
+# OpenVPN can also use a PKCS #12 formatted key file
+# (see &amp;quot;pkcs12&amp;quot; directive in man page).
+ca easy-rsa/2.0/keys/ca.crt
+cert easy-rsa/2.0/keys/server.crt
+key easy-rsa/2.0/keys/server.key 
+# This file should be kept secret
+
+# Diffie hellman parameters.
+# Generate your own with:
+#   openssl dhparam -out dh2048.pem 2048
+dh easy-rsa/2.0/keys/dh1024.pem
+
+# Network topology
+# Should be subnet (addressing via IP)
+# unless Windows clients v2.0.9 and lower have to
+# be supported (then net30, i.e. a /30 per client)
+# Defaults to net30 (not recommended)
+;topology subnet
+
+# Configure server mode and supply a VPN subnet
+# for OpenVPN to draw client addresses from.
+# The server will take 10.8.0.1 for itself,
+# the rest will be made available to clients.
+# Each client will be able to reach the server
+# on 10.8.0.1. Comment this line out if you are
+# ethernet bridging. See the man page for more info.
+server 10.8.0.0 255.255.255.0
+
+# Maintain a record of client &amp;lt;-&amp;gt; virtual IP address
+# associations in this file.  If OpenVPN goes down or
+# is restarted, reconnecting clients can be assigned
+# the same virtual IP address from the pool that was
+# previously assigned.
+ifconfig-pool-persist ipp.txt
+
+# Configure server mode for ethernet bridging.
+# You must first use your OS&amp;#39;s bridging capability
+# to bridge the TAP interface with the ethernet
+# NIC interface.  Then you must manually set the
+# IP/netmask on the bridge interface, here we
+# assume 10.8.0.4/255.255.255.0.  Finally we
+# must set aside an IP range in this subnet
+# (start=10.8.0.50 end=10.8.0.100) to allocate
+# to connecting clients.  Leave this line commented
+# out unless you are ethernet bridging.
+;server-bridge 10.8.0.4 255.255.255.0 10.8.0.50 10.8.0.100
+
+# Configure server mode for ethernet bridging
+# using a DHCP-proxy, where clients talk
+# to the OpenVPN server-side DHCP server
+# to receive their IP address allocation
+# and DNS server addresses.  You must first use
+# your OS&amp;#39;s bridging capability to bridge the TAP
+# interface with the ethernet NIC interface.
+# Note: this mode only works on clients (such as
+# Windows), where the client-side TAP adapter is
+# bound to a DHCP client.
+;server-bridge
+
+# Push routes to the client to allow it
+# to reach other private subnets behind
+# the server.  Remember that these
+# private subnets will also need
+# to know to route the OpenVPN client
+# address pool (10.8.0.0/255.255.255.0)
+# back to the OpenVPN server.
+;push &amp;quot;route 192.168.10.0 255.255.255.0&amp;quot;
+;push &amp;quot;route 192.168.20.0 255.255.255.0&amp;quot;
+
+# To assign specific IP addresses to specific
+# clients or if a connecting client has a private
+# subnet behind it that should also have VPN access,
+# use the subdirectory &amp;quot;ccd&amp;quot; for client-specific
+# configuration files (see man page for more info).
+
+# EXAMPLE: Suppose the client
+# having the certificate common name &amp;quot;Thelonious&amp;quot;
+# also has a small subnet behind his connecting
+# machine, such as 192.168.40.128/255.255.255.248.
+# First, uncomment out these lines:
+;client-config-dir ccd
+;route 192.168.40.128 255.255.255.248
+# Then create a file ccd/Thelonious with this line:
+#   iroute 192.168.40.128 255.255.255.248
+# This will allow Thelonious&amp;#39; private subnet to
+# access the VPN.  This example will only work
+# if you are routing, not bridging, i.e. you are
+# using &amp;quot;dev tun&amp;quot; and &amp;quot;server&amp;quot; directives.
+
+# EXAMPLE: Suppose you want to give
+# Thelonious a fixed VPN IP address of 10.9.0.1.
+# First uncomment out these lines:
+;client-config-dir ccd
+;route 10.9.0.0 255.255.255.252
+# Then add this line to ccd/Thelonious:
+#   ifconfig-push 10.9.0.1 10.9.0.2
+
+# Suppose that you want to enable different
+# firewall access policies for different groups
+# of clients.  There are two methods:
+# (1) Run multiple OpenVPN daemons, one for each
+# group, and firewall the TUN/TAP interface
+# for each group/daemon appropriately.
+# (2) (Advanced) Create a script to dynamically
+# modify the firewall in response to access
+# from different clients.  See man
+# page for more info on learn-address script.
+;learn-address ./script
+
+# If enabled, this directive will configure
+# all clients to redirect their default
+# network gateway through the VPN, causing
+# all IP traffic such as web browsing and
+# and DNS lookups to go through the VPN
+# (The OpenVPN server machine may need to NAT
+# or bridge the TUN/TAP interface to the internet
+# in order for this to work properly).
+push &amp;quot;redirect-gateway def1 bypass-dhcp&amp;quot;
+
+# Certain Windows-specific network settings
+# can be pushed to clients, such as DNS
+# or WINS server addresses.  CAVEAT:
+# http://openvpn.net/faq.html#dhcpcaveats
+# The addresses below refer to the public
+# DNS servers provided by opendns.com.
+push &amp;quot;dhcp-option DNS 192.168.10.15&amp;quot;
+push &amp;quot;dhcp-option DNS 61.139.2.69&amp;quot;
+
+# Uncomment this directive to allow different
+# clients to be able to &amp;quot;see&amp;quot; each other.
+# By default, clients will only see the server.
+# To force clients to only see the server, you
+# will also need to appropriately firewall the
+# server&amp;#39;s TUN/TAP interface.
+client-to-client
+
+# Uncomment this directive if multiple clients
+# might connect with the same certificate/key
+# files or common names.  This is recommended
+# only for testing purposes.  For production use,
+# each client should have its own certificate/key
+# pair.
+#
+# IF YOU HAVE NOT GENERATED INDIVIDUAL
+# CERTIFICATE/KEY PAIRS FOR EACH CLIENT,
+# EACH HAVING ITS OWN UNIQUE &amp;quot;COMMON NAME&amp;quot;,
+# UNCOMMENT THIS LINE OUT.
+duplicate-cn
+
+# The keepalive directive causes ping-like
+# messages to be sent back and forth over
+# the link so that each side knows when
+# the other side has gone down.
+# Ping every 10 seconds, assume that remote
+# peer is down if no ping received during
+# a 120 second time period.
+keepalive 10 120
+
+# For extra security beyond that provided
+# by SSL/TLS, create an &amp;quot;HMAC firewall&amp;quot;
+# to help block DoS attacks and UDP port flooding.
+#
+# Generate with:
+#   openvpn --genkey --secret ta.key
+#
+# The server and each client must have
+# a copy of this key.
+# The second parameter should be &amp;#39;0&amp;#39;
+# on the server and &amp;#39;1&amp;#39; on the clients.
+tls-auth easy-rsa/2.0/keys/ta.key 0 # This file is secret
+
+# Select a cryptographic cipher.
+# This config item must be copied to
+# the client config file as well.
+;cipher BF-CBC# Blowfish (default)
+;cipher AES-128-CBC   # AES
+;cipher DES-EDE3-CBC  # Triple-DES
+
+# Enable compression on the VPN link.
+# If you enable it here, you must also
+# enable it in the client config file.
+comp-lzo
+
+# The maximum number of concurrently connected
+# clients we want to allow.
+;max-clients 100
+
+# It&amp;#39;s a good idea to reduce the OpenVPN
+# daemon&amp;#39;s privileges after initialization.
+#
+# You can uncomment this out on
+# non-Windows systems.
+user nobody
+group nobody
+
+# The persist options will try to avoid
+# accessing certain resources on restart
+# that may no longer be accessible because
+# of the privilege downgrade.
+persist-key
+persist-tun
+
+# Output a short status file showing
+# current connections, truncated
+# and rewritten every minute.
+status /tmp/openvpn-status.log
+
+# By default, log messages will go to the syslog (or
+# on Windows, if running as a service, they will go to
+# the &amp;quot;\Program Files\OpenVPN\log&amp;quot; directory).
+# Use log or log-append to override this default.
+# &amp;quot;log&amp;quot; will truncate the log file on OpenVPN startup,
+# while &amp;quot;log-append&amp;quot; will append to it.  Use one
+# or the other (but not both).
+log/tmp/openvpn/openvpn.log
+log-append  /tmp/openvpn/openvpn.log
+
+# Set the appropriate level of log
+# file verbosity.
+#
+# 0 is silent, except for fatal errors
+# 4 is reasonable for general usage
+# 5 and 6 can help to debug connection problems
+# 9 is extremely verbose
+verb 3
+
+# Silence repeating messages.  At most 20
+# sequential messages of the same message
+# category will be output to the log.
+;mute 20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;创建日志文件目录：&lt;/strong&gt; &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mkdir -p /tmp/openvpn
+chown openvpn:openvpn /tmp/openvpn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;openvpn&quot;&gt;启动OpenVPN服务&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;/etc/init.d/openvpn start
+chkconfig openvpn on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;nat&quot;&gt;配置服务器，开启NAT数据转发和相关端口&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;vim /etc/sysctl.conf
+1   ...
+2   net.ipv4.ip_forward = 1
+3   ...
+
+sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;必须得打开iptables做nat转发&lt;/strong&gt;&lt;br&gt;
+&lt;font color=#0099ff size=3 face=&quot;黑体&quot;&gt;访问局域网需要在这里配置&lt;/font&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;iptables -t nat -A POSTROUTING -s 10.8.0.0/24  -j MASQUERADE
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24  -j MASQUERADE
+iptables -A INPUT -p udp --dport 1153 -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+/etc/init.d/iptables save
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;或者直接关闭iptables&lt;/strong&gt;  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;/etc/init.d/iptables restart
+chkconfig iptables on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#FF4500&gt;注意：如果使用的是云主机如EC2，端口过滤相关的配置则需要跳过，然后到Security Group中进行设置。&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h1 id=&quot;openvpn&quot;&gt;配置OpenVPN客户端&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;配置用户client1客户端的配置文件&lt;/strong&gt;&lt;br&gt;
+    cp /usr/share/doc/openvpn-2.3.10/sample/sample-config-files/client.conf  /etc/openvpn/easy-rsa/2.0/keys/client.ovpn&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;vi /etc/openvpn/easy-rsa/2.0/keys/client.ovpn
+
+##############################################
+# Sample client-side OpenVPN 2.0 config file #
+# for connecting to multi-client server. #
+##
+# This configuration can be used by multiple #
+# clients, however each client should have   #
+# its own cert and key files.#
+##
+# On Windows, you might want to rename this  #
+# file so it has a .ovpn extension   #
+##############################################
+
+# Specify that we are a client and that we
+# will be pulling certain config file directives
+# from the server.
+client
+
+# Use the same setting as you are using on
+# the server.
+# On most systems, the VPN will not function
+# unless you partially or fully disable
+# the firewall for the TUN/TAP interface.
+;dev tap
+dev tun
+
+# Windows needs the TAP-Win32 adapter name
+# from the Network Connections panel
+# if you have more than one.  On XP SP2,
+# you may need to disable the firewall
+# for the TAP adapter.
+;dev-node MyTap
+
+# Are we connecting to a TCP or
+# UDP server?  Use the same setting as
+# on the server.
+;proto tcp
+proto udp
+
+# The hostname/IP and port of the server.
+# You can have multiple remote entries
+# to load balance between the servers.
+remote 192.168.10.99 1153
+;remote my-server-2 1194
+
+# Choose a random host from the remote
+# list for load-balancing.  Otherwise
+# try hosts in the order specified.
+;remote-random
+
+# Keep trying indefinitely to resolve the
+# host name of the OpenVPN server.  Very useful
+# on machines which are not permanently connected
+# to the internet such as laptops.
+resolv-retry infinite
+
+# Most clients don&amp;#39;t need to bind to
+# a specific local port number.
+nobind
+
+# Downgrade privileges after initialization (non-Windows only)
+;user nobody
+;group nobody
+
+# Try to preserve some state across restarts.
+persist-key
+persist-tun
+
+# If you are connecting through an
+# HTTP proxy to reach the actual OpenVPN
+# server, put the proxy server/IP and
+# port number here.  See the man page
+# if your proxy server requires
+# authentication.
+;http-proxy-retry # retry on connection failures
+;http-proxy [proxy server] [proxy port #]
+
+# Wireless networks often produce a lot
+# of duplicate packets.  Set this flag
+# to silence duplicate packet warnings.
+;mute-replay-warnings
+
+# SSL/TLS parms.
+# See the server config file for more
+# description.  It&amp;#39;s best to use
+# a separate .crt/.key file pair
+# for each client.  A single ca
+# file can be used for all clients.
+ca ca.crt
+cert client1.crt
+key client1.key
+
+# Verify server certificate by checking that the
+# certicate has the correct key usage set.
+# This is an important precaution to protect against
+# a potential attack discussed here:
+#  http://openvpn.net/howto.html#mitm
+#
+# To use this feature, you will need to generate
+# your server certificates with the keyUsage set to
+#   digitalSignature, keyEncipherment
+# and the extendedKeyUsage to
+#   serverAuth
+# EasyRSA can do this for you.
+remote-cert-tls server
+
+# If a tls-auth key is used on the server
+# then every client must also have the key.
+tls-auth ta.key 1
+
+# Select a cryptographic cipher.
+# If the cipher option is used on the server
+# then you must also specify it here.
+;cipher x
+
+# Enable compression on the VPN link.
+# Don&amp;#39;t enable this unless it is also
+# enabled in the server config file.
+comp-lzo
+
+# Set log file verbosity.
+verb 3
+
+# Silence repeating messages
+;mute 20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;windows-openvpn-client&quot;&gt;在Windows中，下载并安装OpenVPN Client：&lt;/h1&gt;
+
+&lt;p&gt;下载地址：&lt;a href=&quot;https://openvpn.net/index.php/download/community-downloads.html&quot;&gt;https://openvpn.net/index.php/download/community-downloads.html&lt;/a&gt;&lt;br&gt;
+然后双击安装文件，点击下一步即可&lt;br&gt;
+将服务器端生成的相关证书下载下来，拷贝到客户端windows的openvpn的安装目录下的config目录下&lt;br&gt;
+config目录下有：&lt;br&gt;
+- client.ovpn&lt;br&gt;
+- ta.key&lt;br&gt;
+- ca.crt&lt;br&gt;
+- client1.crt&lt;br&gt;
+- client1.key&lt;br&gt;
+启动客户端，双击图形界面&lt;/p&gt;
+
+&lt;p&gt;若openvpn服务器无公网IP，则首先把openvpn服务器上的server.conf和客户端上的client.ov[n文件里的udp改为tcp
+然后用nat123做一个端口映射
+&lt;img src=&quot;../images/nat1231.png&quot; alt=&quot;nat123&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;然后在客户端安装nat123
+登录nat123访问者
+&lt;img src=&quot;../images/nat1232.png&quot; alt=&quot;nat123&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;最后登录即可&lt;/p&gt;
+</description>
+        <pubDate>Tue, 12 Apr 2016 00:00:00 -0400</pubDate>
+        <link>https://GalenGao.github.io//linux/linux-install-openvpn</link>
+        <guid isPermaLink="true">https://GalenGao.github.io//linux/linux-install-openvpn</guid>
+        
+        <category>openvpn</category>
+        
+        
+        <category>linux</category>
+        
+      </item>
     
       <item>
         <title>Centos6 搭建Github Pages + Jekyll + Markdown</title>

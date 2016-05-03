@@ -1,8 +1,15 @@
 highlighter: pygments
 
-markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+kramdown:
+  input: GFM
+  extensions:
+    - autolink
+    - footnotes
+    - smart
+  use_coderay: true
+  syntax_highlighter: rouge
+  coderay:
+    coderay_line_numbers:  nil
 
 gems: [jekyll-paginate]
 paginate: 7
@@ -17,12 +24,12 @@ url: https://GalenGao.github.io/
 devurl: http://localhost:4000/
 name: HuiRong
 title: HuiRong | Another yet unique freak is showing a freakshow
-description: "Fanghao's personal weblog, on coding or such stuff"
+description: "Galen's personal weblog, on coding or such stuff"
 
 my:
     displayName: Galen
     realName: GaoHuiRong
-    realName_cn: 方浩
+    realName_cn: 高会荣
     jobTitle: "DBA"
     contact:
         qq: 446400837

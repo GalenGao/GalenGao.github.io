@@ -9,7 +9,7 @@ excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用�
 
 [参照]：<http://my.oschina.net/itblog/blog/547250>  
 
-#JDK安装
+#JDK安装 
  
     $ tar zxvf jdk-7u76-linux-x64.tar.gz -C  /usr/local
     $ cd /usr/local
@@ -18,7 +18,7 @@ excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用�
     JAVA_HOME=/usr/local/jdk1.7
     PATH=$PATH:$HOME/bin:/usr/local/mysql/bin:$JAVA_HOME/bin
 
-#安装ElasticSearch  
+#安装ElasticSearch   
 
     wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz
     tar -zxvf elasticsearch-2.2.0.tar.gz

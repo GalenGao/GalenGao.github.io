@@ -1,3 +1,5 @@
+highlighter: rouge
+
 kramdown:
   input: GFM
   extensions:

@@ -43,14 +43,14 @@ Redis Cluster不提供强一致性。例如cluster接受了一个写请求，给
 ## 安装配置redis3.2
 这里我用两台服务器，6个节点，互为主从，即3个主节点3个从节点192.168.10.120和192.168.10.121  
 分别在两台上安装redis  
-```shell
-wget http://download.redis.io/releases/redis-3.2.0.tar.gz
-tar -zxvf redis-3.2.0.tar.gz
-mkdir redis
-cd redis-3.2.0
-make PREFIX=/usr/local/redis
-make PREFIX=/usr/local/redis install
-```
+
+    wget http://download.redis.io/releases/redis-3.2.0.tar.gz
+    tar -zxvf redis-3.2.0.tar.gz
+    mkdir redis
+    cd redis-3.2.0
+    make PREFIX=/usr/local/redis
+    make PREFIX=/usr/local/redis install
+
 将集群工具复制到/usr/local/redis/bin下  
 
 	cp /usr/local/redis-3.2.0/src/redis-trib.rb /usr/local/redis/bin/

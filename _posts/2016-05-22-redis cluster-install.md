@@ -43,6 +43,17 @@ Redis Cluster不提供强一致性。例如cluster接受了一个写请求，给
 ## 安装配置redis3.2
 这里我用两台服务器，6个节点，互为主从，即3个主节点3个从节点192.168.10.120和192.168.10.121  
 分别在两台上安装redis  
+
+{% highlight js %}
+
+function trigger_alert(){
+  alert("Lorem Ipsum dolor sit amet");
+}
+
+trigger_alert();
+
+{% endhighlight %}
+
 {% highlight shell %}
     wget http://download.redis.io/releases/redis-3.2.0.tar.gz
     tar -zxvf redis-3.2.0.tar.gz

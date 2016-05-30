@@ -3,7 +3,7 @@ highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM
-  enable_coderay: true
+  syntax_highlighter: rouge
 
 gems: [jekyll-paginate]
 paginate: 7

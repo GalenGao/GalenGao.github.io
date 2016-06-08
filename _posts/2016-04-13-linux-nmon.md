@@ -41,42 +41,42 @@ You can use the following nmon keyboard shortcuts to display different system st
 If you would like to collect some statistics on CPU performance, you should hit the c key on the keyboard.  
 After hitting the c key you wI’ll see the following output.  
 
-![nmon](../static/img/_posts/nmon2.png)
+![nmon](/static/img/_posts/nmon2.png)
 
 # Check Top Process Statistics
 
 To get stats on top processes that are running on your system, press the t key on your keyboard.  
 You will see the following output.  
 
-![nmon](../static/img/_posts/nmon3.png)
+![nmon](/static/img/_posts/nmon3.png)
 
 # Check Network Statistics  
 
 To get the network stats of your Linux system, just press the n key on your keyboard.  
 You wI’ll see the following output:  
 
-![nmon](../static/img/_posts/nmon4.png)
+![nmon](/static/img/_posts/nmon4.png)
 
 # Disk I/O Graphs  
 
 Use the d key to get information about disks.  
 You wI’ll see the following output:  
 
-![nmon](../static/img/_posts/nmon5.png)
+![nmon](/static/img/_posts/nmon5.png)
 
 # Check Kernel Information  
 
 A most important key to use with this tool is k; it is used to display some brief information on the kernel of your system.  
 You will see the following output after hitting the k key on your keyboard.  
 
-![nmon](../static/img/_posts/nmon6.png)
+![nmon](/static/img/_posts/nmon6.png)
 
 # Get System Information
 
 A very useful key for every system admin is the r key which is used to give information on different resources such as machine architecture, operating system version, Linux version and CPU.  
 You will see the following output by hitting the r key.  
 
-![nmon](../static/img/_posts/nmon7.png)
+![nmon](/static/img/_posts/nmon7.png)
 
 还有许多其他的工具做的和 Nmon 同样的工作，不过 Nmon 对一个 Linux 新手来说还是很友好的。
 Nmon 监控 Linux 的系统性能

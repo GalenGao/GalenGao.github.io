@@ -18,7 +18,7 @@ Once the installation has been finished, you can launch it by typing the nmon co
 
 You wI’ll see the following output:  
 
-![nmon](../static/img/_posts/nmon1.png)
+![nmon](GalenGao.github.io/static/img/_posts/nmon1.png)
 
 You can see from the above screenshot that the nmon command-line utility runs completely in interactive mode, and you can easily toggle statistics using shortcut keys.  
 You can use the following nmon keyboard shortcuts to display different system stats:  

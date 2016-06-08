@@ -1,15 +1,21 @@
-#Intro
+## My Stack Problems
 
-My personal blog, built with Jekyll and Github page.
+> This project forked and has been modified from [A simple grey theme for Jekyll](https://github.com/liamsymonds/simplygrey-jekyll), and the search posts using [Super Search](https://github.com/chinchang/super-search)
 
-#If you want to use this theme
+### Demo
+* [https://agusmakmun.github.io](https://agusmakmun.github.io)
 
-1. fork it
-2. **Important**: If you want to use [Baidu Statistics][baiduTongji] functionality, remember to replace the content of `/javascripts/baidu_statistics.js` with your own. If you don't want to use it or don't understand what I'm talking about, just comment out line 43 of `/_includes/footer.html`. 
-3. **Important**: If you want to use the [Disqus][disqus] (comment system) functionality, remember to replace the content of `/_includes/disqus_load.html` and `/_includes/disqus_count.html` with your own content. If you don't want to use it or don't understand what I'm talking about, just comment out line 27 in `/_layouts/markdownreader_bare.html` and line 35 in `/_layouts/post.html`.
-4. Modify `/_config.yml` with your own info, replace `/images/me.png` with your own.
+#### Feature
 
-That's it
+* Sitemap and XML Feed
+* Paginations in homepage
+* Posts under category
+* Realtime Search Posts _(title & description)_ under query.
+* Related Posts
+* Highlight pre
+* Next & Previous Post
+* Disqus comment
 
-[baiduTongji]: http://tongji.baidu.com/web/welcome/login
-[disqus]: https://disqus.com/
+#### Screenshot
+
+![Screenshot Post Page](https://raw.githubusercontent.com/agusmakmun/agusmakmun.github.io/master/static/img/screenshot-post-page.png  "Screenshot Post Page")

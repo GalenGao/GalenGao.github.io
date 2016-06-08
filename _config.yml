@@ -1,60 +1,18 @@
-highlighter: pygments
-
-markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-
-gems: [jekyll-paginate]
-paginate: 7
-paginate_path: "page:num"
-layout: post
-permalink: /:categories/:title
-excerpt_separator: "[-----]"
-
-# mode: dev
-mode: product
-url: https://GalenGao.github.io/
-devurl: http://localhost:4000/
-name: HuiRong
-title: HuiRong | Another yet unique freak is showing a freakshow
-description: "Galen's personal weblog, on coding or such stuff"
-
-my:
-    displayName: Galen
-    realName: GaoHuiRong
-    realName_cn: 高会荣
-    jobTitle: "DBA"
-    contact:
-        qq: 446400837
-        email: 446400837@qq.com
-        github: http://www.github.com/GalenGao.github.io
-        qzone: http://446400837.qzone.qq.com
-        pinterest: https://www.pinterest.com/miblah/
-        tel: 15671542698
-        address:
-            country: China
-            state: SiChuan
-            city: ChengDu
-            distribute: GaoXinQu
-            postcode: 50000
-            cell: "HLKJ"
-    skills:
-        database: ["Oracle | Mysql", "Memecahed | Redis", " | Mongodb", "Ssdb"]
-        other: ["Zabbix", "Ngnix", "Elasticsearch", "Shell", "Python", "Linux"]
-        tools: ["Sublime Text", "Git | Github", "MarkDown", "Jekyll | Liquid","PL/SQL | Navicat","atom | IntelliJ IDEA"]
-
-collections:
-    qqGroupGuide:
-        output: true
-
-defaults:
-  - scope:
-        path: ""
-        type: "posts"
-    values:
-        excerpt: "{{ page.content }} | slice: 0 300"
-  - scope:
-        path: ""
-        type: "qqGroupGuide"
-    values:
-        layout: markdownreader_bare
+title: Stack Problems
+description: My Personal Stack Problems
+author: Agus Makmun
+github: https://github.com/agusmakmun
+about: I am freelance developer. Currently doing more in backend, actually in Python and Django.
+urls:
+    - text: About Me
+      url: /about/
+    - text: Github
+      url: https://github.com/agusmakmun
+    - text: XML Feed
+      url: /feed.xml
+url: "https://agusmakmun.github.io"
+baseurl: ""
+paginate: 20
+per_page: 20
+paginate_path: "/page:num/"
+markdown: kramdown

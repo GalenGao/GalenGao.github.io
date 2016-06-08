@@ -41,7 +41,7 @@ You can use the following nmon keyboard shortcuts to display different system st
 If you would like to collect some statistics on CPU performance, you should hit the c key on the keyboard.  
 After hitting the c key you wI’ll see the following output.  
 
-![nmon](/static/img/_posts/nmon2.png)
+![nmon](/static/img/myimg/nmon2.png)
 
 # Check Top Process Statistics
 

@@ -1,16 +1,16 @@
 title: Stack Problems
 description: My Personal Stack Problems
-author: Agus Makmun
-github: https://github.com/agusmakmun
-about: I am freelance developer. Currently doing more in backend, actually in Python and Django.
+author: Galen Gao
+github: https://github.com/galengao
+about: I am a Database Administrator. Currently doing more in oracle, actually in Mysql , Linux and so on.
 urls:
     - text: About Me
       url: /about/
     - text: Github
-      url: https://github.com/agusmakmun
+      url: https://github.com/galengao
     - text: XML Feed
       url: /feed.xml
-url: "https://agusmakmun.github.io"
+url: "https://galengao.github.io"
 baseurl: ""
 paginate: 20
 per_page: 20

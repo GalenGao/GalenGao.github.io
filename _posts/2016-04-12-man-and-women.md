@@ -1,12 +1,10 @@
 ---
-title: "男怕批判，女怕忽略"
 layout: post
-category: 文章
-tags: [心灵鸡汤]
-excerpt: "看到微信说到几句比较好的话"
+title:  "男怕批判，女怕忽略"
+date:   2016-04-12 13:25:20 +0700
+categories: [文章, 心灵鸡汤]
 ---
-
-![kaitou](../images/weixin.jpg)
+![kaitou](/static/img/myimg/weixin.jpg)
 
 <font color=#00ffff size=5>
 男女之间的沟通问题，可说是贯穿于交往的整个过程，在一开始“爱”的蒙蔽下，问题不会显山露水，而经年累月，男女两性本身的差异就将此隐患上升到“障碍”的高度。

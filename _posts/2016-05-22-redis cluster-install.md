@@ -1,11 +1,9 @@
 ---
-title: "CENTOS6.6下redis3.2集群搭建"
 layout: post
-category: nosql
-tags: [redis]
-excerpt: "Redis 集群是一个提供在多个Redis间节点间共享数据的程序集.redis3.0以前，只支持主从同步的，如果主的挂了，写入就成问题了。3.0出来后就可以很好帮我们解决这个问题。"
+title:  "CENTOS6.6下redis3.2集群搭建"
+date:   2016-05-22 14:25:20 +0700
+categories: [linux, redis]
 ---
-
 
 
 

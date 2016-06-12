@@ -1,13 +1,9 @@
 ---
-title: "mysql之mysql_config_editor"
 layout: post
-category: mysql
-tags: [mysql]
-excerpt: "mysql_config_editor该工具可以创建一个"login-path"，用户可以直接通过login-path来登录mysql。
-实质上，它存储一个身份认证信息到一个叫做.mylogin.cnf的的登录文件中。"
+title:  "mysql之mysql_config_editor"
+date:   2016-05-25 14:25:20 +0700
+categories: [linux, mysql]
 ---
-
-
 
 mysql_config_editor允许你把登录的身份验证信息存储在一个名为.mylogin.cnf的文件里，该文件的位置在windows下是在%APPDATA%\MySQL目录下，linux下是在用户的家目录下。该文件可在以后通过MySQL客户端程序可以读取，以获得身份验证凭据用于连接到MySQL服务器。  
 mysql_config_editor允许你把登录的身份验证信息存储在一个名为.mylogin.cnf的文件里，该文件的位置在windows下是在%APPDATA%\MySQL目录下，linux下是在用户的家目录下。该文件可在以后通过MySQL客户端程序可以读取，以获得身份验证凭据用于连接到MySQL服务器。  

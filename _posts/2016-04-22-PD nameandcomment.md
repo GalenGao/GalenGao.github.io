@@ -1,11 +1,9 @@
 ---
-title: "使用PowerDesigner对NAME和COMMENT互相转换"
 layout: post
-category: oracle
-tags: [oracle]
-excerpt: "在使用PowerDesigner对数据库进行概念模型和物理模型设计时，一般在NAME或Comment中写中文，在Code中写英文。Name用来显 示，Code在代码中使用，但Comment中的文字会保存到数据库Table或Column的Comment中，当Name已经存在的时候，再写一次 Comment很麻烦，可以使用该文章代码来解决这个问题"
+title:  "使用PowerDesigner对NAME和COMMENT互相转换"
+date:   2016-04-22 17:25:20 +0700
+categories: [linux, PowerDesigner]
 ---
-
 
 在使用PowerDesigner对数据库进行概念模型和物理模型设计时，一般在NAME或Comment中写中文，在Code中写英文。Name用来显 示，Code在代码中使用，但Comment中的文字会保存到数据库Table或Column的Comment中，当Name已经存在的时候，再写一次 Comment很麻烦，可以使用以下代码来解决这个问题。  
 
@@ -13,7 +11,7 @@ excerpt: "在使用PowerDesigner对数据库进行概念模型和物理模型设
 **PowerDesigner->Tools->Execute Commands->Edit/Run Scripts**  
 将代码Copy进去执行就可以了，是对整个CDM或PDM进行操作
  
-#代码一:将Name中的字符COPY至Comment中  
+# 代码一:将Name中的字符COPY至Comment中  
 
 	Option   Explicit 
 	ValidationMode   =   True 
@@ -65,7 +63,7 @@ excerpt: "在使用PowerDesigner对数据库进行概念模型和物理模型设
 
 **另外在使用REVERSE ENGINEER从数据库反向生成PDM的时候，PDM中的表的NAME和CODE事实上都是CODE，为了把NAME替换为数据库中Table或Column的中文Comment，可以使用以下脚本：** 
 
-#代码二:将Comment中的字符COPY至Name中 
+# 代码二:将Comment中的字符COPY至Name中 
 
     Option   Explicit 
     ValidationMode   =   True 

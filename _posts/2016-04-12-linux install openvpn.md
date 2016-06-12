@@ -1,11 +1,11 @@
 ---
-title: "CENTOS6.6搭建OPENVPN"
 layout: post
-category: linux
-tags: [openvpn]
-excerpt: "利用开源软件OPENVPN和nat123映射实现外部访问是动态IP的公司内部网络"
+title:  "CENTOS6.6搭建OPENVPN"
+date:   2016-04-12 16:25:20 +0700
+categories: [linux, openvpn]
 ---
 
+利用开源软件OPENVPN和nat123映射实现外部访问是动态IP的公司内部网络
 # 环境
 OS: CentOS 6.6 x86_64 Minimal
 # 安装EPEL扩展库  
@@ -584,10 +584,10 @@ config目录下有：
 
 若openvpn服务器无公网IP，则首先把openvpn服务器上的server.conf和客户端上的client.ov[n文件里的udp改为tcp
 然后用nat123做一个端口映射
-![nat123](../images/nat1231.png)
+![nat123](/static/img/myimg/nat1231.png)
 
 然后在客户端安装nat123
 登录nat123访问者
-![nat123](../images/nat1232.png)
+![nat123](/static/img/myimg/nat1232.png)
 
 最后登录即可

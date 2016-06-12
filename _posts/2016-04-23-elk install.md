@@ -1,15 +1,14 @@
 ---
-title: "centos ELK安装"
 layout: post
-category: linux
-tags: [elk]
-excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用自行google。该文只是我简单的一个搭建笔记。"  
+title:  "centos ELK安装"
+date:   2016-04-23 16:25:20 +0700
+categories: [linux, elk]
 ---
 
-
+ELK是进行日志收集分析用的，具体工作、原理、作用自行google。该文只是我简单的一个搭建笔记。  
 [参照]：<http://my.oschina.net/itblog/blog/547250>  
 
-#JDK安装 
+# JDK安装 
  
     $ tar zxvf jdk-7u76-linux-x64.tar.gz -C  /usr/local
     $ cd /usr/local
@@ -18,7 +17,7 @@ excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用�
     JAVA_HOME=/usr/local/jdk1.7
     PATH=$PATH:$HOME/bin:/usr/local/mysql/bin:$JAVA_HOME/bin
 
-#安装ElasticSearch   
+# 安装ElasticSearch   
 
     wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz
     tar -zxvf elasticsearch-2.2.0.tar.gz
@@ -49,7 +48,7 @@ excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用�
     http://192.168.10.141:9200/
     http://192.168.10.141:9200/_plugin/head/
 
-#安装Logstash
+# 安装Logstash
 
 	wget https://download.elastic.co/logstash/logstash/logstash-2.2.2.tar.gz
 
@@ -91,7 +90,7 @@ excerpt: "ELK是进行日志收集分析用的，具体工作、原理、作用�
 
 	./bin/logstash agent -f config/log4j_to_es.conf
 
-#安装Kibana
+# 安装Kibana
 
 	wget https://download.elastic.co/kibana/kibana/kibana-4.4.1-linux-x64.tar.gz
 

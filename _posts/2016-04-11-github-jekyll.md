@@ -1,33 +1,29 @@
 ---
-title: "Centos6 搭建Github Pages + Jekyll + Markdown"
 layout: post
-category: translation
-tags: [github,jekyll]
-excerpt: "查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，  
-以下便是我的文档，以供参考。"
+title:  "Centos6 搭建Github Pages + Jekyll + Markdown"
+date:   2016-04-11 15:25:20 +0700
+categories: [github, jekyll]
 ---
-_是否原创: 原创_
 
-_原文链接: <http://galengao.github.io>_
+查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，  
+以下便是我的文档，以供参考。  
 
-_版权: 本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文_
-
-#引言
+# 引言
 
 查看了很多安装文档，每个人说的思路不太一样，所以安装也遇上一定的困难。我总结了几个人的文档，从安装基础软件开始安装，  
 以下便是我的文档，以供参考。 
  
-#安装rvm  
+# 安装rvm  
 rvm是用于安装ruby的，以下命令有时会解析不到那个地址，多尝试几次。 
  
 	curl -L https://get.rvm.io | bash -s stable --ruby
 	source /usr/local/rvm/scripts/rvm
 
 执行`curl -L https://get.rvm.io | bash -s stable --ruby`会报如下错误：  
-![alt text](../images/rvm1.png)  
+![alt text](/static/img/myimg/rvm1.png)  
 **解决办法**：  
 执行上面圈起来的语句，然后重新执行即可  
-![solution](../images/rvm2.png)  
+![solution](/static/img/myimg/rvm2.png)  
 **然后执行** 
 
 	curl -L https://get.rvm.io | bash -s stable --ruby
@@ -37,7 +33,7 @@ rvm是用于安装ruby的，以下命令有时会解析不到那个地址，多�
 	source /usr/local/rvm/scripts/rvm
 
 **`rvm -v` 表示安装成功**  
-![look](../images/rvm3.png) 
+![look](/static/img/myimg/rvm3.png) 
 
 #安装ruby
 
@@ -46,45 +42,45 @@ rvm是用于安装ruby的，以下命令有时会解析不到那个地址，多�
 	rvm install 2.3.0
 	rvm use 2.3.0
 
-![ruby](../images/ruby1.png) 
+![ruby](/static/img/myimg/ruby1.png) 
 
 #安装git
 
 	yum -y git
 
-![ruby](../images/git1.png)
+![ruby](/static/img/myimg/git1.png)
 
 #生成SSH KEY
 
 	ssh-keygen -t rsa
 
 回车，输入两次密码:  
-![ssh](../images/ssh1.png)
+![ssh](/static/img/myimg/ssh1.png)
 
 #把SSH KEY添加到GITHUB里
 
 	cat /root/.ssh/id_rsa.pub
 
-![ssh](../images/ssh2.png)
+![ssh](/static/img/myimg/ssh2.png)
 把上面的内容复制到github里
 =======================  
 登录<https://github.com/> 
  
 **github页面右上角有一个[setting]设置** 如下:
-![ssh](../images/ssh3.png)
+![ssh](/static/img/myimg/ssh3.png)
 
 **进去后点SSH那个选项**
-![ssh](../images/ssh4.png)
+![ssh](/static/img/myimg/ssh4.png)
 
 **然后新建ssh**
-![ssh](../images/ssh5.png)
+![ssh](/static/img/myimg/ssh5.png)
 
 **最后把上面的内容复制进去，title可以空起**
-![ssh](../images/ssh6.png)
+![ssh](/static/img/myimg/ssh6.png)
 
 **然后Add SSH key提交后，会让你再输一把你的github账号即可。  
 测试一下，输入ssh -T git@github.com，出现如下信息即可。箭头那输入密码**
-![ssh](../images/ssh7.png)
+![ssh](/static/img/myimg/ssh7.png)
 
 #设置你的账号信息
 
@@ -98,31 +94,31 @@ Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信�
 #使用GitHub Pages建立博客
 
 **new repository**    
-![github](../images/github1.png)
+![github](/static/img/myimg/github1.png)
 
 **起个repository名，然后创建**  
-![github](../images/github2.png)
+![github](/static/img/myimg/github2.png)
 
 **这时出现如下消息**  
-![github](../images/github3.png)
+![github](/static/img/myimg/github3.png)
 
 **点击上面的setting后如下**  
-![github](../images/github4.png)
+![github](/static/img/myimg/github4.png)
 
 **再点击上面的Launch automatic page generator**  
-![github](../images/github6.png)
+![github](/static/img/myimg/github6.png)
 
 **这时上面都不用管，继续点击上面的continue to layouts**  
-![github](../images/github5.png)
+![github](/static/img/myimg/github5.png)
 
 **选中一个主题后点击上面的Publish page即可，会出现一个地址。**  
-![github](../images/github7.png)
+![github](/static/img/myimg/github7.png)
 
 **复制上面的地址http://galengao.github.io/myblog在新窗口中打开找到SSH后的连接**  
-![github](../images/github8.png)
+![github](/static/img/myimg/github8.png)
 
 **然后复制那个连接，在本地克隆**  
-![github](../images/github9.png)
+![github](/static/img/myimg/github9.png)
 
 #安装jekyll
 
@@ -135,7 +131,7 @@ Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信�
 	gem sources -l、
 
 如果安装jekyll出现如下错误时：    
-![jekyll](../images/jekyll1.png)
+![jekyll](/static/img/myimg/jekyll1.png)
 
 解决升级gem，移除国外镜像，用国内的。  
 
@@ -144,7 +140,7 @@ Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信�
 	gem sources -a https://ruby.taobao.org/
 	gem sources -l
 
-![jekyll](../images/jekyll2.png)
+![jekyll](/static/img/myimg/jekyll2.png)
 
 #启动项目查看情况
 
@@ -154,9 +150,9 @@ Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信�
 
 	jekyll serve -H192.168.10.145
 
-![project](../images/project1.png)
+![project](/static/img/myimg/project1.png)
 这时浏览器会看到如下信息：
-![project](../images/project2.png)
+![project](/static/img/myimg/project2.png)
 
 #替换jekyll模板
 

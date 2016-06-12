@@ -4,6 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I am freelance developer. Currently doing more in backend, actually in Python and Django.
+I am a Database Administrator. Currently doing more in oracle, actually in Mysql , Linux and so on.
 
-email: agus[at]python.web.id
+email: galengao1987@163.com

@@ -21,7 +21,7 @@ categories: [linux, mysql]
 - 如果数据量很大, 而又不过分影响业务运行, 可以使用第四种方式, 使用xtrabackup进行完全备份后, 定期使用xtrabackup进行增量备份或差异备份  
  
 # 实战演练
-## cp复制数据文件备份及恢复
+##cp复制数据文件备份及恢复
 
 {% highlight sql %}  
 mysql> show databases;
@@ -71,7 +71,7 @@ mysql> select * from a
 1 row in set (0.00 sec)
 {% endhighlight %}
 
-```bash
+{% highlight bash %} 
 [root@my57 mysql]# mkdir /backup
 
 [root@my57 mysql]# cp -a /data/mysql/data/* /backup/
@@ -84,7 +84,8 @@ auto.cnf  ib_buffer_pool  ibdata1  ib_logfile0  ib_logfile1  ibtmp1  my57.err  m
 
  ERROR! MySQL server PID file could not be found!
 Starting MySQL... ERROR! The server quit without updating PID file (/data/mysql/data//my57.pid).
-```
+{% endhighlight %}
+
 这时启动不了，我们再把备份文件拷贝回来，在启动就可以了。
 
 ```Bash
@@ -93,7 +94,7 @@ cp -a /backup/* /data/mysql/data/
 
 ## mysqldump的复制与恢复
 
-```SQL
+{% highlight SQL %}
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -136,7 +137,7 @@ mysql> show master status
 | bin-log.000001 |      567 |              |                  |                   |
 +----------------+----------+--------------+------------------+-------------------+
 1 row in set (0.00 sec)
-```
+{% endhighlight %}
 
 **开始备份**
 
@@ -146,7 +147,7 @@ mysql> show master status
 
 **再创建一个数据库做增量测试**
 
-```SQL
+{% highlight SQL %}
 mysql> create database test1;
 Query OK, 1 row affected (0.00 sec)
 
@@ -171,7 +172,7 @@ mysql> SHOW MASTER STATUS;
 | bin-log.000001 |      869 |              |                  |                   |
 +----------------+----------+--------------+------------------+-------------------+
 1 row in set (0.00 sec)
-```
+{% endhighlight %}
 
 **备份二进制日志**
 
@@ -181,7 +182,7 @@ cp bin-log.000001 /backup/
 
 **停止mysql在启动，编译安装的启动不了，必须重新初始化**
 
-```Bash
+{% highlight Bash %}
 [root@my57 data]# service mysql stop
 Shutting down MySQL. SUCCESS! 
 
@@ -236,7 +237,7 @@ mysql> show databases;
 | test1              |
 +--------------------+
 6 rows in set (0.00 sec)
-```
+{% endhighlight %}
 
 # xtrabackup备份参考另外文章
 

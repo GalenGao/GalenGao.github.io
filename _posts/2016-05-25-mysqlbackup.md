@@ -23,7 +23,7 @@ categories: [linux, mysql]
 # 实战演练
 ## cp复制数据文件备份及恢复
 
-```SQL  
+{% highlight sql %}  
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -69,7 +69,8 @@ mysql> select * from a
 |    1 | gao  |
 +------+------+
 1 row in set (0.00 sec)
-```
+{% endhighlight %}
+
 ```bash
 [root@my57 mysql]# mkdir /backup
 
@@ -137,13 +138,13 @@ mysql> show master status
 1 row in set (0.00 sec)
 ```
 
-** 开始备份 **
+**开始备份**
 
 ```Bash
 [root@my57 data]# mysqldump --all-databases --lock-all-tables  > /backup/backup.sql
 ```
 
-** 再创建一个数据库做增量测试 **
+**再创建一个数据库做增量测试**
 
 ```SQL
 mysql> create database test1;
@@ -172,13 +173,13 @@ mysql> SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-** 备份二进制日志 **
+**备份二进制日志**
 
 ```Bash
 cp bin-log.000001 /backup/
 ```
 
-** 停止mysql在启动，编译安装的启动不了，必须重新初始化 **
+**停止mysql在启动，编译安装的启动不了，必须重新初始化**
 
 ```Bash
 [root@my57 data]# service mysql stop

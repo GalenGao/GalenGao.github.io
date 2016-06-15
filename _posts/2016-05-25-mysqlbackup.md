@@ -5,7 +5,7 @@ date:   2016-05-25 14:32:04 +0700
 categories: [linux, mysql]
 ---
 
-## 备份策略
+# 备份策略
 
 针对不同的场景下, 我们应该制定不同的备份策略对数据库进行备份, 一般情况下, 备份策略一般为以下三种：  
 
@@ -20,8 +20,9 @@ categories: [linux, mysql]
 - 如果数据量一般, 而又不过分影响业务运行, 可以使用第三种方式, 使用lvm2的快照对数据文件进行备份, 而后定期备份BINARY LOG达到增量备份的效果  
 - 如果数据量很大, 而又不过分影响业务运行, 可以使用第四种方式, 使用xtrabackup进行完全备份后, 定期使用xtrabackup进行增量备份或差异备份  
  
-## 实战演练
-### cp复制数据文件备份及恢复
+# 实战演练
+
+## cp复制数据文件备份及恢复
 
 {% highlight sql %}  
 mysql> show databases;
@@ -92,7 +93,7 @@ Starting MySQL... ERROR! The server quit without updating PID file (/data/mysql/
 cp -a /backup/* /data/mysql/data/
 ```
 
-### mysqldump的复制与恢复
+## mysqldump的复制与恢复
 
 {% highlight SQL %}
 mysql> show databases;

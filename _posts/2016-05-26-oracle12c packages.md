@@ -10,7 +10,7 @@ categories: [linux, oracle]
 #### 1、Packages for Oracle Linux 7 and Red Hat Enterprise Linux 7  
 
 The following packages (or later versions) must be installed:  
-```
+```Bash
 binutils-2.23.52.0.1-12.el7.x86_64 
 compat-libcap1-1.10-3.el7.x86_64 
 gcc-4.8.2-3.el7.x86_64 
@@ -41,7 +41,7 @@ sysstat-10.1.5-1.el7.x86_64
 #### 2、Packages for Oracle Linux 6 and Red Hat Enterprise Linux 6  
 
 The following packages (or later versions) must be installed:  
-```
+```Bash
 binutils-2.20.51.0.2-5.11.el6 (x86_64)
 compat-libcap1-1.10-1 (x86_64)
 compat-libstdc++-33-3.2.3-69.el6 (x86_64)
@@ -82,7 +82,7 @@ sysstat-9.0.4-11.el6 (x86_64)
 #### 3、Package requirements for Oracle Linux 5 and Red Hat Enterprise Linux 5  
 
 The following packages (or later versions) must be installed:  
-```
+```Bash
 binutils-2.17.50.0.6
 compat-libstdc++-33-3.2.3
 compat-libstdc++-33-3.2.3 (32 bit)
@@ -129,6 +129,7 @@ sysstat-7.0.2
 For each installation software owner, check the resource limits for installation, using the following recommended ranges:  
 
 **Table 5-1 Installation Owner Resource Limit Recommended Ranges**  
+
 | Resource Shell Limit	| Resource | Soft Limit | Hard Limit |
 | Open file descriptors | nofile | at least 1024 | at least 65536 |
 | Number of processes available to a single user | nproc | at least 2047 | at least 16384 |
@@ -138,21 +139,21 @@ For each installation software owner, check the resource limits for installation
 **To check resource limits:**  
 Log in as an installation owner.  
 Check the soft and hard limits for the file descriptor setting. Ensure that the result is in the recommended range, for example:  
-```
+```Bash
 $ ulimit -Sn
 1024
 $ ulimit -Hn
 65536
 ```
 Check the soft and hard limits for the number of processes available to a user. Ensure that the result is in the recommended range, for example:  
-```
+```Bash
 $ ulimit -Su
 2047
 $ ulimit -Hu
 16384
 ```
 Check the soft limit for the stack setting. Ensure that the result is in the recommended range, for example:  
-```
+```Bash
 $ ulimit -Ss
 10240
 $ ulimit -Hs

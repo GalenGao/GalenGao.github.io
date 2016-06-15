@@ -39,12 +39,12 @@ categories: [linux, yum]
 
 # 假如有两台linux，一台可以上网另外一台不能，可以利用yum在能上网的那台下到本地再传过去  
 有时，我们需要下载一个rpm包，只是下载下来，拷贝给其他机器使用。前面也介绍过yum安装rpm包的时候，首先得下载这个rpm包然后再去安装。  
-**所以使用yum完全可以做到只下载而不安装。**
+**所以使用yum完全可以做到只下载而不安装。**  
 ## 安装 yum-downloadonly 
 
 	yum install -y yum-plugin-downloadonly.noarch 
 
-注：如果你的CentOS是5.x版本，则需要安装yum-downloadonly.noarch这个包。
+注：如果你的CentOS是5.x版本，则需要安装yum-downloadonly.noarch这个包。  
 
 ## 下载一个rpm包而不安装
 

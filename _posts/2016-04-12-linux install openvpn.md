@@ -7,7 +7,7 @@ categories: [linux, openvpn]
 
 利用开源软件OPENVPN和nat123映射实现外部访问是动态IP的公司内部网络
 # 环境
-OS: CentOS 6.6 x86_64 Minimal
+OS: CentOS 6.6 x86_64 Minimal  
 # 安装EPEL扩展库  
 
 	yum install http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm  

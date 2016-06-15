@@ -133,11 +133,12 @@ For each installation software owner, check the resource limits for installation
 
 **Table 5-1 Installation Owner Resource Limit Recommended Ranges**  
 
-| Resource Shell Limit	| Resource | Soft Limit | Hard Limit |
-| Open file descriptors | nofile | at least 1024 | at least 65536 |
-| Number of processes available to a single user | nproc | at least 2047 | at least 16384 |
-| Size of the stack segment of the process | stack | at least 10240 KB | at least 10240 KB, and at most 32768 KB |
-| Maximum Locked Memory Limit | memlock | at least 90 percent of the current RAM when HugePages memory is enabled and at least 3145728 KB (3 GB) when HugePages memory is disabled | at least 90 percent of the current RAM when HugePages memory is enabled and at least 3145728 KB (3 GB) when HugePages memory is disabled |
+| Resource Shell Limit	                         | Resource | Soft Limit        | Hard Limit                      |
+|================================================|==========|===================|=================================|
+| Open file descriptors                          | nofile   | at least 1024     | at least 65536                  |
+| Number of processes available to a single user | nproc    | at least 2047     | at least 16384                  |
+| Size of the stack segment of the process       | stack    | at least 10240 KB | at least 10240 KB, and at most 32768 KB                                                                                                          |
+| Maximum Locked Memory Limit | memlock          | at least 90 percent of the current RAM when HugePages memory is enabled and at least 3145728 KB (3 GB) when HugePages memory is disabled | at least 90 percent of the current RAM when HugePages memory is enabled and at least 3145728 KB (3 GB) when HugePages memory is disabled |
 
 **To check resource limits:**  
 Log in as an installation owner.  
@@ -170,7 +171,7 @@ Repeat this procedure for each Oracle software installation owner.
 > If necessary, update the resource limits in the /etc/security/limits.conf configuration file for the installation owner. However, note that the configuration file is distribution specific. Contact your system administrator for distribution specific configuration file information.  
 
 `vi /etc/security/limits.conf`
-{% highlight bash %}
+{% highlight ruby %}
 oracle soft nproc 2047
 oracle hard nproc 16384
 oracle soft nofile 1024

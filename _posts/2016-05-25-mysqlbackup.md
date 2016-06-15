@@ -2,7 +2,7 @@
 layout: post
 title:  "mysql cp复制和mysqldump备份测试"
 date:   2016-05-25 14:32:04 +0700
-categories: [linux, mysql]
+categories: [mysql]
 ---
 
 # 备份策略

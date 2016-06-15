@@ -2,7 +2,7 @@
 layout: post
 title:  "oracle12c各个版本对其需要的依赖包及系统参数的修改"
 date:   2016-05-26 10:32:04 +0700
-categories: [linux, oracle]
+categories: [oracle]
 ---
 
 以下是我在oracle官网上对oracle12c 各个版本的依赖包需求整理

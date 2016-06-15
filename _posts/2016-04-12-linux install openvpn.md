@@ -2,7 +2,7 @@
 layout: post
 title:  "CENTOS6.6搭建OPENVPN"
 date:   2016-04-12 16:25:20 +0700
-categories: [linux, openvpn]
+categories: [openvpn]
 ---
 
 利用开源软件OPENVPN和nat123映射实现外部访问是动态IP的公司内部网络

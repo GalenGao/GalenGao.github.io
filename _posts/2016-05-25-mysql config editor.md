@@ -2,7 +2,7 @@
 layout: post
 title:  "mysql之mysql_config_editor"
 date:   2016-05-25 14:25:20 +0700
-categories: [linux, mysql]
+categories: [mysql]
 ---
 
 mysql_config_editor允许你把登录的身份验证信息存储在一个名为.mylogin.cnf的文件里，该文件的位置在windows下是在%APPDATA%\MySQL目录下，linux下是在用户的家目录下。该文件可在以后通过MySQL客户端程序可以读取，以获得身份验证凭据用于连接到MySQL服务器。  

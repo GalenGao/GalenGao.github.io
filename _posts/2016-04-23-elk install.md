@@ -2,7 +2,7 @@
 layout: post
 title:  "centos ELK安装"
 date:   2016-04-23 16:25:20 +0700
-categories: [linux, elk]
+categories: [elk]
 ---
 
 ELK是进行日志收集分析用的，具体工作、原理、作用自行google。该文只是我简单的一个搭建笔记。  

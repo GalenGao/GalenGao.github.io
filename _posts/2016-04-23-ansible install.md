@@ -2,7 +2,7 @@
 layout: post
 title:  "centos ansible安装"
 date:   2016-04-23 14:25:20 +0700
-categories: [linux, ansible]
+categories: [ansible]
 ---
 
 # 配置epel源  

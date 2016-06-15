@@ -2,7 +2,7 @@
 layout: post
 title:  "CENTOS6.6下redis3.2集群搭建"
 date:   2016-05-22 14:25:20 +0700
-categories: [linux, redis]
+categories: [redis]
 ---
 
 

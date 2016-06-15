@@ -2,7 +2,7 @@
 layout: post
 title:  "使用PowerDesigner对NAME和COMMENT互相转换"
 date:   2016-04-22 17:25:20 +0700
-categories: [linux, PowerDesigner]
+categories: [PowerDesigner]
 ---
 
 在使用PowerDesigner对数据库进行概念模型和物理模型设计时，一般在NAME或Comment中写中文，在Code中写英文。Name用来显 示，Code在代码中使用，但Comment中的文字会保存到数据库Table或Column的Comment中，当Name已经存在的时候，再写一次 Comment很麻烦，可以使用以下代码来解决这个问题。  

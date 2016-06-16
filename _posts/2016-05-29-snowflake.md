@@ -74,7 +74,7 @@ snowflake_start_server \
 }
 {% endhighlight %}
 
-### 数据整理重建ID
+* **数据整理重建ID**  
 
 重建ID是一个很庞大的工程，首先要很了解表的结构。不然，如果少更新了某个表的一列都会导致数据的不一致。  
 当然，如果你的表中有很强的外键以及设置了级联那更新一个主键会更新其他相关联的外键。这里我还是不建议去依赖外键级联更新来投机取巧毕竟如果有数据库的设计在项目的里程碑中经过了n次变化，也不能肯定设置的外键一定是级联更新的。  
@@ -83,6 +83,7 @@ snowflake_start_server \
 SET FOREIGN_KEY_CHECKS=0;
 {% endhighlight %}
 > 小提示：其实理论上我们是没有必要重建ID的因为原来的ID已经是唯一的了而且是整型，他兼容BIGINT。但是这里我还是做了重建，主要是因为以后的数据一致。并且如果有些人的ID不是整型的，而是有一定含义的那时候也肯定需要做ID的重建。  
+ 
 * **修改相关表ID的数据类型为BIGINT**
 
 {% highlight SQL %}
@@ -201,8 +202,8 @@ if __name__=='__main__':
   rebuild.close_conn()
 {% endhighlight %}
 
-**完整的python程序：**[rebuild_id.py](http://www.ttlsa.com/wp-content/uploads/2016/02/rebuild_id.py_.zip)
-执行程序  
+**完整的python程序：**[rebuild_id.py](http://www.ttlsa.com/wp-content/uploads/2016/02/rebuild_id.py_.zip)  
+**执行程序**   
 
 ```python
 python rebuild_id.py

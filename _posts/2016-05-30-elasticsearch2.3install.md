@@ -98,7 +98,7 @@ cd esik
 mvn clean package
 {% endhighlight %}
 
-* **把打包后的文件解压拷入es的plugins下面
+* **把打包后的文件解压拷入es的plugins下面**
 
 {% highlight ruby %}
 # 打包后esik目录下面有个target/release目录

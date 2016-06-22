@@ -75,9 +75,9 @@ http://192.168.10.145:9200/_plugin/head/
 
 ### 安装ik分词库
 
-从这直接下载ik包，注意对应es版本
-https://github.com/medcl/elasticsearch-analysis-ik
-此处下载elasticsearch-analysis-ik-1.9.3.zip
+从这直接下载ik包，注意对应es版本  
+https://github.com/medcl/elasticsearch-analysis-ik  
+此处下载elasticsearch-analysis-ik-1.9.3.zip  
 * **上传elasticsearch-analysis-ik-1.9.3.zip到linux解压**
 
 {% highlight ruby %}
@@ -137,7 +137,7 @@ sgle_word_low_freq.dic;custom/你建的文件.dic</entry>
 
 ### 不安装ik前后的分词地址
 * **不安装ik时，访问默认分词，地址为：**  
-* 
+ 
 ```
 curl -XPOST  "http://localhost:9200/userinfo/_analyze?analyzer=standard&pretty=true&text=我是中国人"
 ```

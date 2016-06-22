@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "elasticsearch2.3.3集群搭建踩到的坑"
-date:   2016-06-01 16:32:04 +0700
+date:   2016-05-29 16:32:04 +0700
 categories: [elasticsearch]
 ---
  

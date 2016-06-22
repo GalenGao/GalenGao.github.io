@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "elasticsearch2.3.3安装"
-date:   2016-06-02 10:22:04 +0700
+date:   2016-05-30 10:22:04 +0700
 categories: [elasticsearch]
 ---
  

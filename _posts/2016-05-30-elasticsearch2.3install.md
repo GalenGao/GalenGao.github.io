@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "elasticsearch2.3.3安装"
-date:   2016-05-30 15:22:04 +0700
+date:   2016-05-30 15:22:04
 categories: [elasticsearch]
 ---
  
@@ -24,7 +24,7 @@ export M2_HOME=/usr/local/maven
 export PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
 # 使环境变量生效
 source .bash_profile
-{% highlight ruby %}
+{% endhighlight %}
 
 ### 安装es    
 * **下载elasticsearch-2.3.3版本并解压**  

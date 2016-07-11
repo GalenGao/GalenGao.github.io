@@ -158,6 +158,7 @@ If you need to add an HTTP Proxy, set a different directory or partition for the
 ## Uninstall
 
 You can uninstall the Docker software with yum.  
+
 * List the package you have installed.  
 
 {% highlight ruby %}
@@ -183,7 +184,7 @@ $ rm -rf /var/lib/docker
 Locate and delete any user-created configuration files.
 
 
-# 使用
+# docker的使用
 
 ## 下载启动镜像安装应用
 
@@ -200,10 +201,10 @@ docker images
 NAME                           DESCRIPTION         STARS     OFFICIAL   AUTOMATED
                                                              
 anarh/centos6.6                 Docker image for centos6.6                      0                    [OK]
-eliezio/centos6.6-devtoolset2-gtest    Docker image based on Centos 6.6 suitable ...   0                    [OK]
-chrisgeorge/centos6.6-py2.6         CentOS 6.6 with Python 2.6                      0                    [OK]
-mystique/hadoopbase              Hadoop base image - Centos 6.6 Updated to ...   0                    [OK]
-incu6us/centos6.6-with-nginx        Wav server for FreeCall                         0                    [OK]
+eliezio/centos6.6-devtoolset2-gtest    Docker image based on Centos 6.6 suitable ...   0             [OK]
+chrisgeorge/centos6.6-py2.6         CentOS 6.6 with Python 2.6                      0                [OK]
+mystique/hadoopbase              Hadoop base image - Centos 6.6 Updated to ...   0                   [OK]
+incu6us/centos6.6-with-nginx        Wav server for FreeCall                         0                [OK]
 {% endhighlight %}
 
 * pull镜像，上面搜索到很多，我们选择一个下载  
@@ -242,12 +243,11 @@ anarh/centos6.6    latest          eeb98e74a7bd        10 months ago       202.6
 * `exit`后通过`docker ps -a`找到该容器names对应的容器ID  
 * 运行`commit`命令来提交  
 
-{% highlight ruby %}
- docker commit -m "install mysql5.6.28 from centos6.6" -a "galen" 14aa06d651c6 galen/centos6.6-mysql5.6
+`docker commit -m "install mysql5.6.28 from centos6.6" -a "galen" 14aa06d651c6 galen/centos6.6-mysql5.6`
 
 > 其中，-m参数用来来指定提交的说明信息；-a可以指定用户信息的；14aa06d651c6代表你的容器的id；galen/centos6.6-mysql5.6指定目标镜像的用户名、仓库名和 tag 信息。创建成功后会返回这个镜像的 ID 信息。注意的是，你一定要将galen改为你自己的用户名。因为下文还会用到此用户名!  
 
-
+{% highlight ruby %}
 [root@galen ~]# docker commit -m "install mysql5.6.28 from centos6.6" -a "galen" 14aa06d651c6 galen/centos6.6-mysql5.6
 sha256:8fa5dde39e421b9ade3dae485f9276bd9c5b64ef5f38995afcdd3a3fb6df40f7
 {% endhighlight %}
@@ -294,6 +294,9 @@ The push refers to a repository [docker.io/galen/centos6.6-mysql5.6]
 {% endhighlight %}
 
 * 上传完后你登录docker hub你的账号后，在里面就能看到你上传的东西了
+
+## 创建私有仓库
+
 
 
 > 注意：如果退出去了当前容器，比如`exit`，在重新执行上上述命令`docker run -t -i anarh/centos6.6 /bin/bash`是不行的，重新执行上述命令后实际是新启动一个容器，这时是没有你原来的操作过程的的，比如你上面安装的mysql。  

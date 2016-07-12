@@ -337,6 +337,10 @@ curl http://192.168.10.146:5000/v1/search
 
 {% highlight ruby %}
 docker pull 192.168.10.146:5000/mysql
+# 此处又是一个坑，当你pull的时候会默认用https，所以无法现在。
+# 网上很多说法是在/etc/default/docker下加上这句DOCKER_OPTS="$DOCKER_OPTS --insecure-registry=192.168.10.146:5000"但我不成功
+# 我是在/lib/systemd/system/docker.service文件里的ExecStart这个参数后面加上--insecure-registry 192.168.10.146:5000如下
+# ExecStart=/usr/bin/docker daemon -H fd:// --insecure-registry 192.168.10.146:5000
 {% endhighlight %}
 
 

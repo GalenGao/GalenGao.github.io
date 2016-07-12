@@ -128,10 +128,12 @@ $ sudo docker run hello-world
 
 The docker daemon binds to a Unix socket instead of a TCP port. By default that Unix socket is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user.  
 To avoid having to use sudo when you use the docker command, create a Unix group called docker and add users to it. When the docker daemon starts, it makes the ownership of the Unix socket read/writable by the docker group.  
+ 
 > Warning: The docker group is equivalent to the root user; For details on how this impacts security in your system, see Docker Daemon Attack Surface for details.  
 
 To create the docker group and add your user:  
-* Log into Centos as a user with sudo privileges.
+
+* Log into Centos as a user with sudo privileges.  
 * Create the docker group.  
 
 `groupadd docker`  
@@ -297,6 +299,45 @@ The push refers to a repository [docker.io/galen/centos6.6-mysql5.6]
 
 ## 创建私有仓库
 
+* 下载一个registry
+
+{% highlight ruby %}
+docker pull registry
+# ps：此处已经不想吐槽，因为GFW的关系，我不知道重试了多少次才下载成功。
+{% endhighlight %}
+
+* 启动registry容器
+
+{% highlight ruby %}
+docker run -d -p 5000:5000 -v /opt/data/registry:/tmp/registry registry
+# -p端口映射， 默认情况下，仓库会被创建在容器的 /tmp/registry 下。可以通过 -v 参数来将镜像文件存放在本地的指定路径。 例如下面的例子将上传的镜像放到 /opt/data/registry 目录。
+{% endhighlight %}
+
+* 把自己已有的容器tag的一个标识，相当于复制重命名一个
+
+{% highlight ruby %}
+docker tag galen/centos6.6-mysql5.6 127.0.0.1:5000/mysql
+# 此处我命名为这个127.0.0.1:5000/mysql，docker images时就会看到一个127.0.0.1:5000/mysql镜像
+{% endhighlight %}
+
+* 把刚才tag的容器上传
+
+{% highlight ruby %}
+docker push 127.0.0.1:5000/mysql
+{% endhighlight %}
+
+* 查看是否有该镜像了
+
+{% highlight ruby %}
+curl http://192.168.10.146:5000/v1/search
+{"num_results": 1, "query": "", "results": [{"description": "", "name": "library/mysql"}]}
+{% endhighlight %}
+
+* 在其他服务器上下载刚才的镜像
+
+{% highlight ruby %}
+docker pull 192.168.10.146:5000/mysql
+{% endhighlight %}
 
 
 > 注意：如果退出去了当前容器，比如`exit`，在重新执行上上述命令`docker run -t -i anarh/centos6.6 /bin/bash`是不行的，重新执行上述命令后实际是新启动一个容器，这时是没有你原来的操作过程的的，比如你上面安装的mysql。  

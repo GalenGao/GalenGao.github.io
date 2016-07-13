@@ -66,11 +66,12 @@ net.ipv4.tcp_keepalive_time = 30
 net.ipv4.ip_local_port_range = 1024    65000
 {% endhighlight %}
 
-# 安装apr，方便tomcat 开启aoi  
+ 
 
-##	安装APR
+#	安装APR
 
-* 下载apr-1.5.2.tar.gz和apr-util-1.5.4.tar.gz
+* 下载apr-1.5.2.tar.gz和apr-util-1.5.4.tar.gz  
+安装apr，方便tomcat 开启aoi   
 [apr下载地址](https://apr.apache.org/download.cgi)
 
 {% highlight ruby %}
@@ -133,7 +134,7 @@ $ mv apache-tomcat-7.0.64 zhnx
 
 ##	进入TOMCAT精简目录
 
-** 请参照下面步骤一步一步顺序操作**  
+**请参照下面步骤一步一步顺序操作**  
 {% highlight ruby %}
 $ cd zhnx
 
@@ -177,9 +178,9 @@ $ mkdir center
 $ mv conf/ center/
 {% endhighlight %}
 
-** 拷贝并修改脚本启动参数**  
+**拷贝并修改脚本启动参数**  
 
-* **到目录/data/zhnx/sbin 下新建三个脚本，这里与center项目为例**  
+* **到目录/data/zhnx/sbin 下新建三个脚本，这里与center项目为例：startcenter.sh、stopcenter.sh和super.sh**  
 {% highlight ruby %}
 $ cd /data/zhnx/sbin
 
@@ -363,7 +364,7 @@ commandError(){
 }
 {% endhighlight %}
 
-* **到目录/etc/rc.d/init.d/下新建一个脚本，这里与center项目为例**
+* **到目录/etc/rc.d/init.d/下新建一个脚本，这里与center项目为例：center**
 {% highlight ruby %}
 $ cd /etc/rc.d/init.d/
 
@@ -450,24 +451,26 @@ vi server.xml
 </Server>
 {% endhighlight %}
 
-** 若有自己需要增加的jar就拷进去**  
+**若有自己需要增加的jar就拷进去**  
 $ cd /data/zhnx/server/lib
 把jar考进去
  
 # 项目部署
 
 
-新建目录webapp名称与startcenter.sh里的webapps名称一样
-日志名称与服务名一样
-$ mkdir -p /data/zhnx/center_webapps
+新建目录webapp名称与startcenter.sh里的webapps名称一样  
+日志名称与服务名一样  
+$ mkdir -p /data/zhnx/center_webapps  
 
-$ mkdir -p /data/zhnx/logs/center
+$ mkdir -p /data/zhnx/logs/center  
 
-center.war 部署至 center_webapps
+center.war 部署至 center_webapps  
 
-部署时需将对应webapps目录下的文件及文件夹清空；
-然后把项目war包拷入对应webapps目录下
-启动服务
+部署时需将对应webapps目录下的文件及文件夹清空；  
+然后把项目war包拷入对应webapps目录下  
+启动服务  
+{% highlight ruby %} 
 service center start
+{% endhighlight %}
 
 

@@ -4,12 +4,12 @@
  * //////////////
  */
 body {
-  font-family: "Georgia", serif;
-  background-color: #fff;
-  font-size: 16px;
-  line-height: 1.4em;
-  color: #3E4349;
-  font-weight: 300;
+    font-family: "Roboto Condensed", Arial, sans-serif;
+    background-color: #fff;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #666;
+    font-weight: 300;
 }
 hr {
     margin-top: 20px;
@@ -38,27 +38,22 @@ span.time, span.categories {
 }
 
 h1 {
-    font-family: Arial, sans-serif;
-    font-size: 24px;
-    color: #155A74;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #999;
+    font-weight: normal;
+    color: #696969;
+    margin-bottom: 10px;
+    font-size: 25px;
 }
 
 h2 {
-  font-family: Arial, sans-serif;
-  font-size: 20px;
-  color: #22b8eb;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #999;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: #666666;
 }
 
 h3 {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  color: #22b8eb;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #999;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: #666666;
 }
 
 a, a:link, a:active {

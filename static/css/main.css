@@ -39,7 +39,7 @@ span.time, span.categories {
 
 h1 {
     font-family: Arial, sans-serif;
-    font-size: 44px;
+    font-size: 34px;
     color: #155A74;
     padding-bottom: 4px;
     border-bottom: 1px solid #999;
@@ -47,7 +47,7 @@ h1 {
 
 h2 {
   font-family: Arial, sans-serif;
-  font-size: 38px;
+  font-size: 28px;
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;
@@ -55,7 +55,7 @@ h2 {
 
 h3 {
   font-family: Arial, sans-serif;
-  font-size: 32px;;
+  font-size: 22px;;
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;

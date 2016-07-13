@@ -43,8 +43,6 @@ h1 {
     color: #155A74;
     padding-bottom: 4px;
     border-bottom: 1px solid #999;
-    margin-bottom: 0.5rem;
-    margin-top: 0.2rem;
 }
 
 h2 {
@@ -53,8 +51,6 @@ h2 {
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;
-  margin-bottom: 0.5rem;
-  margin-top: 0.2rem;
 }
 
 h3 {
@@ -63,8 +59,6 @@ h3 {
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;
-  margin-bottom: 0.5rem;
-  margin-top: 0.2rem;
 }
 
 a, a:link, a:active {

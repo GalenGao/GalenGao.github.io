@@ -136,24 +136,32 @@ To create the docker group and add your user:
 * Log into Centos as a user with sudo privileges.  
 * Create the docker group.  
 
-`groupadd docker`  
+{% highlight ruby %} 
+groupadd docker  
+{% endhighlight %}
 
 * Add your user to docker group.  
 
-`usermod -aG docker your_username`
+{% highlight ruby %} 
+usermod -aG docker your_username
+{% endhighlight %}
 
 * Log out and log back in.  
 This ensures your user is running with the correct permissions.  
 
 * Verify your work by running docker without sudo.  
 
-`$ docker run hello-world`  
+{% highlight ruby %} 
+$ docker run hello-world
+{% endhighlight %} 
 
 ### Start the docker daemon at boot  
 
 * To ensure Docker starts when you boot your system, do the following:  
 
-`$ sudo chkconfig docker on`  
+{% highlight ruby %}
+$ sudo chkconfig docker on
+{% endhighlight %}  
 
 If you need to add an HTTP Proxy, set a different directory or partition for the Docker runtime files, or make other customizations, read our Systemd article to learn how tocustomize your Systemd Docker daemon options.  
 
@@ -186,7 +194,7 @@ $ rm -rf /var/lib/docker
 Locate and delete any user-created configuration files.
 
 
-# docker的使用
+# Docker的使用
 
 ## 下载启动镜像安装应用
 

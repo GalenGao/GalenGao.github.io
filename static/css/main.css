@@ -39,9 +39,11 @@ span.time, span.categories {
 
 h1 {
     font-weight: normal;
-    color: #696969;
-    margin-bottom: 10px;
+    color: #155A74;
     font-size: 25px;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+    text-rendering: optimizeLegibility
 }
 
 h2 {

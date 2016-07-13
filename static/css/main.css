@@ -39,26 +39,32 @@ span.time, span.categories {
 
 h1 {
     font-family: Arial, sans-serif;
-    font-size: 2.25rem;
+    font-size: 44px;
     color: #155A74;
     padding-bottom: 4px;
     border-bottom: 1px solid #999;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
 }
 
 h2 {
   font-family: Arial, sans-serif;
-  font-size: 1.8125rem;
+  font-size: 38px;
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 h3 {
   font-family: Arial, sans-serif;
-  font-size: 1.7725rem;;
+  font-size: 32px;;
   color: #155A74;
   padding-bottom: 4px;
   border-bottom: 1px solid #999;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 a, a:link, a:active {

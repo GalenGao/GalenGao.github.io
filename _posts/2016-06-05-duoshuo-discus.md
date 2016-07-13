@@ -12,19 +12,19 @@ categories: [blog]
 
 
 
-**登录多说创建站点**  
+### 登录多说创建站点 
 
  [多说站点创建地址](http://duoshuo.com/create-site/)  
 
-**创建多说站点，填写信息如下图：**    
+### 创建多说站点，填写信息如下图：    
 
 ![duoshuo](/static/img/myimg/duoshuo1.png)
 
-**填写完信息后，点击创建，生成代码，如下图：**    
+### 填写完信息后，点击创建，生成代码，如下图：   
 
 ![duoshuo](/static/img/myimg/duoshuo2.png)  
 
-**上图代码有三处地方需要修改，代码中已经表示出来了，可以参照我的代码：**  
+### 上图代码有三处地方需要修改，代码中已经表示出来了，可以参照我的代码： 
   
 {% highlight html %} 
 <!-- 多说评论框 start -->
@@ -46,7 +46,7 @@ var duoshuoQuery = {short_name:"galengao"};
 <!-- 多说公共JS代码 end -->
 {% endhighlight %}
 
-**将此代码粘贴到需要的位置,至于放在什么文件什么地方,取决于你所使用的模板**  
+### 将此代码粘贴到需要的位置,至于放在什么文件什么地方,取决于你所使用的模板  
 
 一般位置在`_layouts/post.html`    
 或者`_layouts/default.html`  

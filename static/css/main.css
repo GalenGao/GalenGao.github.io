@@ -38,12 +38,11 @@ span.time, span.categories {
 }
 
 h1 {
-    font-weight: normal;
-    color: #155A74;
-    font-size: 25px;
-    margin-bottom: 0.5rem;
-    margin-top: 0.2rem;
-    text-rendering: optimizeLegibility
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #369;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #999;
 }
 
 h2 {

@@ -4,8 +4,12 @@
  * //////////////
  */
 body {
-    font-family: "Microsoft YaHei", Arial;
-    font-size: 18px;
+  font-family: "Georgia", serif;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 1.4em;
+  color: #3E4349;
+  font-weight: 300;
 }
 hr {
     margin-top: 20px;

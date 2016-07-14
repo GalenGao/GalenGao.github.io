@@ -14,7 +14,7 @@ categories: [blog]
 
 ### 登录多说创建站点 
 
- [多说站点创建地址](http://duoshuo.com/create-site/)  
+***链接地址请点击** [多说站点创建地址](http://duoshuo.com/create-site/)  
 
 ### 创建多说站点，填写信息如下图：    
 
@@ -30,6 +30,10 @@ categories: [blog]
 <!-- 多说评论框 start -->
 	<div class="ds-thread"
   data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
+# 我把我填的东西注释起来，负责在博客里它会自动引用变量，造成乱的
+<!--  <div class="ds-thread"
+  data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
+ -->
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

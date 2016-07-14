@@ -47,8 +47,10 @@ var duoshuoQuery = {short_name:"galengao"};
 <!-- 多说公共JS代码 end -->
 {% endhighlight %}
 
-> <div class="ds-thread"
-  data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
+> 根据中文提示有三处修改：
+> 1、data-thread-key 我改为{{ site.url }}_{{ page.title }}
+> 2、data-title 我改为{{ page.title }}
+> 3、data-url 我改为{{ site.url }}
 
 ### 将此代码粘贴到需要的位置,至于放在什么文件什么地方,取决于你所使用的模板  
 

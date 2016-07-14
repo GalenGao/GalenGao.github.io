@@ -29,11 +29,8 @@ categories: [blog]
 {% highlight html %} 
 <!-- 多说评论框 start -->
 	<div class="ds-thread"
-  data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
-# 我把我填的东西注释起来，负责在博客里它会自动引用变量，造成乱的
-<!--  <div class="ds-thread"
-  data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
- -->
+  data-thread-key="请将此处替换成你站点的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+# 由于变量在这里写了博客里会乱，所以替换方法见下面
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -49,6 +46,9 @@ var duoshuoQuery = {short_name:"galengao"};
 	</script>
 <!-- 多说公共JS代码 end -->
 {% endhighlight %}
+
+> <div class="ds-thread"
+  data-thread-key="{{ site.url }}_{{ page.title }}"data-title="{{ page.title }}"data-url="{{ site.url }}"></div>
 
 ### 将此代码粘贴到需要的位置,至于放在什么文件什么地方,取决于你所使用的模板  
 

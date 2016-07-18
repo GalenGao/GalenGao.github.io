@@ -11,6 +11,13 @@ categories: [docker]
 * **其次因为既然用到docker，当然离不开kubernetes管理，还有swarm，前者管理复杂，但功能齐全**
 * **这里仅仅是安装部署，还未使用，具体使用出现问题后续更新**
 
+# 前提条件
+
+系统时centos7上
+关闭防火墙 systemctl stop firewalld.service
+关闭selinux 
+vi /etc/selinux/comfig
+
 # 主要组件说明
 
 Kubernetes 集群中主要存在两种类型的节点，分别是 master 节点，以及 minion 节点。  
@@ -455,3 +462,8 @@ NAME             STATUS    AGE
 776c306b60e6f972: name=etcd3 peerURLs=http://192.168.10.149:2380 clientURLs=http://192.168.10.149:2379
 a40f86f061be3fbe: name=etcd2 peerURLs=http://192.168.10.148:2380 clientURLs=http://192.168.10.148:2379
 {% endhighlight %}
+
+> centos7查看日志命令：
+> journalctl -xe
+> 或者 systemctl status flanneld.service 
+> flanneld对应改成你的项目

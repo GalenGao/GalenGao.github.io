@@ -9,7 +9,7 @@ categories: [oracle]
 
 * **自己在centos6.6上搭建的单实例oracle12c**
 * **由于搭建过程有些不好写，所以图片偏多**
-* ***由于截图不规则导致排版有点乱，已经安装过来了，有些截图不能回头截图了，见谅*
+* ***由于截图不规则导致排版有点乱，已经安装过来了，有些截图不能回头截图了，见谅**
 
 
 
@@ -35,16 +35,19 @@ grep MemTotal /proc/meminfo
 grep SwapTotal /proc/meminfo
 free -g
 {% endhighlight %}
+
 ![install ora](/static/img/inora/ora12c4.png)
 
 Oracle 12c 对系统内存的最低要求为1G，推荐2G或更大的内存  
 Oracle对交换分区（Swap Space）的推荐设置如下  
+
 ![install ora](/static/img/inora/ora12c5.png)
  
  **Check Disk Capacity**  
 {% highlight ruby %}
 df -h
 {% endhighlight %}
+
 ![install ora](/static/img/inora/ora12c6.png)
 
 > Oracle 12c 企业版的需要6.4G大小的磁盘空间，标准版需要6.1G大小的磁盘空间。/tmp 需要至少1G的大小  
@@ -113,6 +116,7 @@ sysstat-9.0.4-11.el6 (x86_64)
 # 检查包
 rpm -q binutils compat-libcap1 compat-libstdc++ gcc gcc-c++ glibc glibc-devel ksh libaio libaio-devel libgcc libstdc++ libstdc++-devel libXext libXtst libX11 libXau libXi make sysstat
 {% endhighlight %}
+
 ![install ora](/static/img/inora/ora12c8.png)
 
 还有7个没安装  
@@ -131,12 +135,14 @@ chkconfig iptables off
 
 修改  
 SELINUX=disabled  
+
 ![install ora](/static/img/inora/ora12c9.png)
 
 * vi etc/hosts
 
 增加  
 192.168.1.140 dgp  
+
 ![install ora](/static/img/inora/ora12c10.png)
 
 * vi /etc/security/limits.conf  
@@ -180,6 +186,7 @@ net.core.wmem_max = 1048576
 > 注：因为kernel.shmall和kernel.shmmax 系统里已经有比它大的值了，所以把这两个参数注释  
 
 sysctl -p  生效  
+
 ![install ora](/static/img/inora/ora12c13.png)
 
 * vi /etc/profile  
@@ -196,6 +203,7 @@ fi
 {% endhighlight %}
 
 篇幅太长，截取部分  
+
 ![install ora](/static/img/inora/ora12c14.png)
 
 * vi /etc/pam.d/login  
@@ -257,6 +265,7 @@ cd database
 ![install ora](/static/img/inora/ora12c18.png)
 
 * 不需要支持，弹出提示时点yes  
+
 ![install ora](/static/img/inora/ora12c19.png)
 
 
@@ -266,58 +275,74 @@ cd database
 
 
 * 这里安装单实例的  
+
 ![install ora](/static/img/inora/ora12c21.png)
 
 * 选择默认英语  
+
 ![install ora](/static/img/inora/ora12c22.png)
 
 * 默认企业版  
+
 ![install ora](/static/img/inora/ora12c23.png)
 
 * 软件安装路径  
+
 ![install ora](/static/img/inora/ora12c24.png)
 
 如果空间不够，新增一块硬盘，然后格式化并挂载上去  
 fdisk -l  
 fdisk /dev/sdb  
+
 ![install ora](/static/img/inora/ora12c25.png)
 
 ![install ora](/static/img/inora/ora12c26.png)
 
 
 * 默认  
+
 ![install ora](/static/img/inora/ora12c27.png)
  
 * 默认  
+
 ![install ora](/static/img/inora/ora12c28.png)
 
-* 安装条件检查，前面准备好一般没什么问题；  
+* 安装条件检查，前面准备好一般没什么问题； 
+ 
 ![install ora](/static/img/inora/ora12c29.png)
 
 * 然后开始安装  
+
 ![install ora](/static/img/inora/ora12c30.png)
 ![install ora](/static/img/inora/ora12c31.png)
 
 
 * 配置环境变量  
+
 ![install ora](/static/img/inora/ora12c32.png)
 
 source .bash_profile  
 
 * dbca创建实例  
+
 ![install ora](/static/img/inora/ora12c33.png)
 
 * 设置全局库名及密码下一步  
+
 ![install ora](/static/img/inora/ora12c34.png)
 
 * 先决条件检查，这里空间不够先忽略  
+
 ![install ora](/static/img/inora/ora12c35.png)
 
 * 前面设置的预览  
+
 ![install ora](/static/img/inora/ora12c36.png)
 
 * 点结束开始安装  
+
 ![install ora](/static/img/inora/ora12c37.png)
 
 * 检查  
+
 至此就安装结束了  

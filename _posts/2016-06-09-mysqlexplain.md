@@ -180,7 +180,7 @@ mysql> explain select * from (select * from customer) a;
 
 **8、其它如物化视图等查询自己去造例子去**
 
-**1、system**
+
 ### table(JSON name: table_name)
 
 显示这一行的数据是关于哪张表的，也可以是下列值之一：  
@@ -196,7 +196,7 @@ mysql> explain select * from (select * from customer) a;
 
 EXPLAIN输出的类型列描述了如何联接表。下面的列表介绍了连接类型，从最好的类型到最差的命令：    
 
-**1、system**  
+**1、system**   
 这是const的一个特例联接类型。表只有一行（=系统表）。  
 
 {% highlight ruby %}
@@ -210,7 +210,7 @@ mysql> explain select * from (select * from customer where customer_id=1) a;
 2 rows in set
 {% endhighlight %}
 
-**2、const**  
+**2、const**   
 
 表最多有一个匹配行，它将在查询开始时被读取。因为仅有一行，在这行的列值可被优化器剩余部分认为是常数。const表很快，因为它们只读取一次！   
 const用于用常数值比较PRIMARY KEY或UNIQUE索引的所有部分时。在下面的查询中，tbl_name可以用于const表：  

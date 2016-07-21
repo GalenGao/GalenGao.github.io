@@ -184,9 +184,9 @@ mysql> explain select * from (select * from customer) a;
 ### table(JSON name: table_name)
 
 显示这一行的数据是关于哪张表的，也可以是下列值之一：  
-<unionM,N>: The row refers to the union of the rows with id values of M and N.  
-<derivedN>: The row refers to the derived table result for the row with an id value of N. A derived table may result, for example, from a subquery in the FROM clause.  
-<subqueryN>: The row refers to the result of a materialized subquery for the row with an id value of N.  
+unionM,N: The row refers to the union of the rows with id values of M and N.  
+derivedN: The row refers to the derived table result for the row with an id value of N. A derived table may result, for example, from a subquery in the FROM clause.  
+subqueryN: The row refers to the result of a materialized subquery for the row with an id value of N.  
 
 ### partitions (JSON name: partitions)
 

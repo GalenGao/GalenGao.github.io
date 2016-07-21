@@ -14,7 +14,7 @@ categories: [mysql]
 
 **由于要把每个点都翻译出来，还需要举例，所以需要一定的时间，本人先把架构理出来，然后逐个点开始**  
 
-(http://dev.mysql.com/doc/refman/5.6/en/explain-output.html)
+(http://dev.mysql.com/doc/refman/5.6/en/explain-output.html)  
 EXPLAIN语句返回MYSLQ的执行计划，通过他返回的信息，我们能了解到MYSQL优化器是如何执行SQL语句的，通过分析他能帮助你提供优化的思路。  
 
 
@@ -40,8 +40,8 @@ mysql> explain select customer_id,a.store_id,first_name,last_name, b.manager_sta
 
 EXPLAIN主要包含以下信息：
 
-|Column	|JSON Name	|Meaning|
-|-------|-----------|--------|
+|Column	   |JSON Name	   |Meaning|
+|----------|---------------|--------|
 |id	|select_id	|The SELECT identifier|
 |select_type	|None	|The SELECT type|
 |table	|table_name	|The table for the output row|
@@ -57,16 +57,16 @@ EXPLAIN主要包含以下信息：
 
 
 
- * id (JSON name: select_id)
+### id (JSON name: select_id)
  
 SQL查询中的序列号。
 
- * select_type (JSON name: none)
+### select_type (JSON name: none)
  
 查询的类型，可以是下表的任何一种类型：  
 
-|select_type Value|	JSON Name|	Meaning|
-|-----------------------|----------|---------|
+|select_type Value      |	JSON Name|	Meaning|
+|-----------------------|------------|---------|
 |SIMPLE	|None|简单查询(不适用union和子查询的)|
 |PRIMARY|	None|最外层的查询|
 |UNION|	None|UNION中的第二个或者后面的SELECT语句|
@@ -81,7 +81,7 @@ SQL查询中的序列号。
 
 查询类型例子：
 
-1、SIMPLE 简单查询(不适用union和子查询的)
+**1、SIMPLE 简单查询(不适用union和子查询的)**
 
 {% highlight ruby %}
 mysql> explain select * from staff;
@@ -93,7 +93,7 @@ mysql> explain select * from staff;
 1 row in set
 {% endhighlight %}
 
-2、PRIMARY 最外层的查询
+**2、PRIMARY 最外层的查询**
 
 {% highlight ruby %}
 mysql> explain select * from (select last_name,first_name from customer) a;
@@ -106,7 +106,7 @@ mysql> explain select * from (select last_name,first_name from customer) a;
 2 rows in set
 {% endhighlight %}
 
-3、UNION UNION中的第二个或者后面的SELECT语句
+**3、UNION UNION中的第二个或者后面的SELECT语句**
 
 {% highlight ruby %}
 mysql> explain select first_name,last_name from customer a where customer_id=1 union select first_name,last_name from customer b where customer_id=2;
@@ -120,7 +120,7 @@ mysql> explain select first_name,last_name from customer a where customer_id=1 u
 3 rows in set
 {% endhighlight %}
 
-4、DEPENDENT UNION UNION中的第二个或者后面的SELECT语句，依赖于外部查询
+**4、DEPENDENT UNION UNION中的第二个或者后面的SELECT语句，依赖于外部查询**
 
 {% highlight ruby %}
 mysql> explain select * from customer where customer_id in(select customer_id from customer a where customer_id=1 union all select customer_id from customer b where customer_id=2);
@@ -135,7 +135,7 @@ mysql> explain select * from customer where customer_id in(select customer_id fr
 4 rows in set
 {% endhighlight %}
 
-5、UNION RESULT UNION结果
+**5、UNION RESULT UNION结果**
 
 {% highlight ruby %}
 mysql> explain select * from staff union select * from staff;
@@ -149,7 +149,7 @@ mysql> explain select * from staff union select * from staff;
 3 rows in set
 {% endhighlight %}
 
-6、SUBQUERY 子查询中的第一个SELECT语句
+**6、SUBQUERY 子查询中的第一个SELECT语句**
 
 {% highlight ruby %}
 mysql> explain select customer_id from customer where store_id =
@@ -165,7 +165,7 @@ mysql> explain select customer_id from customer where store_id =
 
 > 有兴趣的可以去把=号换成`in`试试
 
-7、DERIVED 派生表的SELECT(FROM子句的子查询)
+**7、DERIVED 派生表的SELECT(FROM子句的子查询)**
 
 {% highlight ruby %}
 mysql> explain select * from (select * from customer) a;
@@ -178,25 +178,27 @@ mysql> explain select * from (select * from customer) a;
 2 rows in set
 {% endhighlight %}
 
-8、其它如物化视图等查询自己去造例子去
+**8、其它如物化视图等查询自己去造例子去**
 
-* table(JSON name: table_name)
+
+### table(JSON name: table_name)
 
 显示这一行的数据是关于哪张表的，也可以是下列值之一：  
-<unionM,N>: The row refers to the union of the rows with id values of M and N.
-<derivedN>: The row refers to the derived table result for the row with an id value of N. A derived table may result, for example, from a subquery in the FROM clause.
-<subqueryN>: The row refers to the result of a materialized subquery for the row with an id value of N.
+<unionM,N>: The row refers to the union of the rows with id values of M and N.  
+<derivedN>: The row refers to the derived table result for the row with an id value of N. A derived table may result, for example, from a subquery in the FROM clause.  
+<subqueryN>: The row refers to the result of a materialized subquery for the row with an id value of N.  
 
-*  partitions (JSON name: partitions)
+### partitions (JSON name: partitions)
 
-分区中的记录将被查询相匹配。显示此列仅在使用分区关键字。该值为NULL对于非分区表。
+分区中的记录将被查询相匹配。显示此列仅在使用分区关键字。该值为NULL对于非分区表。  
 
-*  type (JSON name: access_type)
+### type (JSON name: access_type)
 
-EXPLAIN输出的类型列描述了如何联接表。下面的列表介绍了连接类型，从最好的类型到最差的命令：  
+EXPLAIN输出的类型列描述了如何联接表。下面的列表介绍了连接类型，从最好的类型到最差的命令：    
 
-1、system
-这是const的一个特例联接类型。表只有一行（=系统表）。
+**1、system**
+
+这是const的一个特例联接类型。表只有一行（=系统表）。  
 
 {% highlight ruby %}
 mysql> explain select * from (select * from customer where customer_id=1) a;
@@ -209,19 +211,21 @@ mysql> explain select * from (select * from customer where customer_id=1) a;
 2 rows in set
 {% endhighlight %}
 
-2、const
-表最多有一个匹配行，它将在查询开始时被读取。因为仅有一行，在这行的列值可被优化器剩余部分认为是常数。const表很快，因为它们只读取一次！  
-const用于用常数值比较PRIMARY KEY或UNIQUE索引的所有部分时。在下面的查询中，tbl_name可以用于const表：
+**2、const**
+
+表最多有一个匹配行，它将在查询开始时被读取。因为仅有一行，在这行的列值可被优化器剩余部分认为是常数。const表很快，因为它们只读取一次！   
+const用于用常数值比较PRIMARY KEY或UNIQUE索引的所有部分时。在下面的查询中，tbl_name可以用于const表：  
 
 {% highlight ruby %}
 SELECT * from tbl_name WHERE primary_key=1；
 SELECT * from tbl_name WHERE primary_key_part1=1和 primary_key_part2=2；
 {% endhighlight %}
 
-3、eq_ref
-对于每个来自于前面的表的行组合，从该表中读取一行。这可能是最好的联接类型，除了const类型。它用在一个索引的所有部分被联接使用并且索引是UNIQUE或PRIMARY KEY。  
+**3、eq_ref**
+
+对于每个来自于前面的表的行组合，从该表中读取一行。这可能是最好的联接类型，除了const类型。它用在一个索引的所有部分被联接使用并且索引是UNIQUE或PRIMARY KEY。   
 eq_ref可以用于使用= 操作符比较的带索引的列。比较值可以为常量或一个使用在该表前面所读取的表的列的表达式。  
-在下面的例子中，MySQL可以使用eq_ref联接来处理ref_tables：
+在下面的例子中，MySQL可以使用eq_ref联接来处理ref_tables：  
 
 {% highlight ruby %}
 SELECT * FROM ref_table,other_table
@@ -232,10 +236,11 @@ SELECT * FROM ref_table,other_table
   AND ref_table.key_column_part2=1;
 {% endhighlight %}
 
-4、ref
-对于每个来自于前面的表的行组合，所有有匹配索引值的行将从这张表中读取。如果联接只使用键的最左边的前缀，或如果键不是UNIQUE或PRIMARY KEY（换句话说，如果联接不能基于关键字选择单个行的话），则使用ref。如果使用的键仅仅匹配少量行，该联接类型是不错的。  
-ref可以用于使用=或<=>操作符的带索引的列。  
-在下面的例子中，MySQL可以使用ref联接来处理ref_tables：
+**4、ref**
+
+对于每个来自于前面的表的行组合，所有有匹配索引值的行将从这张表中读取。如果联接只使用键的最左边的前缀，或如果键不是UNIQUE或PRIMARY KEY（换句话说，如果联接不能基于关键字选择单个行的话），则使用ref。如果使用的键仅仅匹配少量行，该联接类型是不错的。    
+ref可以用于使用=或<=>操作符的带索引的列。    
+在下面的例子中，MySQL可以使用ref联接来处理ref_tables：  
 
 {% highlight ruby %}
 SELECT * FROM ref_table WHERE key_column=expr;
@@ -248,44 +253,44 @@ SELECT * FROM ref_table,other_table
   AND ref_table.key_column_part2=1;
 {% endhighlight %}
 
-5、 fulltext
+**5、 fulltext** 
 
-使用FULLTEXT索引进行联接。
+使用FULLTEXT索引进行联接。  
 
-6、ref_or_null
+**6、ref_or_null**  
 
-该联接类型如同ref，但是添加了MySQL可以专门搜索包含NULL值的行。在解决子查询中经常使用该联接类型的优化。
-在下面的例子中，MySQL可以使用ref_or_null联接来处理ref_tables：
+该联接类型如同ref，但是添加了MySQL可以专门搜索包含NULL值的行。在解决子查询中经常使用该联接类型的优化。  
+在下面的例子中，MySQL可以使用ref_or_null联接来处理ref_tables：  
 
 {% highlight ruby %}
 SELECT * FROM ref_table
   WHERE key_column=expr OR key_column IS NULL;
 {% endhighlight %}
 
-7、index_merge
+**7、index_merge**  
 
-该联接类型表示使用了索引合并优化方法。在这种情况下，key列包含了使用的索引的清单，key_len包含了使用的索引的最长的关键元素。
+该联接类型表示使用了索引合并优化方法。在这种情况下，key列包含了使用的索引的清单，key_len包含了使用的索引的最长的关键元素。  
 
-8、unique_subquery
+**8、unique_subquery**
 
-unique_subquery是一个索引查找函数，可以完全替换子查询，效率更高。
-该类型替换了下面形式的IN子查询的ref：
+unique_subquery是一个索引查找函数，可以完全替换子查询，效率更高。  
+该类型替换了下面形式的IN子查询的ref：  
 
 {% highlight ruby %}
 value IN (SELECT primary_key FROM single_table WHERE some_expr)
 {% endhighlight %}
 
-9、index_subquery
+**9、index_subquery**
 
-该联接类型类似于unique_subquery。可以替换IN子查询，但只适合下列形式的子查询中的非唯一索引：
+该联接类型类似于unique_subquery。可以替换IN子查询，但只适合下列形式的子查询中的非唯一索引：  
 {% highlight ruby %}
 value IN (SELECT key_column FROM single_table WHERE some_expr)
 {% endhighlight %}
 
-10、range
+**10、range**
 
-只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引。key_len包含所使用索引的最长关键元素。在该类型中ref列为NULL。  
-当使用=、<>、>、>=、<、<=、IS NULL、<=>、BETWEEN或者IN操作符，用常量比较关键字列时，可以使用range
+只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引。key_len包含所使用索引的最长关键元素。在该类型中ref列为NULL。    
+当使用=、<>、>、>=、<、<=、IS NULL、<=>、BETWEEN或者IN操作符，用常量比较关键字列时，可以使用range  
 
 {% highlight ruby %}
 SELECT * FROM tbl_name
@@ -301,224 +306,226 @@ SELECT * FROM tbl_name
   WHERE key_part1 = 10 AND key_part2 IN (10,20,30);
 {% endhighlight %}
 
-11、index
+**11、index**
 
-The index join type is the same as ALL, except that the index tree is scanned. This occurs two ways:
+The index join type is the same as ALL, except that the index tree is scanned. This occurs two ways:  
 
-a、If the index is a covering index for the queries and can be used to satisfy all data required from the table, only the index tree is scanned. In this case, the Extra column says Using index. An index-only scan usually is faster than ALL because the size of the index usually is smaller than the table data.
+a、If the index is a covering index for the queries and can be used to satisfy all data required from the table, only the index tree is scanned. In this case, the Extra column says Using index. An index-only scan usually is faster than ALL because the size of the index usually is smaller than the table data.  
 
-b、A full table scan is performed using reads from the index to look up data rows in index order. Uses index does not appear in the Extra column.
+b、A full table scan is performed using reads from the index to look up data rows in index order. Uses index does not appear in the Extra column.  
 
-MySQL can use this join type when the query uses only columns that are part of a single index.
+MySQL can use this join type when the query uses only columns that are part of a single index.  
 
-12、all
+**12、all**
 
+对于每个来自于先前的表的行组合，进行完整的表扫描。如果表是第一个没标记const的表，这通常不好，并且通常在它情况下很差。通常可以增加更多的索引而不要使用ALL，使得行能基于前面的表中的常数值或列值被检索出。  
 
-对于每个来自于先前的表的行组合，进行完整的表扫描。如果表是第一个没标记const的表，这通常不好，并且通常在它情况下很差。通常可以增加更多的索引而不要使用ALL，使得行能基于前面的表中的常数值或列值被检索出。
+### possible_keys (JSON name: possible_keys)
 
-* possible_keys (JSON name: possible_keys)
+possible_keys列指出MySQL能使用哪个索引在该表中找到行。注意，该列完全独立于EXPLAIN输出所示的表的次序。这意味着在possible_keys中的某些键实际上不能按生成的表次序使用。  
 
+如果该列是NULL，则没有相关的索引。在这种情况下，可以通过检查WHERE子句看是否它引用某些列或适合索引的列来提高你的查询性能。如果是这样，创造一个适当的索引并且再次用EXPLAIN检查查询  
 
-possible_keys列指出MySQL能使用哪个索引在该表中找到行。注意，该列完全独立于EXPLAIN输出所示的表的次序。这意味着在possible_keys中的某些键实际上不能按生成的表次序使用。
-
-如果该列是NULL，则没有相关的索引。在这种情况下，可以通过检查WHERE子句看是否它引用某些列或适合索引的列来提高你的查询性能。如果是这样，创造一个适当的索引并且再次用EXPLAIN检查查询
-
-* key (JSON name: key)
+### key (JSON name: key)  
 
 key列显示MySQL实际决定使用的键（索引）。如果没有选择索引，键是NULL。要想强制MySQL使用或忽视possible_keys列中的索引，在查询中使用FORCE INDEX、USE INDEX或者IGNORE INDEX。
 
- * key_len (JSON name: key_length)
+### key_len (JSON name: key_length)
  
+key_len列显示MySQL决定使用的键长度。如果键是NULL，则长度为NULL。  
+使用的索引的长度。在不损失精确性的情况下，长度越短越好   
 
-key_len列显示MySQL决定使用的键长度。如果键是NULL，则长度为NULL。
-使用的索引的长度。在不损失精确性的情况下，长度越短越好 
-
- * ref (JSON name: ref)
+### ref (JSON name: ref)
  
-ref列显示使用哪个列或常数与key一起从表中选择行。
+ref列显示使用哪个列或常数与key一起从表中选择行。  
 
- * rows (JSON name: rows)
+### rows (JSON name: rows)  
  
- rows列显示MySQL认为它执行查询时必须检查的行数。
+rows列显示MySQL认为它执行查询时必须检查的行数。
 
- * filtered (JSON name: filtered)
+### filtered (JSON name: filtered)
  
-The filtered column indicates an estimated percentage of table rows that will be filtered by the table condition. That is, rows shows the estimated number of rows examined and rows × filtered / 100 shows the number of rows that will be joined with previous tables. This column is displayed if you use EXPLAIN EXTENDED.
+The filtered column indicates an estimated percentage of table rows that will be filtered by the table condition. That is, rows shows the estimated number of rows examined and rows × filtered / 100 shows the number of rows that will be joined with previous tables. This column is displayed if you use EXPLAIN EXTENDED.  
 
- * Extra (JSON name: none)
+### Extra (JSON name: none)
+
  该列包含MySQL解决查询的详细信息,下面详细.
 
-1、Child of 'table' pushed join@1 (JSON: message text)
+**1、Child of 'table' pushed join@1 (JSON: message text)**  
 
-This table is referenced as the child of table in a join that can be pushed down to the NDB kernel. Applies only in MySQL Cluster, when pushed-down joins are enabled. See the description of the ndb_join_pushdown server system variable for more information and examples.
+This table is referenced as the child of table in a join that can be pushed down to the NDB kernel. Applies only in MySQL Cluster, when pushed-down joins are enabled. See the description of the ndb_join_pushdown server system variable for more information and examples.  
 
-const row not found (JSON property: const_row_not_found)
+const row not found (JSON property: const_row_not_found)  
 
-For a query such as SELECT ... FROM tbl_name, the table was empty.
+For a query such as SELECT ... FROM tbl_name, the table was empty.  
 
-2、Deleting all rows (JSON property: message)
+**2、Deleting all rows (JSON property: message)**  
 
-For DELETE, some storage engines (such as MyISAM) support a handler method that removes all table rows in a simple and fast way. This Extra value is displayed if the engine uses this optimization.
+For DELETE, some storage engines (such as MyISAM) support a handler method that removes all table rows in a simple and fast way. This Extra value is displayed if the engine uses this optimization.  
 
-3、Distinct (JSON property: distinct)
+**3、Distinct (JSON property: distinct)**  
 
-MySQL is looking for distinct values, so it stops searching for more rows for the current row combination after it has found the first matching row.
+MySQL is looking for distinct values, so it stops searching for more rows for the current row combination after it has found the first matching row.  
 
-4、FirstMatch(tbl_name) (JSON property: first_match)
+**4、FirstMatch(tbl_name) (JSON property: first_match)**  
 
-The semi-join FirstMatch join shortcutting strategy is used for tbl_name.
+The semi-join FirstMatch join shortcutting strategy is used for tbl_name.  
 
-5、Full scan on NULL key (JSON property: message)
+**5、Full scan on NULL key (JSON property: message)**
 
-This occurs for subquery optimization as a fallback strategy when the optimizer cannot use an index-lookup access method.
+This occurs for subquery optimization as a fallback strategy when the optimizer cannot use an index-lookup access method.  
 
-6、Impossible HAVING (JSON property: message)
+**6、Impossible HAVING (JSON property: message)**
 
-The HAVING clause is always false and cannot select any rows.
+The HAVING clause is always false and cannot select any rows.  
 
-7、Impossible WHERE (JSON property: message)
+**7、Impossible WHERE (JSON property: message)**
 
-The WHERE clause is always false and cannot select any rows.
+The WHERE clause is always false and cannot select any rows.  
 
-8、Impossible WHERE noticed after reading const tables (JSON property: message)
+**8、Impossible WHERE noticed after reading const tables (JSON property: message)**  
 
-MySQL has read all const (and system) tables and notice that the WHERE clause is always false.
+MySQL has read all const (and system) tables and notice that the WHERE clause is always false.  
 
-9、LooseScan(m..n) (JSON property: message)
+**9、LooseScan(m..n) (JSON property: message)**
 
-The semi-join LooseScan strategy is used. m and n are key part numbers.
+The semi-join LooseScan strategy is used. m and n are key part numbers.  
 
-10、Materialize, Scan (JSON: message text)
+**10、Materialize, Scan (JSON: message text)**
 
-Before MySQL 5.6.7, this indicates use of a single materialized temporary table. If Scan is present, no temporary table index is used for table reads. Otherwise, an index lookup is used. See also the Start materialize entry.
+Before MySQL 5.6.7, this indicates use of a single materialized temporary table. If Scan is present, no temporary table index is used for table reads. Otherwise, an index lookup is used. See also the Start materialize entry.  
 
-As of MySQL 5.6.7, materialization is indicated by rows with a select_type value of MATERIALIZED and rows with a table value of <subqueryN>.
+As of MySQL 5.6.7, materialization is indicated by rows with a select_type value of MATERIALIZED and rows with a table value of <subqueryN>.  
 
-11、No matching min/max row (JSON property: message)
+**11、No matching min/max row (JSON property: message)**
 
-No row satisfies the condition for a query such as SELECT MIN(...) FROM ... WHERE condition.
+No row satisfies the condition for a query such as SELECT MIN(...) FROM ... WHERE condition.  
 
-12、no matching row in const table (JSON property: message)
+**12、no matching row in const table (JSON property: message)**
 
 For a query with a join, there was an empty table or a table with no rows satisfying a unique index condition.
 
-13、No matching rows after partition pruning (JSON property: message)
+**13、No matching rows after partition pruning (JSON property: message)**
 
-For DELETE or UPDATE, the optimizer found nothing to delete or update after partition pruning. It is similar in meaning to Impossible WHERE for SELECT statements.
+For DELETE or UPDATE, the optimizer found nothing to delete or update after partition pruning. It is similar in meaning to Impossible WHERE for SELECT statements.  
 
-14、No tables used (JSON property: message)
+**14、No tables used (JSON property: message)**
 
-The query has no FROM clause, or has a FROM DUAL clause.
+The query has no FROM clause, or has a FROM DUAL clause.  
 
-For INSERT or REPLACE statements, EXPLAIN displays this value when there is no SELECT part. For example, it appears for EXPLAIN INSERT INTO t VALUES(10) because that is equivalent to EXPLAIN INSERT INTO t SELECT 10 FROM DUAL.
+For INSERT or REPLACE statements, EXPLAIN displays this value when there is no SELECT part. For example, it appears for EXPLAIN INSERT INTO t VALUES(10) because that is equivalent to EXPLAIN INSERT INTO t SELECT 10 FROM DUAL.  
 
-15、Not exists (JSON property: message)
+**15、Not exists (JSON property: message)**  
 
-MySQL was able to do a LEFT JOIN optimization on the query and does not examine more rows in this table for the previous row combination after it finds one row that matches the LEFT JOIN criteria. Here is an example of the type of query that can be optimized this way:
+MySQL was able to do a LEFT JOIN optimization on the query and does not examine more rows in this table for the previous row combination after it finds one row that matches the LEFT JOIN criteria. Here is an example of the type of query that can be optimized this way:  
 
 SELECT * FROM t1 LEFT JOIN t2 ON t1.id=t2.id
-  WHERE t2.id IS NULL;
-Assume that t2.id is defined as NOT NULL. In this case, MySQL scans t1 and looks up the rows in t2 using the values of t1.id. If MySQL finds a matching row in t2, it knows that t2.id can never be NULL, and does not scan through the rest of the rows in t2 that have the same id value. In other words, for each row in t1, MySQL needs to do only a single lookup in t2, regardless of how many rows actually match in t2.
+  WHERE t2.id IS NULL;  
 
-16、Range checked for each record (index map: N) (JSON property: message)
+Assume that t2.id is defined as NOT NULL. In this case, MySQL scans t1 and looks up the rows in t2 using the values of t1.id. If MySQL finds a matching row in t2, it knows that t2.id can never be NULL, and does not scan through the rest of the rows in t2 that have the same id value. In other words, for each row in t1, MySQL needs to do only a single lookup in t2, regardless of how many rows actually match in t2.  
 
-MySQL found no good index to use, but found that some of indexes might be used after column values from preceding tables are known. For each row combination in the preceding tables, MySQL checks whether it is possible to use a range or index_merge access method to retrieve rows. This is not very fast, but is faster than performing a join with no index at all. The applicability criteria are as described in Section 8.2.1.3, “Range Optimization”, and Section 8.2.1.4, “Index Merge Optimization”, with the exception that all column values for the preceding table are known and considered to be constants.
+**16、Range checked for each record (index map: N) (JSON property: message)**  
 
-Indexes are numbered beginning with 1, in the same order as shown by SHOW INDEX for the table. The index map value N is a bitmask value that indicates which indexes are candidates. For example, a value of 0x19 (binary 11001) means that indexes 1, 4, and 5 will be considered.
+MySQL found no good index to use, but found that some of indexes might be used after column values from preceding tables are known. For each row combination in the preceding tables, MySQL checks whether it is possible to use a range or index_merge access method to retrieve rows. This is not very fast, but is faster than performing a join with no index at all. The applicability criteria are as described in Section 8.2.1.3, “Range Optimization”, and Section 8.2.1.4, “Index Merge Optimization”, with the exception that all column values for the preceding table are known and considered to be constants.  
 
-17、Scanned N databases (JSON property: message)
+Indexes are numbered beginning with 1, in the same order as shown by SHOW INDEX for the table. The index map value N is a bitmask value that indicates which indexes are candidates. For example, a value of 0x19 (binary 11001) means that indexes 1, 4, and 5 will be considered.  
 
-This indicates how many directory scans the server performs when processing a query for INFORMATION_SCHEMA tables, as described in Section 8.2.4, “Optimizing INFORMATION_SCHEMA Queries”. The value of N can be 0, 1, or all.
+**17、Scanned N databases (JSON property: message)**  
 
-18、Select tables optimized away (JSON property: message)
+This indicates how many directory scans the server performs when processing a query for INFORMATION_SCHEMA tables, as described in Section 8.2.4, “Optimizing INFORMATION_SCHEMA Queries”. The value of N can be 0, 1, or all.  
 
-The optimizer determined 1) that at most one row should be returned, and 2) that to produce this row, a deterministic set of rows must be read. When the rows to be read can be read during the optimization phase (for example, by reading index rows), there is no need to read any tables during query execution.
+**18、Select tables optimized away (JSON property: message)**  
 
-The first condition is fulfilled when the query is implicitly grouped (contains an aggregate function but no GROUP BY clause). The second condition is fulfilled when one row lookup is performed per index used. The number of indexes read determines the number of rows to read.
+The optimizer determined 1) that at most one row should be returned, and 2) that to produce this row, a deterministic set of rows must be read. When the rows to be read can be read during the optimization phase (for example, by reading index rows), there is no need to read any tables during query execution.  
 
-Consider the following implicitly grouped query:
+The first condition is fulfilled when the query is implicitly grouped (contains an aggregate function but no GROUP BY clause). The second condition is fulfilled when one row lookup is performed per index used. The number of indexes read determines the number of rows to read.  
 
-SELECT MIN(c1), MIN(c2) FROM t1;
-Suppose that MIN(c1) can be retrieved by reading one index row and MIN(c2) can be retrieved by reading one row from a different index. That is, for each column c1 and c2, there exists an index where the column is the first column of the index. In this case, one row is returned, produced by reading two deterministic rows.
+Consider the following implicitly grouped query:  
 
-This Extra value does not occur if the rows to read are not deterministic. Consider this query:
+SELECT MIN(c1), MIN(c2) FROM t1;  
 
-SELECT MIN(c2) FROM t1 WHERE c1 <= 10;
-Suppose that (c1, c2) is a covering index. Using this index, all rows with c1 <= 10 must be scanned to find the minimum c2 value. By contrast, consider this query:
+Suppose that MIN(c1) can be retrieved by reading one index row and MIN(c2) can be retrieved by reading one row from a different index. That is, for each column c1 and c2, there exists an index where the column is the first column of the index. In this case, one row is returned, produced by reading two deterministic rows.  
+
+This Extra value does not occur if the rows to read are not deterministic. Consider this query:  
+
+SELECT MIN(c2) FROM t1 WHERE c1 <= 10;  
+
+Suppose that (c1, c2) is a covering index. Using this index, all rows with c1 <= 10 must be scanned to find the minimum c2 value. By contrast, consider this query:  
 
 SELECT MIN(c2) FROM t1 WHERE c1 = 10;
-In this case, the first index row with c1 = 10 contains the minimum c2 value. Only one row must be read to produce the returned row.
+  
+In this case, the first index row with c1 = 10 contains the minimum c2 value. Only one row must be read to produce the returned row.  
 
-For storage engines that maintain an exact row count per table (such as MyISAM, but not InnoDB), this Extra value can occur for COUNT(*) queries for which the WHERE clause is missing or always true and there is no GROUP BY clause. (This is an instance of an implicitly grouped query where the storage engine influences whether a deterministic number of rows can be read.)
+For storage engines that maintain an exact row count per table (such as MyISAM, but not InnoDB), this Extra value can occur for COUNT(*) queries for which the WHERE clause is missing or always true and there is no GROUP BY clause. (This is an instance of an implicitly grouped query where the storage engine influences whether a deterministic number of rows can be read.)  
 
-19、Skip_open_table, Open_frm_only, Open_trigger_only, Open_full_table (JSON property: message)
+**19、Skip_open_table, Open_frm_only, Open_trigger_only, Open_full_table (JSON property: message)**  
 
-These values indicate file-opening optimizations that apply to queries for INFORMATION_SCHEMA tables, as described in Section 8.2.4, “Optimizing INFORMATION_SCHEMA Queries”.
+These values indicate file-opening optimizations that apply to queries for INFORMATION_SCHEMA tables, as described in Section 8.2.4, “Optimizing INFORMATION_SCHEMA Queries”.  
 
-Skip_open_table: Table files do not need to be opened. The information has already become available within the query by scanning the database directory.
+Skip_open_table: Table files do not need to be opened. The information has already become available within the query by scanning the database directory.  
 
-Open_frm_only: Only the table's .frm file need be opened.
+Open_frm_only: Only the table's .frm file need be opened.  
 
-Open_trigger_only: Only the table's .TRG file need be opened.
+Open_trigger_only: Only the table's .TRG file need be opened.  
 
-Open_full_table: The unoptimized information lookup. The .frm, .MYD, and .MYI files must be opened.
+Open_full_table: The unoptimized information lookup. The .frm, .MYD, and .MYI files must be opened.  
 
-20、Start materialize, End materialize, Scan (JSON: message text)
+**20、Start materialize, End materialize, Scan (JSON: message text)**  
 
-Before MySQL 5.6.7, this indicates use of multiple materialized temporary tables. If Scan is present, no temporary table index is used for table reads. Otherwise, an index lookup is used. See also the Materialize entry.
+Before MySQL 5.6.7, this indicates use of multiple materialized temporary tables. If Scan is present, no temporary table index is used for table reads. Otherwise, an index lookup is used. See also the Materialize entry.  
 
-As of MySQL 5.6.7, materialization is indicated by rows with a select_type value of MATERIALIZED and rows with a table value of <subqueryN>.
+As of MySQL 5.6.7, materialization is indicated by rows with a select_type value of MATERIALIZED and rows with a table value of <subqueryN>.  
 
-21、Start temporary, End temporary (JSON property: message)
+**21、Start temporary, End temporary (JSON property: message)**  
 
-This indicates temporary table use for the semi-join Duplicate Weedout strategy.
+This indicates temporary table use for the semi-join Duplicate Weedout strategy.  
 
-22、unique row not found (JSON property: message)
+**22、unique row not found (JSON property: message)**  
 
-For a query such as SELECT ... FROM tbl_name, no rows satisfy the condition for a UNIQUE index or PRIMARY KEY on the table.
+For a query such as SELECT ... FROM tbl_name, no rows satisfy the condition for a UNIQUE index or PRIMARY KEY on the table.  
 
-23、Using filesort (JSON property: using_filesort)
+**23、Using filesort (JSON property: using_filesort)**  
 
-MySQL must do an extra pass to find out how to retrieve the rows in sorted order. The sort is done by going through all rows according to the join type and storing the sort key and pointer to the row for all rows that match the WHERE clause. The keys then are sorted and the rows are retrieved in sorted order. See Section 8.2.1.15, “ORDER BY Optimization”.
+MySQL must do an extra pass to find out how to retrieve the rows in sorted order. The sort is done by going through all rows according to the join type and storing the sort key and pointer to the row for all rows that match the WHERE clause. The keys then are sorted and the rows are retrieved in sorted order. See Section 8.2.1.15, “ORDER BY Optimization”.  
 
-24、Using index (JSON property: using_index)
+**24、Using index (JSON property: using_index)**  
 
-The column information is retrieved from the table using only information in the index tree without having to do an additional seek to read the actual row. This strategy can be used when the query uses only columns that are part of a single index.
+The column information is retrieved from the table using only information in the index tree without having to do an additional seek to read the actual row. This strategy can be used when the query uses only columns that are part of a single index.  
 
-For InnoDB tables that have a user-defined clustered index, that index can be used even when Using index is absent from the Extra column. This is the case if type is index and key is PRIMARY.
+For InnoDB tables that have a user-defined clustered index, that index can be used even when Using index is absent from the Extra column. This is the case if type is index and key is PRIMARY.  
 
-25、Using index condition (JSON property: using_index_condition)
+**25、Using index condition (JSON property: using_index_condition)**  
 
-Tables are read by accessing index tuples and testing them first to determine whether to read full table rows. In this way, index information is used to defer (“push down”) reading full table rows unless it is necessary. See Section 8.2.1.6, “Index Condition Pushdown Optimization”.
+Tables are read by accessing index tuples and testing them first to determine whether to read full table rows. In this way, index information is used to defer (“push down”) reading full table rows unless it is necessary. See Section 8.2.1.6, “Index Condition Pushdown Optimization”.  
 
-26、Using index for group-by (JSON property: using_index_for_group_by)
+**26、Using index for group-by (JSON property: using_index_for_group_by)**  
 
-Similar to the Using index table access method, Using index for group-by indicates that MySQL found an index that can be used to retrieve all columns of a GROUP BY or DISTINCT query without any extra disk access to the actual table. Additionally, the index is used in the most efficient way so that for each group, only a few index entries are read. For details, see Section 8.2.1.16, “GROUP BY Optimization”.
+Similar to the Using index table access method, Using index for group-by indicates that MySQL found an index that can be used to retrieve all columns of a GROUP BY or DISTINCT query without any extra disk access to the actual table. Additionally, the index is used in the most efficient way so that for each group, only a few index entries are read. For details, see Section 8.2.1.16, “GROUP BY Optimization”.  
 
-27、Using join buffer (Block Nested Loop), Using join buffer (Batched Key Access) (JSON property: using_join_buffer)
+**27、Using join buffer (Block Nested Loop), Using join buffer (Batched Key Access) (JSON property: using_join_buffer)**  
 
-Tables from earlier joins are read in portions into the join buffer, and then their rows are used from the buffer to perform the join with the current table. (Block Nested Loop) indicates use of the Block Nested-Loop algorithm and (Batched Key Access) indicates use of the Batched Key Access algorithm. That is, the keys from the table on the preceding line of the EXPLAIN output will be buffered, and the matching rows will be fetched in batches from the table represented by the line in which Using join buffer appears.
+Tables from earlier joins are read in portions into the join buffer, and then their rows are used from the buffer to perform the join with the current table. (Block Nested Loop) indicates use of the Block Nested-Loop algorithm and (Batched Key Access) indicates use of the Batched Key Access algorithm. That is, the keys from the table on the preceding line of the EXPLAIN output will be buffered, and the matching rows will be fetched in batches from the table represented by the line in which Using join buffer appears.  
 
-In JSON-formatted output, the value of using_join_buffer is always either one of Block Nested Loop or Batched Key Access.
+In JSON-formatted output, the value of using_join_buffer is always either one of Block Nested Loop or Batched Key Access.  
 
-28、Using MRR (JSON property: message)
+**28、Using MRR (JSON property: message)**  
 
-Tables are read using the Multi-Range Read optimization strategy. See Section 8.2.1.13, “Multi-Range Read Optimization”.
+Tables are read using the Multi-Range Read optimization strategy. See Section 8.2.1.13, “Multi-Range Read Optimization”.  
 
-29、Using sort_union(...), Using union(...), Using intersect(...) (JSON property: message)
+**29、Using sort_union(...), Using union(...), Using intersect(...) (JSON property: message)**  
 
-These indicate how index scans are merged for the index_merge join type. See Section 8.2.1.4, “Index Merge Optimization”.
+These indicate how index scans are merged for the index_merge join type. See Section 8.2.1.4, “Index Merge Optimization”.  
 
-30、Using temporary (JSON property: using_temporary_table)
+**30、Using temporary (JSON property: using_temporary_table)**  
 
-To resolve the query, MySQL needs to create a temporary table to hold the result. This typically happens if the query contains GROUP BY and ORDER BY clauses that list columns differently.
+To resolve the query, MySQL needs to create a temporary table to hold the result. This typically happens if the query contains GROUP BY and ORDER BY clauses that list columns differently.  
 
-31、Using where (JSON property: attached_condition)
+**31、Using where (JSON property: attached_condition)**  
 
-A WHERE clause is used to restrict which rows to match against the next table or send to the client. Unless you specifically intend to fetch or examine all rows from the table, you may have something wrong in your query if the Extra value is not Using where and the table join type is ALL or index.
+A WHERE clause is used to restrict which rows to match against the next table or send to the client. Unless you specifically intend to fetch or examine all rows from the table, you may have something wrong in your query if the Extra value is not Using where and the table join type is ALL or index.  
 
-Using where has no direct counterpart in JSON-formatted output; the attached_condition property contains any WHERE condition used.
+Using where has no direct counterpart in JSON-formatted output; the attached_condition property contains any WHERE condition used.  
 
-32、Using where with pushed condition (JSON property: message)
+**32、Using where with pushed condition (JSON property: message)**  
 
-This item applies to NDB tables only. It means that MySQL Cluster is using the Condition Pushdown optimization to improve the efficiency of a direct comparison between a nonindexed column and a constant. In such cases, the condition is “pushed down” to the cluster's data nodes and is evaluated on all data nodes simultaneously. This eliminates the need to send nonmatching rows over the network, and can speed up such queries by a factor of 5 to 10 times over cases where Condition Pushdown could be but is not used. For more information, see Section 8.2.1.5, “Engine Condition Pushdown Optimization”.
+This item applies to NDB tables only. It means that MySQL Cluster is using the Condition Pushdown optimization to improve the efficiency of a direct comparison between a nonindexed column and a constant. In such cases, the condition is “pushed down” to the cluster's data nodes and is evaluated on all data nodes simultaneously. This eliminates the need to send nonmatching rows over the network, and can speed up such queries by a factor of 5 to 10 times over cases where Condition Pushdown could be but is not used. For more information, see Section 8.2.1.5, “Engine Condition Pushdown Optimization”.  

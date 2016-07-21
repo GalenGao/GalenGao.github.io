@@ -180,7 +180,7 @@ mysql> explain select * from (select * from customer) a;
 
 **8、其它如物化视图等查询自己去造例子去**
 
-
+**1、system**
 ### table(JSON name: table_name)
 
 显示这一行的数据是关于哪张表的，也可以是下列值之一：  

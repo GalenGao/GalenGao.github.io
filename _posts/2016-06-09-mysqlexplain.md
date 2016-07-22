@@ -14,8 +14,9 @@ categories: [mysql]
 
 **由于要把每个点都翻译出来，还需要举例，所以需要一定的时间，本人先把架构理出来，然后逐个点开始**  
 
-(http://dev.mysql.com/doc/refman/5.6/en/explain-output.html)  
-EXPLAIN语句返回MYSLQ的执行计划，通过他返回的信息，我们能了解到MYSQL优化器是如何执行SQL语句的，通过分析他能帮助你提供优化的思路。  
+**官网地址：http://dev.mysql.com/doc/refman/5.6/en/explain-output.html** 
+ 
+**EXPLAIN语句返回MYSLQ的执行计划，通过他返回的信息，我们能了解到MYSQL优化器是如何执行SQL语句的，通过分析他能帮助你提供优化的思路。**  
 
 
 # 语法
@@ -34,6 +35,21 @@ mysql> explain select customer_id,a.store_id,first_name,last_name, b.manager_sta
 |  1 | SIMPLE      | b     | eq_ref | PRIMARY       | PRIMARY | 1       | sakila.a.store_id |    1 | NULL  |
 +----+-------------+-------+--------+---------------+---------+---------+-------------------+------+-------+
 2 rows in set
+{% endhighlight %}
+
+* EXPLAIN还有一种语法，类似于desc
+
+{% highlight ruby %}
+mysql> explain actor;
++-------------+----------------------+------+-----+-------------------+-----------------------------+
+| Field       | Type                 | Null | Key | Default           | Extra                       |
++-------------+----------------------+------+-----+-------------------+-----------------------------+
+| actor_id    | smallint(5) unsigned | NO   | PRI | NULL              | auto_increment              |
+| first_name  | varchar(45)          | NO   |     | NULL              |                             |
+| last_name   | varchar(45)          | NO   | MUL | NULL              |                             |
+| last_update | timestamp            | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+----------------------+------+-----+-------------------+-----------------------------+
+4 rows in set
 {% endhighlight %}
 
 # EXPLAIN的输出

@@ -71,15 +71,12 @@ make && make install
 {% endhighlight %}
 
 > 注：若运行 perl Makefile.PL时报Can't locate CPAN.pm in @INC这个错时，表示没有安装CPAN模块：  
-> 
-> {% highlight ruby %}
-> wget http://www.cpan.org/authors/id/A/AN/ANDK/CPAN-2.10.tar.gz
-> tar -zxvf CPAN-2.10.tar.gz
-> cd CPAN-2.10
-> perl Makefile.PL
-> make
-> make install
-> {% endhighlight %}
+> wget http://www.cpan.org/authors/id/A/AN/ANDK/CPAN-2.10.tar.gz  
+> tar -zxvf CPAN-2.10.tar.gz  
+> cd CPAN-2.10  
+> perl Makefile.PL  
+> make  
+> make install  
 
 
 * 在node3上安装mha4mysql-manager  
@@ -225,8 +222,7 @@ nohup masterha_manager --conf=/etc/mha/app1/app1.cnf --remove_dead_master_conf -
 masterha_stop --conf=/etc/mha/app1/app1.cnf
 {% endhighlight %}
 
-守护进程方式参考：   
-<https://code.google.com/p/mysql-master-ha/wiki/Runnning_Background
+守护进程方式参考：<https://code.google.com/p/mysql-master-ha/wiki/Runnning_Background
 ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/home:/weberho:/qmailtoaster/openSUSE_Tumbleweed/x86_64/daemontools-0.76-5.3.x86_64.rpm>
 
 **9、配置VIP**  
@@ -264,6 +260,7 @@ service keepalived start
 {% endhighlight %}
 
 * 配置keepalived配置文件  
+
 在keepalived中2种模式，分别是master->backup模式和backup->backup模式。这两种模式有很大区别。在master->backup模式下，一旦主库宕机，虚拟ip会自动漂移到从库，当主库修复后，keepalived启动后，还会把虚拟ip抢占过来，即使设置了非抢占模式（nopreempt）抢占ip的动作也会发生。在backup->backup模式下，当主库宕机后虚拟ip会自动漂移到从库上，当原主库恢复和keepalived服务启动后，并不会抢占新主的虚拟ip，即使是优先级高于从库的优先级别，也不会发生抢占。为了减少ip漂移次数，通常是把修复好的主库当做新的备库。下面依次是两种配置方式：  
 **a、master->backup模式**  
 {% highlight ruby %}
@@ -677,7 +674,7 @@ yum -y install perl-Time-HiRes
 {% endhighlight %}
 
 问题3：  
-![mha](/static/img/mha/mha7.jepg)
+![mha](/static/img/mha/mha7.jpeg)
 
 解决办法:  
 每个节点都做好mysql命令的软链  
